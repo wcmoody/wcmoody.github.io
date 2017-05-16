@@ -1,3 +1,10 @@
+---
+layout: page
+title: Cirriculum Vitae
+permalink: /cv/
+---
+
+
 ### Curriculum Vitae
 
 [![](pics/iconPdf.png)CV PDF](/pdf/moody-cv.pdf)  
