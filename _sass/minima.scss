@@ -12,7 +12,6 @@ $spacing-unit:     30px !default;
 
 $text-color:       #111 !default;
 $background-color: #fdfdfd !default;
-$brand-color:      #2a7ae2 !default;
 
 $grey-color:       #828282 !default;
 $grey-color-light: lighten($grey-color, 40%) !default;
@@ -23,6 +22,15 @@ $content-width:    800px !default;
 
 $on-palm:          600px !default;
 $on-laptop:        800px !default;
+
+$clemson-purple:      #522d80;
+$clemson-orange:      #f66733;
+$usma-gold:	#be9969;
+$usma-gray:	#b2b4b3;
+$usma-black:	#000000;
+
+$brand-color:      $usma-gold !default;
+
 
 // Use media queries like this:
 // @include media-query($on-palm) {
@@ -45,5 +53,6 @@ $on-laptop:        800px !default;
 @import
   "minima/base",
   "minima/layout",
-  "minima/syntax-highlighting"
+  "minima/syntax-highlighting",
+  "minima/header"
 ;
