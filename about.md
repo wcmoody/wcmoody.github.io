@@ -6,7 +6,7 @@ permalink: /about/
 
 I am a member of the faculty of the [United States Military Academy](http://www.usma.edu) at West Point, NY in the [Electrical Engineering and Computer Science (EECS) Department](http://www.usma.edu/eecs). I teach multiple courses in our computing programs from both the Computer Science and Information Technology Majors, along with courses in our Cyber Secruity Engineering Sequence and Cyber Security Minor.
 
-I also serve as the Officer in Charge (OIC) and Head Coach of USMA's [Cadet Competitive Cyber Team (C3T)](http://www.usma.edu/crc/sitepages/c3t.aspx) aka B[i\|y]te?sForEveryone on [ctftime.org](http://www.ctftime.org/).
+I also serve as the Officer in Charge (OIC) and Head Coach of USMA's [Cadet Competitive Cyber Team (C3T)](http://www.usma.edu/crc/sitepages/c3t.aspx) aka `B[i|y]te?sForEveryone` on [ctftime.org](http://www.ctftime.org/).
 
 I completed my Ph.D. in Computer Science from Clemson University in Spring 2015. My dissertation is entitled Designing, Building, and Modeling Maneuverable Application within Shared Computing Resources. My advisor was Dr. Amy Apon and I was part of the Big Data Systems Lab. 
 
