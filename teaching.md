@@ -4,7 +4,7 @@ title: Teaching
 permalink: /teaching/
 ---
 
-I have taught classes at USMA since the Fall of 2015. In that time, I have taught courses in both of the majors in the computing programs in the EECS department. My main course has been the networking engineering course (IT350). I am transiting now to take over operating systems (CS481). I got to cut my teach by teaching our freshman (called Plebes) introductory programming and information technology (IT105). I have advised a student on an independent research project and I will be the primary advisor to two different senior capstone projects this upcoming year.
+I have taught classes at USMA since the Fall of 2015. In that time, I have taught courses in both of the majors in the computing programs in the EECS department. My main course has been the networking engineering course (IT350). I am transiting now to take over operating systems (CS481). I got to cut my teeth by teaching our freshman (called Plebes) introductory programming and information technology (IT105). I have advised a student on an independent research project and I will be the primary advisor to two different senior capstone projects this upcoming year.
 
 You can read more about these classes here:
 
