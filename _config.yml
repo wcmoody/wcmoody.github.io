@@ -16,10 +16,10 @@
 title: W. Clay Moody
 email: william.moody@usma.edu 
 description: > # this means to ignore newlines until "baseurl:"
-        Professional Site of W. Clay Moody, Ph.D. Assistant Professor at the United States
-        Military Academy at West Point. Deputy Directory, Infomation Technology Program, Department
-        of Electrical Engineering and Computer Science. Officer in Charge / Head Coach - Cadet Competitive Cyber
-        Team. Lieutenant Colonel - Cyberware Branch
+        Alastor Moody. Ex-Auror, Ministry malcontent, and your new Defense Against the
+        Dark Arts teacher. I am here because Dumbledore asked me. End of story,
+        goodbye, the end! Any questions? When it comes to the Dark Arts I believe in a
+        practical approach
 baseurl: "" # the subpath of your site, e.g. /blog
 url: "http://wclaymoody.com" # the base hostname & protocol for your site, e.g. http://example.com
 twitter_username: wclaymoody 

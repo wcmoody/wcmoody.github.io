@@ -4,6 +4,9 @@ title: About
 permalink: /about/
 ---
 
+{: .center}
+![](/pics/me.jpg){:height="50%" width="50%"}
+
 I am a member of the faculty of the [United States Military Academy](http://www.usma.edu) at West Point, NY in the [Electrical Engineering and Computer Science (EECS) Department](http://www.usma.edu/eecs). I teach multiple courses in our computing programs from both the Computer Science and Information Technology Majors, along with courses in our Cyber Secruity Engineering Sequence and Cyber Security Minor.
 
 I also serve as the Officer in Charge (OIC) and Head Coach of USMA's [Cadet Competitive Cyber Team (C3T)](http://www.usma.edu/crc/sitepages/c3t.aspx) aka `B[i|y]te?sForEveryone` on [ctftime.org](http://www.ctftime.org/).

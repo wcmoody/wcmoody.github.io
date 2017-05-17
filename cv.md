@@ -29,7 +29,7 @@ permalink: /cv/
     [![](/pics/iconPdf.png)PDF](/pdf/moodytrustcol14.pdf) [![](/pics/ieee-favicon.ico)IEEE](http://ieeexplore.ieee.org/xpl/articleDetails.jsp?tp=&arnumber=7014609)
 
 *   <u>W.C. Moody</u>; J. Anderson; K.-C. Wang; A. Apon, 'Reconfigurable Network Testbed for Evaluation of Datacenter Topologies', _The 6th International Workshop on Data-intensive Distributed Computing (DIDC'14)_ , 23-27 Jun. 2014  
-    [![](/pics/iconPdf.png)PDF](/pdf/didc02f-moody.pdf) [![](/pics/acm.png)ACM](http://dl.acm.org/citation.cfm?id=2608020.2608023&coll=DL&dl=GUIDE&CFID=489186775&CFTOKEN=91233070)
+    [![](/pics/iconPdf.png)PDF](/pdf/didc02f-moody.pdf) [![](/pics/acm.png){:height="5%" width="5%"}ACM](http://dl.acm.org/citation.cfm?id=2608020.2608023&coll=DL&dl=GUIDE&CFID=489186775&CFTOKEN=91233070)
 
 *   J. Dressler; <u>W.C. Moody</u>; J. M. Koepke; C. L. Bowen III, 'Operational Data Classes for Establishing Situational Awareness in Cyberspace', _The 6th International Conference on Cyber Conflict_ , 3-6 Jun. 2014  
     [![](/pics/iconPdf.png)PDF](/pdf/Odcesac-Final.pdf) [![](/pics/ccdcoe.jpg)CCDCOE](http://www.ccdcoe.org/cycon/2014/proceedings/d2r1s7_dresslermoody.pdf) [ ![](/pics/ieee-favicon.ico)IEEE](http://ieeexplore.ieee.org/xpl/articleDetails.jsp?arnumber=6916402&refinements%3D4274209713%26sortType%3Dasc_p_Sequence%26filter%3DAND%28p_IS_Number%3A6916383%29)

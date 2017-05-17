@@ -52,6 +52,10 @@ img {
     text-align: center;
 }
 
+.right {
+    float: right;
+}
+
 /**
  * Figures
  */
@@ -167,7 +171,11 @@ pre {
   }
 }
 
-
+img + em {
+    font-size: 75%;
+    font-weight: bold;
+    
+}
 
 /**
  * Wrapper
@@ -223,3 +231,4 @@ pre {
     padding-top: 5px;
   }
 }
+
