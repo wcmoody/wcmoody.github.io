@@ -12,3 +12,6 @@ You can read more about these classes here:
 * [Networking Engineering and Design](/teaching/cy-350-networking-engineering-and-design)
 * [Capstone Projects](/teaching/xe-401-402-capstone-projects)
 * [Introduction to Computing and Information Tecnology](/teaching/it-105-introduction-to-computing-and-information-technology)
+
+{: .center}
+![](/pics/classroom.png)
