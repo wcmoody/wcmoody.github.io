@@ -17,6 +17,8 @@ Here are some of my blogs from CTF write-up and other things of interest to me.
         <h2>
           <a class="post-link" href="{{ post.url | relative_url }}">{{ post.title | escape }}</a>
         </h2>
+
+	{{ post.excerpt }} <a href="{{ post.url }}">Read more &raquo;</a>
       </li>
     {% endfor %}
   </ul>

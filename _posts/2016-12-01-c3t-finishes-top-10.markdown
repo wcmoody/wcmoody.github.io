@@ -2,6 +2,7 @@
 layout: post
 title: Cadet Competitive Cyber Team finishes in Top 10 at competition
 date: 2016-12-01 11:22:33
+excerpt_separator: <!--more-->
 disqus: true
 ---
 
@@ -10,6 +11,8 @@ _This article previously appeared [here.](http://www.pointerview.com/2016/12/01/
 Four members of the Cadet Competitive Cyber Team (C3T) spent 36 straight hours over Veterans Day Weekend hacking into New York University, Tandon School of Engineering computers. These actions were fully endorsed by NYU and part of the Cyber Security Awareness Week (CSAW) North American Capture the Flag (CTF) Championship.
 
 This annual event features teams from the top computer science schools in the nation. West Point’s team advanced to the championship round for the sixth straight year, and finished in ninth place—the highest finish ever for the team known in hacking competitions as BitsForEveryone (BFE).
+
+<!--more-->
 
 Represented by just four cadets at the championship, the achievement was an accomplishment for the entire team of 20 cadets (plus one midshipmen and a local high school student). During the qualifying competition in September, BFE locked themselves in Thayer Hall and hacked away in the online competition for 48 consecutive hours.
 

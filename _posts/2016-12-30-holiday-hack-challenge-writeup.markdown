@@ -1,11 +1,15 @@
 ---
 layout: post
 title: "2016 SANS Holiday Hack Challenge Writeup"
+excerpt_separator: <!--more-->
 date: 2016-12-31 03:13:37
 disqus: true
 ---
 
 The great folks at SANS and CounterHack have brought us another adventure in the land of Josh and Jessica Dosis. This years challenge is called Santa's Business Card. The game can be found [here](http://holidayhackchallenge.com). After saving the world from the nefarious plot of the ATNA Corporation last year, siblings Josh and Jessica find themselves in a pickle when Santa gets kidnapped from there house on Christmas Eve. All that is left is Santa's business card. Its up to us to help the Dosis kids save Christmas (again...).
+
+
+<!--more-->
 
 ### Part 1: A Most Curious Business Card
 

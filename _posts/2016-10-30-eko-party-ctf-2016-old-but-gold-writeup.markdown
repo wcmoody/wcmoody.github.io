@@ -2,10 +2,9 @@
 layout: post
 title: "2016 EKO Party CTF Old But Gold Writeup"
 date: 2016-10-30 10:31:16
+excerpt_separator: <!--more-->
 disqus: true
 ---
-
-## Old But Gold (Misc 250)
 
 {: .center}
 ![](/assets/images/ekoctf2016/punchcard.png)
@@ -13,6 +12,8 @@ disqus: true
 As part of BitsForEveryone, I competed in [EKO Party CTF 2016](https://ctftime.org/event/342). This CTF had a great Misc 250 point challenged called "Old But Gold." 
 
 My students immediately pointed this challenge out to me since they knew I loved punch cards. A few months prior, I had written a challenge for our internal try-out CTF in which they were given a base64 encoced ascii art image of an IBM-29 punch card with a message encoded for them. It was a favorite for the students. It took me about 20 minutes to repurpose my code to solve this challenge. 
+
+<!--more-->
 
 **Description**: These QR codes look weird
 

@@ -2,6 +2,7 @@
 layout: post
 title: EECS cadets, faculty enter live Codewarz for first time
 date: 2017-02-02 13:37:42
+excerpt_separator: <!--more-->
 disqus: true
 ---
 
@@ -14,6 +15,8 @@ Codewarz is a programming competition designed by and for active duty cyber Sold
 The competitions have two components, live and online competitions. The live competition was held for the first time at the U.S. Military Academy Jan. 21.
 
 “The event features programming challenges that include a wide range of topics from traditional computer science type problems to more applied cyber-related problems,” Maj. Benjamin Klimkowski, assistant professor in the Electoral Engineering and Computer Science Department, said.
+
+<!--more-->
 
 “Some are pure math-based problems while others require knowledge of file forensics, networking and cryptography,” Klimkowski explained. “In essence, participants will go to a website and read a problem description that may or may not have a small example of the requirement output. From there, they will develop the code that solves it. Participants will then submit the code where an automated testing server will test against a set of test cases that participants do not see.”
 

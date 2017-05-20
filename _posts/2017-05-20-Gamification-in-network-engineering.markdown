@@ -1,13 +1,16 @@
 ---
 layout: post
 title: Gamification in a Network Engineering Class 
-date: 2017-02-02 13:37:42
+date: 2017-05-20 13:37:42
+excerpt_separator: <!--more-->
 disqus: true
 ---
 
-In my [IT350]() course, I like to add some capture the flag events on the final project as bonus questions. I take this opportunity to expose the students to CTF games and also allow them to go deeper on a subject that has been covered in class.
+In my [IT350](/teaching/cy-350-networking-engineering-and-design) course, I like to add some capture the flag events on the final project as bonus questions. I take this opportunity to expose the students to CTF games and also allow them to go deeper on a subject that has been covered in class.
 
 This semester I had a three part problem with three flags. The first two flags were worth three points each and the last one was for four points. The flags were to be solved in order and the difficult increased with each one. Below is the problem statement given in the assignment:
+
+<!--more-->
 
 ```
 A cadet learns much about ********** in IT350. A snippet of a router running configuration file can be found on the host 10.R.0.51. (R is the last 2 of your classroom number [52|64]). There are three stages of flags hidden in these systems, see if you can recover the flags. Stage 1 and 2 are worth 3 points each, stage 3 is 4 points. Flags start with IT350. This is also worth endless internet cool points so, no inter-group collaboration!
