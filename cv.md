@@ -32,7 +32,7 @@ permalink: /cv/
     [![](/assets/pics/iconPdf.png)PDF](/assets/pdf/didc02f-moody.pdf) [![](/assets/pics/acm.png){:height="5%" width="5%"}ACM](http://dl.acm.org/citation.cfm?id=2608020.2608023&coll=DL&dl=GUIDE&CFID=489186775&CFTOKEN=91233070)
 
 *   J. Dressler; <u>W.C. Moody</u>; J. M. Koepke; C. L. Bowen III, 'Operational Data Classes for Establishing Situational Awareness in Cyberspace', _The 6th International Conference on Cyber Conflict_ , 3-6 Jun. 2014  
-    [![](/assets/pics/iconPdf.png)PDF](/assets/pdf/Odcesac-Final.pdf) [![](/assets/pics/ccdcoe.jpg)CCDCOE](http://www.ccdcoe.org/cycon/2014/proceedings/d2r1s7_dresslermoody.pdf) [ ![](/assets/pics/ieee-favicon.ico)IEEE](http://ieeexplore.ieee.org/xpl/articleDetails.jsp?arnumber=6916402&refinements%3D4274209713%26sortType%3Dasc_p_Sequence%26filter%3DAND%28p_IS_Number%3A6916383%29)
+    [![](/assets/pics/iconPdf.png)PDF](/assets/pdf/Odcesac-Final.pdf) [![](/assets/pics/ccdcoe.jpg)CCDCOE](http://www.ccdcoe.org/cycon/2014/proceedings/d2r1s7_dresslermoody.pdf) [ ![](/assets/pics/ieee-favicon.ico)IEEE](http://ieeexplore.ieee.org/document/6916402/)
 
 *   <u>W.C. Moody</u>; L.B. Ngo; E. Duffy; A. Apon, 'JUMMP: Job Uninterrupted Maneuverable MapReduce Platform', _Cluster Computing (CLUSTER), 2013 IEEE International Conference on_ , pp. 1-8, 23-27 Sept. 2013  
     [![](/assets/pics/iconPdf.png)PDF](/assets/pdf/Jummp-Final.pdf) [![](/assets/pics/sf-favicon.ico)Source](https://sourceforge.net/projects/jummp/) [![](/assets/pics/ieee-favicon.ico)IEEE](http://ieeexplore.ieee.org/xpl/articleDetails.jsp?arnumber=6702650&punumber%3D6689497%26sortType%3Dasc_p_Sequence%26filter%3DAND%28p_IS_Number%3A6702603%29%26pageNumber%3D2)
