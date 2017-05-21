@@ -7,7 +7,7 @@ permalink: /cv/
 
 [![](/pics/iconPdf.png)CV PDF](/pdf/moody-cv.pdf) 
 
-### Education
+#### Education
 
 *   **PhD**, Computer Science: May 2015  
     Clemson University, Clemson, South Carolina  
