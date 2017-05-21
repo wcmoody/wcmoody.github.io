@@ -14,4 +14,4 @@ You can read more about these classes here:
 * [Introduction to Computing and Information Tecnology](/teaching/it-105-introduction-to-computing-and-information-technology)
 
 {: .center}
-![](/pics/classroom.png)
+![](/assets/pics/classroom.png)

@@ -5,7 +5,7 @@ permalink: /about/
 ---
 
 {: .center}
-![](/pics/me.jpg){:height="50%" width="50%"}
+![](/assets/pics/me.jpg){:height="50%" width="50%"}
 
 I am a member of the faculty of the [United States Military Academy](http://www.usma.edu) at West Point, NY in the [Electrical Engineering and Computer Science (EECS) Department](http://www.usma.edu/eecs). I teach multiple courses in our computing programs from both the Computer Science and Information Technology Majors, along with courses in our Cyber Secruity Engineering Sequence and Cyber Security Minor.
 

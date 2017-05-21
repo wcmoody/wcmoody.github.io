@@ -3,7 +3,7 @@ title: Home
 layout: home
 ---
 {: .center}
-![](/pics/banner.jpg)
+![](/assets/pics/banner.jpg)
 *I solemnly swear that I am up to no good*
 
 ### Greetings!
