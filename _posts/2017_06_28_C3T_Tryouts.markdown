@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "C3T Tryouts"
-date: 2016-10-30 10:31:16
+date: 2017-06-28 03:14:16
 excerpt_separator: <!--more-->
 disqus: true
 ---
