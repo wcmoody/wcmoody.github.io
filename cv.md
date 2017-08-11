@@ -21,21 +21,23 @@ permalink: /cv/
 
 #### Journal Articles:
 
-* <u>W.C. Moody</u>; A. Apon, 'Maneuverable Applications: Advancing Distributed Computing', _Cyber Defense Review_ (submitted May 2017 - in review)
+* <u>W.C. Moody</u>; A. Apon, 'Maneuverable Applications: Advancing Distributed Computing', _Cyber Defense Review_ (to appear)
 
 #### Conference Papers:
 
-*   <u>W.C. Moody</u>; Hongxin Hu; A. Apon, 'Defensive Maneuver Cyber Platform Modeling with Stochastic Petri Nets', _In Collaborative Computing: Networking, Applications and Worksharing (Collaboratecom), 2014 10th International Conference on_ , 22 Oct. 2014  
+*   <u>W.C. Moody</u>, H. Hu, A. Apon; 'Defensive Maneuver Cyber Platform Modeling with Stochastic Petri Nets', _In Collaborative Computing: Networking, Applications and Worksharing (Collaboratecom), 2014 10th International Conference on_ , 22 Oct. 2014  
     [![](/assets/pics/iconPdf.png)PDF](/assets/pdf/moodytrustcol14.pdf) [![](/assets/pics/ieee-favicon.ico)IEEE](http://ieeexplore.ieee.org/xpl/articleDetails.jsp?tp=&arnumber=7014609)
 
-*   <u>W.C. Moody</u>; J. Anderson; K.-C. Wang; A. Apon, 'Reconfigurable Network Testbed for Evaluation of Datacenter Topologies', _The 6th International Workshop on Data-intensive Distributed Computing (DIDC'14)_ , 23-27 Jun. 2014  
+*   <u>W.C. Moody</u>, J. Anderson, K.-C. Wang, A. Apon; 'Reconfigurable Network Testbed for Evaluation of Datacenter Topologies', _The 6th International Workshop on Data-intensive Distributed Computing (DIDC'14)_ , 23-27 Jun. 2014  
     [![](/assets/pics/iconPdf.png)PDF](/assets/pdf/didc02f-moody.pdf) [![](/assets/pics/acm.png){:height="5%" width="5%"}ACM](http://dl.acm.org/citation.cfm?id=2608020.2608023&coll=DL&dl=GUIDE&CFID=489186775&CFTOKEN=91233070)
 
-*   J. Dressler; <u>W.C. Moody</u>; J. M. Koepke; C. L. Bowen III, 'Operational Data Classes for Establishing Situational Awareness in Cyberspace', _The 6th International Conference on Cyber Conflict_ , 3-6 Jun. 2014  
+*   J. Dressler, <u>W.C. Moody</u>, J. M. Koepke, C. L. Bowen III; 'Operational Data Classes for Establishing Situational Awareness in Cyberspace', _The 6th International Conference on Cyber Conflict_ , 3-6 Jun. 2014  
     [![](/assets/pics/iconPdf.png)PDF](/assets/pdf/Odcesac-Final.pdf) [![](/assets/pics/ccdcoe.jpg)CCDCOE](http://www.ccdcoe.org/cycon/2014/proceedings/d2r1s7_dresslermoody.pdf) [ ![](/assets/pics/ieee-favicon.ico)IEEE](http://ieeexplore.ieee.org/document/6916402/)
 
 *   <u>W.C. Moody</u>; L.B. Ngo; E. Duffy; A. Apon, 'JUMMP: Job Uninterrupted Maneuverable MapReduce Platform', _Cluster Computing (CLUSTER), 2013 IEEE International Conference on_ , pp. 1-8, 23-27 Sept. 2013  
     [![](/assets/pics/iconPdf.png)PDF](/assets/pdf/Jummp-Final.pdf) [![](/assets/pics/sf-favicon.ico)Source](https://sourceforge.net/projects/jummp/) [![](/assets/pics/ieee-favicon.ico)IEEE](http://ieeexplore.ieee.org/xpl/articleDetails.jsp?arnumber=6702650&punumber%3D6689497%26sortType%3Dasc_p_Sequence%26filter%3DAND%28p_IS_Number%3A6702603%29%26pageNumber%3D2)
+
+*   J. Chamberlin, J. Hussey, B. Klimkowski, <u>W.C. Moody</u>, C. Morrell; 'The Impact of Virtualized Technology on Undergraduate Computer Networking Education', _SIGITE'17, 18th Annual Conference on Information Technology Education_, 4-7 Oct. 2017, _to appear_.
 
 #### Invited Talks:
 *   <u>W.C. Moody</u>, 'Reconfigurable Network Testbed for Evaluation of Datacenter Topologies', _The 6th International Workshop on Data-intensive Distributed Computing (DIDC'14)_ , 24 June. 2014, Vancouver, Canada [![](/assets/pics/iconPdf.png)PDF](/assets/pdf/didc-2014-moody-presentation.pdf)
@@ -59,15 +61,16 @@ permalink: /cv/
 
 #### Teaching:  
 
-*	_CS 481 Operating Systems,_ United States Military Academy, NY - Instructor 2016
+*  _CS 481 Operating Systems,_ United States Military Academy, NY - Instructor 2016
 *  _IT 350 Network Engineering and Design,_ United States Military Academy, NY - Course Director, Instructor 2015-2017
 *  _IT 105 Introduction to Computing and Information Technology,_ United States Military Academy, Instruction 2015-2016
-*   _CPSC 3620 Distributed Programming and Cluster Computing,_ Clemson University, SC - Reoccuring Guest Lecturer, 2013-2014
-*   _Introduction to Programming_, Anderson Homeschool Association Encore Program, AY 2013-2014
-*   _Joint Advanced Cyber Warface Course_ Fort Meade, MD - Reoccurring Guest Lecturer, 2011-2012
+*  _CPSC 3620 Distributed Programming and Cluster Computing,_ Clemson University, SC - Reoccuring Guest Lecturer, 2013-2014
+*  _Introduction to Programming_, Anderson Homeschool Association Encore Program, AY 2013-2014
+*  _Joint Advanced Cyber Warface Course_ Fort Meade, MD - Reoccurring Guest Lecturer, 2011-2012
 
 #### Service: 
-*	Program Committee, 2016 Army Cyber Institute Cyber Talks, New York City
+*   Paper Referee, 2017 International Conflict on Cyber Conflict U.S. (CyCon U.S.)
+*   Program Committee, 2016 Army Cyber Institute Cyber Talks, New York City
 *   Paper Referee, Journal of Parallel and Distrubuted Computing (JPDC)
 *   Paper Referee, 2014 IEEE International Conference on Big Data (BigData14)
 *   Paper Referee, 2014 IEEE International Conference on High Performance Computing (HiPC)
@@ -92,6 +95,7 @@ permalink: /cv/
 
 #### Awards and Recognition:
 
+*   Top Field Grade Officer, 2016 All-Army Cyberstakes Online, Capture the Flag Competition September 2016
 *   Outstanding Computer Science PhD Student - Clemson Univesity, 2014-2015
 *   Finalist, Intelligence National Security Alliance Sidney D. Drell Academic Award, November 2013 [INSA](http://www.insaonline.org/i/e/aa/2013/recipients.aspx)
 
