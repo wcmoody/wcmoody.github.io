@@ -24,6 +24,7 @@ permalink: /cv/
 * <u>W.C. Moody</u>; A. Apon, 'Maneuverable Applications: Advancing Distributed Computing', _Cyber Defense Review_ (to appear)
 
 #### Conference Papers:
+*   J. Chamberlin, J. Hussey, B. Klimkowski, <u>W.C. Moody</u>, C. Morrell; 'The Impact of Virtualized Technology on Undergraduate Computer Networking Education', _SIGITE'17, 18th Annual Conference on Information Technology Education_, 4-7 Oct. 2017, _to appear_.
 
 *   <u>W.C. Moody</u>, H. Hu, A. Apon; 'Defensive Maneuver Cyber Platform Modeling with Stochastic Petri Nets', _In Collaborative Computing: Networking, Applications and Worksharing (Collaboratecom), 2014 10th International Conference on_ , 22 Oct. 2014  
     [![](/assets/pics/iconPdf.png)PDF](/assets/pdf/moodytrustcol14.pdf) [![](/assets/pics/ieee-favicon.ico)IEEE](http://ieeexplore.ieee.org/xpl/articleDetails.jsp?tp=&arnumber=7014609)
@@ -37,7 +38,6 @@ permalink: /cv/
 *   <u>W.C. Moody</u>; L.B. Ngo; E. Duffy; A. Apon, 'JUMMP: Job Uninterrupted Maneuverable MapReduce Platform', _Cluster Computing (CLUSTER), 2013 IEEE International Conference on_ , pp. 1-8, 23-27 Sept. 2013  
     [![](/assets/pics/iconPdf.png)PDF](/assets/pdf/Jummp-Final.pdf) [![](/assets/pics/sf-favicon.ico)Source](https://sourceforge.net/projects/jummp/) [![](/assets/pics/ieee-favicon.ico)IEEE](http://ieeexplore.ieee.org/xpl/articleDetails.jsp?arnumber=6702650&punumber%3D6689497%26sortType%3Dasc_p_Sequence%26filter%3DAND%28p_IS_Number%3A6702603%29%26pageNumber%3D2)
 
-*   J. Chamberlin, J. Hussey, B. Klimkowski, <u>W.C. Moody</u>, C. Morrell; 'The Impact of Virtualized Technology on Undergraduate Computer Networking Education', _SIGITE'17, 18th Annual Conference on Information Technology Education_, 4-7 Oct. 2017, _to appear_.
 
 #### Invited Talks:
 *   <u>W.C. Moody</u>, 'Reconfigurable Network Testbed for Evaluation of Datacenter Topologies', _The 6th International Workshop on Data-intensive Distributed Computing (DIDC'14)_ , 24 June. 2014, Vancouver, Canada [![](/assets/pics/iconPdf.png)PDF](/assets/pdf/didc-2014-moody-presentation.pdf)
