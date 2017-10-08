@@ -61,9 +61,9 @@ permalink: /cv/
 
 #### Teaching:  
 
-*  _CS 481 Operating Systems,_ United States Military Academy, NY - Instructor 2016-2017
+*  _CS 481 Operating Systems,_ United States Military Academy, NY - Course Director, Instructor 2016-2017
 *  _IT 350 Network Engineering and Design,_ United States Military Academy, NY - Course Director, Instructor 2015-2017
-*  _IT 105 Introduction to Computing and Information Technology,_ United States Military Academy, Instruction 2015-2016
+*  _IT 105 Introduction to Computing and Information Technology,_ United States Military Academy, Instructor 2015-2016
 *  _CPSC 3620 Distributed Programming and Cluster Computing,_ Clemson University, SC - Reoccuring Guest Lecturer, 2013-2014
 *  _Introduction to Programming_, Anderson Homeschool Association Encore Program, AY 2013-2014
 *  _Joint Advanced Cyber Warface Course_ Fort Meade, MD - Reoccurring Guest Lecturer, 2011-2012
