@@ -24,13 +24,13 @@ permalink: /cv/
 * <u>W.C. Moody</u>; A. Apon, 'Maneuverable Applications: Advancing Distributed Computing', _Cyber Defense Review_ (to appear)
 
 #### Conference Papers:
-*   J. Chamberlin, J. Hussey, B. Klimkowski, <u>W.C. Moody</u>, C. Morrell; 'The Impact of Virtualized Technology on Undergraduate Computer Networking Education', _SIGITE'17, 18th Annual Conference on Information Technology Education_, 4-7 Oct. 2017. [![](/assets/pics/iconPdf.png)PDF](/assets/pdf/sigite17_virtualization_final.pdf)[![](/assets/pics/acm.png){:height="5%" width="5%"}ACM](https://dl.acm.org/citation.cfm?id=3125693&CFID=817111606&CFTOKEN=90233768)
+*   J. Chamberlin, J. Hussey, B. Klimkowski, <u>W.C. Moody</u>, C. Morrell; 'The Impact of Virtualized Technology on Undergraduate Computer Networking Education', _SIGITE'17, 18th Annual Conference on Information Technology Education_, 4-7 Oct. 2017. [![](/assets/pics/iconPdf.png)PDF](/assets/pdf/sigite17_virtualization_final.pdf)[![](/assets/pics/acm.png){:height="5%" width="5%"}ACM](https://dl.acm.org/citation.cfm?id=3125693)
 
 *   <u>W.C. Moody</u>, H. Hu, A. Apon; 'Defensive Maneuver Cyber Platform Modeling with Stochastic Petri Nets', _In Collaborative Computing: Networking, Applications and Worksharing (Collaboratecom), 2014 10th International Conference on_ , 22 Oct. 2014  
     [![](/assets/pics/iconPdf.png)PDF](/assets/pdf/moodytrustcol14.pdf) [![](/assets/pics/ieee-favicon.ico)IEEE](http://ieeexplore.ieee.org/xpl/articleDetails.jsp?tp=&arnumber=7014609)
 
 *   <u>W.C. Moody</u>, J. Anderson, K.-C. Wang, A. Apon; 'Reconfigurable Network Testbed for Evaluation of Datacenter Topologies', _The 6th International Workshop on Data-intensive Distributed Computing (DIDC'14)_ , 23-27 Jun. 2014  
-    [![](/assets/pics/iconPdf.png)PDF](/assets/pdf/didc02f-moody.pdf) [![](/assets/pics/acm.png){:height="5%" width="5%"}ACM](http://dl.acm.org/citation.cfm?id=2608020.2608023&coll=DL&dl=GUIDE&CFID=489186775&CFTOKEN=91233070)
+    [![](/assets/pics/iconPdf.png)PDF](/assets/pdf/didc02f-moody.pdf) [![](/assets/pics/acm.png){:height="5%" width="5%"}ACM](http://dl.acm.org/citation.cfm?id=2608020.2608023)
 
 *   J. Dressler, <u>W.C. Moody</u>, J. M. Koepke, C. L. Bowen III; 'Operational Data Classes for Establishing Situational Awareness in Cyberspace', _The 6th International Conference on Cyber Conflict_ , 3-6 Jun. 2014  
     [![](/assets/pics/iconPdf.png)PDF](/assets/pdf/Odcesac-Final.pdf) [![](/assets/pics/ccdcoe.jpg)CCDCOE](http://www.ccdcoe.org/cycon/2014/proceedings/d2r1s7_dresslermoody.pdf) [ ![](/assets/pics/ieee-favicon.ico)IEEE](http://ieeexplore.ieee.org/document/6916402/)
