@@ -24,7 +24,7 @@ permalink: /cv/
 * <u>W.C. Moody</u>; A. Apon, 'Maneuverable Applications: Advancing Distributed Computing', _Cyber Defense Review_ (to appear)
 
 #### Conference Papers:
-*   J. Chamberlin, J. Hussey, B. Klimkowski, <u>W.C. Moody</u>, C. Morrell; 'The Impact of Virtualized Technology on Undergraduate Computer Networking Education', _SIGITE'17, 18th Annual Conference on Information Technology Education_, 4-7 Oct. 2017. [![](/assets/pics/iconPdf.png)PDF](/assets/pdf/sigite17_virtualization_final.pdf)[![](/assets/pics/acm.png){:height="5%" width="5%"}ACM](http://delivery.acm.org/10.1145/3130000/3125693/p109-chamberlin.pdf)
+*   J. Chamberlin, J. Hussey, B. Klimkowski, <u>W.C. Moody</u>, C. Morrell; 'The Impact of Virtualized Technology on Undergraduate Computer Networking Education', _SIGITE'17, 18th Annual Conference on Information Technology Education_, 4-7 Oct. 2017. [![](/assets/pics/iconPdf.png)PDF](/assets/pdf/sigite17_virtualization_final.pdf)[![](/assets/pics/acm.png){:height="5%" width="5%"}ACM](https://dl.acm.org/citation.cfm?id=2608020.2608023&coll=DL&dl=GUIDE)
 
 *   <u>W.C. Moody</u>, H. Hu, A. Apon; 'Defensive Maneuver Cyber Platform Modeling with Stochastic Petri Nets', _In Collaborative Computing: Networking, Applications and Worksharing (Collaboratecom), 2014 10th International Conference on_ , 22 Oct. 2014  
     [![](/assets/pics/iconPdf.png)PDF](/assets/pdf/moodytrustcol14.pdf) [![](/assets/pics/ieee-favicon.ico)IEEE](http://ieeexplore.ieee.org/xpl/articleDetails.jsp?tp=&arnumber=7014609)
