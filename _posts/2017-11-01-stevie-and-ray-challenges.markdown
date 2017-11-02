@@ -13,6 +13,7 @@ solves for the first part, but none for the second. For Fall 2017, I re-released
 this semester. In this post, I will reveal the details of how Stevie and Ray are created, and how they can be solved.
 
 ![StevieNJamie](https://ichef.bbci.co.uk/news/660/media/images/80875000/jpg/_80875877_stevieafp.jpg)
+
 **Stevie Wonder and Jamie Foxx playing the role of the late great Ray Charles**
 
 <!--more-->
