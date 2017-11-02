@@ -1,0 +1,210 @@
+<p>For our internal CTF for tryouts the past two years, I have had a series of challenges called <em>Stevie and Ray</em>.</p>
+
+<p>These challenges were favorites with the cadets. Both challenges were released in the Fall 2016 challenge with many
+solves for the first part, but none for the second. For Fall 2017, I re-released Stevie and Ray 2 and it had 3 or 4 solves
+this semester. In this post, I will reveal the details of how Stevie and Ray are created, and how they can be solved.</p>
+
+<p><img src="https://ichef.bbci.co.uk/news/660/media/images/80875000/jpg/_80875877_stevieafp.jpg" alt="StevieNJamie" /></p>
+
+<!--more-->
+
+<h3 id="stevie-and-ray">Stevie and Ray</h3>
+
+<p>Hacker candidates were presented with the challenge description of <code class="highlighter-rouge">There is an odd service running at  on port . See if you can break its code and interact with it.</code>.</p>
+
+<p>When the connecting to the service the following mesage is received:</p>
+<div class="highlighter-rouge"><pre class="highlight"><code>.. .o o. o. .o .. oo o. .. oo o. o. .. .o o. oo .o ..
+.. oo oo .. oo .. .o .o .. .o .o .. .. oo .. .o oo o.
+.o .o .. .. o. .. .. o. .. oo o. oo .. .o .. o. o. oo
+</code></pre>
+</div>
+<p>This appears to be garabage, but after a few minutes of studying, you may see that it is Braille. Braille is an interesting encoding scheme. A single character
+is represent by a series of flat or raised dots in the arrangement of 3 rows and 2 columns. There is a character for the 26 lowercase letters. There is also a
+shift symbol and a number sign symbol. When the letter <code class="highlighter-rouge">a</code> through <code class="highlighter-rouge">j</code> is preceeded with by the <code class="highlighter-rouge">number</code> character that is the number 1-0 [where a is 1 and j is
+0]. When proceeded by a <code class="highlighter-rouge">shift</code> symbol, the following letter is a capital letter.</p>
+
+<p>The encoded provided is using a lower case letter O for a raised dot and a period for a flat dot. Decoding the provided prompt, we see the message is <code class="highlighter-rouge">What do you want?</code>. The user is able to interact with the service by typing a response, but nothing happens until after three lines have been entered. Afterwards, another encoded message is returned. Providing the input of <code class="highlighter-rouge">flag</code> three times provides the following message:</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>.. .o o. o. o. oo .. .. .. oo o. .. oo .o oo o.
+.. o. .o oo oo .o oo .. .. .o .o .. .o o. .. .o
+.o o. o. o. o. oo o. .. .o o. o. .. .. .. .. ..
+</code></pre>
+</div>
+
+<p>This decodes to <code class="highlighter-rouge">Sorry, no dice</code> and the service is closed. Since the Braille message is three lines long, the student should see they have to enter their
+response in Braille. Encoding either <code class="highlighter-rouge">Flag</code> or <code class="highlighter-rouge">flag</code> will provide the flag encoded in Braille.</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>.. .o o. o. o. oo .. .. .. oo o. .. oo .o oo o.
+.. o. .o oo oo .o oo .. .. .o .o .. .o o. .. .o
+.o o. o. o. o. oo o. .. .o o. o. .. .. .. .. ..
+</code></pre>
+</div>
+<p>The flag is <code class="highlighter-rouge">C3T Br4il3 4 The W1n</code>. There are no symbols for <code class="highlighter-rouge"><span class="p">{</span><span class="w"> </span><span class="p">}</span></code> so the normal flag pattern is not followed, but its a quick solve at this point.</p>
+
+<p>The server code that generates the prompt can be seen below:</p>
+
+<div class="language-python highlighter-rouge"><pre class="highlight"><code><span class="c">#!/usr/bin/env python</span>
+
+<span class="kn">import</span> <span class="nn">sys</span><span class="o">,</span> <span class="nn">os</span>
+<span class="kn">from</span> <span class="nn">random</span> <span class="kn">import</span> <span class="n">randint</span> <span class="k">as</span> <span class="n">ri</span>
+<span class="kn">from</span> <span class="nn">string</span> <span class="kn">import</span> <span class="n">digits</span>
+
+<span class="n">lowercase</span> <span class="o">=</span> <span class="p">[</span><span class="nb">chr</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">97</span><span class="p">,</span><span class="mi">123</span><span class="p">)]</span>
+<span class="n">uppercase</span> <span class="o">=</span> <span class="p">[</span><span class="nb">chr</span><span class="p">(</span><span class="n">y</span><span class="p">)</span> <span class="k">for</span> <span class="n">y</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">65</span><span class="p">,</span><span class="mi">91</span><span class="p">)]</span>
+
+<span class="n">letterdots</span> <span class="o">=</span> <span class="p">[[</span><span class="mi">1</span><span class="p">,],[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">4</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">5</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">4</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">5</span><span class="p">],</span>
+        <span class="p">[</span><span class="mi">2</span><span class="p">,</span><span class="mi">4</span><span class="p">],</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">3</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">5</span><span class="p">],[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">],</span>
+        <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">5</span><span class="p">],</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">],</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">6</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">6</span><span class="p">],</span> 
+        <span class="p">[</span><span class="mi">2</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">6</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">6</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">6</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">6</span><span class="p">]]</span>
+<span class="n">shift</span> <span class="o">=</span> <span class="p">[</span><span class="mi">6</span><span class="p">,]</span>
+<span class="n">numbersign</span> <span class="o">=</span> <span class="p">[</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">6</span><span class="p">]</span>
+<span class="n">punctuation</span> <span class="o">=</span> <span class="s">" .,?;!"</span>
+<span class="n">puncdots</span> <span class="o">=</span> <span class="p">[[],</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">6</span><span class="p">],</span> <span class="p">[</span><span class="mi">2</span><span class="p">,],</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">6</span><span class="p">],</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">],</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">5</span><span class="p">]]</span>
+
+
+<span class="k">def</span> <span class="nf">d2l</span><span class="p">(</span><span class="n">dotlist</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">dotlist</span> <span class="ow">in</span> <span class="n">letterdots</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">lowercase</span><span class="p">[</span><span class="n">letterdots</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="n">dotlist</span><span class="p">)]</span>
+    <span class="k">elif</span> <span class="n">dotlist</span> <span class="ow">in</span> <span class="n">puncdots</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">punctuation</span><span class="p">[</span><span class="n">puncdots</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="n">dotlist</span><span class="p">)]</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">return</span> <span class="s">"&amp;"</span>
+
+<span class="k">def</span> <span class="nf">d2i</span><span class="p">(</span><span class="n">dotlist</span><span class="p">):</span>
+    <span class="n">ind</span> <span class="o">=</span> <span class="p">(</span><span class="n">lowercase</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="n">d2l</span><span class="p">(</span><span class="n">dotlist</span><span class="p">))</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="o">%</span> <span class="mi">10</span>
+    <span class="k">return</span> <span class="n">digits</span><span class="p">[</span><span class="n">ind</span><span class="p">]</span>
+
+<span class="k">def</span> <span class="nf">build</span><span class="p">(</span><span class="n">message</span><span class="p">):</span>
+    <span class="n">brows</span> <span class="o">=</span> <span class="p">[]</span>
+
+    <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">message</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s">'</span><span class="se">\n</span><span class="s">'</span><span class="p">):</span>
+        <span class="n">brow</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">letter</span> <span class="ow">in</span> <span class="n">line</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">letter</span> <span class="ow">in</span> <span class="n">lowercase</span><span class="p">:</span>
+                <span class="n">brow</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">letterdots</span><span class="p">[</span><span class="n">lowercase</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="n">letter</span><span class="p">)])</span>
+            <span class="k">elif</span> <span class="n">letter</span> <span class="ow">in</span> <span class="n">uppercase</span><span class="p">:</span>
+                <span class="n">brow</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">shift</span><span class="p">)</span>
+                <span class="n">brow</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">letterdots</span><span class="p">[</span><span class="n">lowercase</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="n">letter</span><span class="o">.</span><span class="n">lower</span><span class="p">())])</span>
+            <span class="k">elif</span> <span class="n">letter</span> <span class="ow">in</span> <span class="n">digits</span><span class="p">:</span>
+                <span class="n">brow</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">numbersign</span><span class="p">)</span>
+                <span class="n">brow</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">letterdots</span><span class="p">[(</span><span class="n">digits</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="n">letter</span><span class="p">)</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="o">%</span> <span class="mi">10</span><span class="p">])</span>
+            <span class="k">elif</span> <span class="n">letter</span> <span class="ow">in</span> <span class="n">punctuation</span><span class="p">:</span>
+                <span class="n">brow</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">puncdots</span><span class="p">[</span><span class="n">punctuation</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="n">letter</span><span class="p">)])</span>
+        <span class="n">brows</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">brow</span><span class="p">)</span>
+    <span class="n">final</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">brows</span><span class="p">:</span>
+        <span class="n">base</span> <span class="o">=</span> <span class="n">ri</span><span class="p">(</span><span class="mi">22</span><span class="p">,</span><span class="mi">90</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">dotrow</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">3</span><span class="p">):</span>
+            <span class="n">braille</span> <span class="o">=</span> <span class="s">''</span>
+            <span class="k">for</span> <span class="n">letter</span> <span class="ow">in</span> <span class="n">row</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">dotrow</span> <span class="o">+</span> <span class="mi">1</span> <span class="ow">in</span> <span class="n">letter</span><span class="p">:</span>
+                    <span class="n">braille</span> <span class="o">+=</span> <span class="s">'o'</span>
+                <span class="k">else</span><span class="p">:</span> <span class="n">braille</span> <span class="o">+=</span> <span class="s">'.'</span>
+                <span class="k">if</span> <span class="n">dotrow</span> <span class="o">+</span> <span class="mi">4</span> <span class="ow">in</span> <span class="n">letter</span><span class="p">:</span>
+                    <span class="n">braille</span> <span class="o">+=</span> <span class="s">'o'</span>
+                <span class="k">else</span><span class="p">:</span> <span class="n">braille</span> <span class="o">+=</span> <span class="s">'.'</span>
+                <span class="n">braille</span> <span class="o">+=</span> <span class="s">' '</span>
+            <span class="n">final</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">braille</span><span class="p">)</span>
+    <span class="k">return</span> <span class="s">'</span><span class="se">\n</span><span class="s">'</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">final</span><span class="p">)</span>
+
+
+<span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="s">"__main__"</span><span class="p">:</span>
+    <span class="n">sys</span><span class="o">.</span><span class="n">stdout</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">fdopen</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">stdout</span><span class="o">.</span><span class="n">fileno</span><span class="p">(),</span> <span class="s">'w'</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">build</span><span class="p">(</span><span class="s">"What do you want?"</span><span class="p">))</span>
+    <span class="n">answer1</span> <span class="o">=</span> <span class="nb">raw_input</span><span class="p">()</span>
+    <span class="n">answer2</span> <span class="o">=</span> <span class="nb">raw_input</span><span class="p">()</span>
+    <span class="n">answer3</span> <span class="o">=</span> <span class="nb">raw_input</span><span class="p">()</span>
+    <span class="n">answer</span> <span class="o">=</span> <span class="s">'</span><span class="se">\n</span><span class="s">'</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="n">answer1</span><span class="p">,</span> <span class="n">answer2</span><span class="p">,</span> <span class="n">answer3</span><span class="p">])</span>
+    <span class="k">if</span> <span class="n">answer</span> <span class="o">==</span> <span class="n">build</span><span class="p">(</span><span class="s">"Flag"</span><span class="p">)</span> <span class="ow">or</span> <span class="n">answer</span> <span class="o">==</span> <span class="n">build</span><span class="p">(</span><span class="s">"flag"</span><span class="p">):</span>
+        <span class="k">print</span><span class="p">(</span><span class="n">build</span><span class="p">(</span><span class="s">"C3T Br4il3 4 The W1n"</span><span class="p">))</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">print</span><span class="p">(</span><span class="n">build</span><span class="p">(</span><span class="s">"Sorry! No dice"</span><span class="p">))</span>
+</code></pre>
+</div>
+
+<p>The code to solve the challenge can be found here:</p>
+<div class="language-python highlighter-rouge"><pre class="highlight"><code><span class="c">#!/usr/bin/env python</span>
+
+<span class="kn">import</span> <span class="nn">sys</span>
+<span class="kn">from</span> <span class="nn">random</span> <span class="kn">import</span> <span class="n">randint</span> <span class="k">as</span> <span class="n">ri</span>
+<span class="kn">from</span> <span class="nn">string</span> <span class="kn">import</span> <span class="n">digits</span>
+
+<span class="n">lowercase</span> <span class="o">=</span> <span class="p">[</span><span class="nb">chr</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mh">0x61</span><span class="p">,</span> <span class="mh">0x61</span> <span class="o">+</span> <span class="mi">27</span><span class="p">)]</span>
+<span class="n">uppercase</span> <span class="o">=</span> <span class="p">[</span><span class="nb">chr</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mh">0x61</span><span class="p">,</span> <span class="mh">0x41</span> <span class="o">+</span> <span class="mi">27</span><span class="p">)]</span>
+
+<span class="n">letterdots</span> <span class="o">=</span> <span class="p">[[</span><span class="mi">1</span><span class="p">,],[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">4</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">5</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">4</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">5</span><span class="p">],</span>
+        <span class="p">[</span><span class="mi">2</span><span class="p">,</span><span class="mi">4</span><span class="p">],</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">3</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">5</span><span class="p">],[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">],</span>
+        <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">5</span><span class="p">],</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">],</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">6</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">6</span><span class="p">],</span> 
+        <span class="p">[</span><span class="mi">2</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">6</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">6</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">6</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">6</span><span class="p">]]</span>
+<span class="n">shift</span> <span class="o">=</span> <span class="p">[</span><span class="mi">6</span><span class="p">,]</span>
+<span class="n">numbersign</span> <span class="o">=</span> <span class="p">[</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">6</span><span class="p">]</span>
+<span class="n">punctuation</span> <span class="o">=</span> <span class="s">" .,?;!"</span>
+<span class="n">puncdots</span> <span class="o">=</span> <span class="p">[[],</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">6</span><span class="p">],</span> <span class="p">[</span><span class="mi">2</span><span class="p">,],</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">6</span><span class="p">],</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">],</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">5</span><span class="p">]]</span>
+
+
+<span class="k">def</span> <span class="nf">d2l</span><span class="p">(</span><span class="n">dotlist</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">dotlist</span> <span class="ow">in</span> <span class="n">letterdots</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">lowercase</span><span class="p">[</span><span class="n">letterdots</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="n">dotlist</span><span class="p">)]</span>
+    <span class="k">elif</span> <span class="n">dotlist</span> <span class="ow">in</span> <span class="n">puncdots</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">punctuation</span><span class="p">[</span><span class="n">puncdots</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="n">dotlist</span><span class="p">)]</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">return</span> <span class="s">"&amp;"</span>
+<span class="k">def</span> <span class="nf">d2i</span><span class="p">(</span><span class="n">dotlist</span><span class="p">):</span>
+    <span class="n">ind</span> <span class="o">=</span> <span class="p">(</span><span class="n">lowercase</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="n">d2l</span><span class="p">(</span><span class="n">dotlist</span><span class="p">))</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="o">%</span> <span class="mi">10</span>
+    <span class="k">return</span> <span class="n">digits</span><span class="p">[</span><span class="n">ind</span><span class="p">]</span>
+
+<span class="k">def</span> <span class="nf">solve</span><span class="p">(</span><span class="n">data</span><span class="p">):</span>
+    <span class="k">for</span> <span class="n">linecount</span><span class="p">,</span> <span class="n">line</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s">'</span><span class="se">\n</span><span class="s">'</span><span class="p">)):</span>
+        <span class="c">#print("Line count is {} and line len is \</span>
+               <span class="c"># {}".format(linecount,len(line)))</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">line</span><span class="p">)</span><span class="o">==</span><span class="mi">0</span><span class="p">:</span> <span class="k">continue</span>
+        <span class="n">line</span> <span class="o">=</span> <span class="n">line</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+        <span class="k">if</span> <span class="n">linecount</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">letters</span> <span class="o">=</span> <span class="p">[]</span>
+            <span class="k">for</span> <span class="n">pairs</span> <span class="ow">in</span> <span class="n">line</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s">' '</span><span class="p">):</span>
+                <span class="n">letters</span><span class="o">.</span><span class="n">append</span><span class="p">([])</span>
+            <span class="c">#print("all letters initialized ")</span>
+
+        <span class="n">lettercount</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">letters</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">pairs</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">line</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s">' '</span><span class="p">)):</span>
+            <span class="c">#print ("looking at pair #%d (%s) from line %d" % (i, pairs, \</span>
+                <span class="c">#linecount))</span>
+            <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">pairs</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span> <span class="k">continue</span>
+            <span class="k">for</span> <span class="n">j</span><span class="p">,</span> <span class="n">column</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">pairs</span><span class="p">):</span>
+                <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">column</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span> <span class="k">continue</span>
+                <span class="k">if</span> <span class="n">j</span><span class="o">==</span><span class="mi">0</span> <span class="ow">and</span> <span class="n">column</span> <span class="o">==</span> <span class="s">'o'</span><span class="p">:</span>
+                    <span class="c">#print ("    we got raised in column 0 (%s)" % column)</span>
+                    <span class="n">letters</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">linecount</span><span class="o">+</span><span class="mi">1</span> <span class="p">)</span>
+                <span class="k">if</span> <span class="n">j</span><span class="o">==</span><span class="mi">1</span> <span class="ow">and</span> <span class="n">column</span> <span class="o">==</span> <span class="s">'o'</span><span class="p">:</span>
+                    <span class="c">#print ("    we got raised in column 1 (%s)" % column)</span>
+                    <span class="n">letters</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">linecount</span> <span class="o">+</span> <span class="mi">4</span><span class="p">)</span>
+                <span class="c">#print ("letter %d is now" % i, letters[i])</span>
+
+        <span class="k">if</span> <span class="n">linecount</span> <span class="o">==</span> <span class="mi">2</span><span class="p">:</span>
+            <span class="n">message</span> <span class="o">=</span> <span class="s">''</span>
+            <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span>
+            <span class="k">while</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="nb">len</span><span class="p">(</span><span class="n">letters</span><span class="p">):</span>
+                <span class="n">letter</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">letters</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+                <span class="k">if</span> <span class="n">letter</span> <span class="o">==</span> <span class="n">shift</span><span class="p">:</span>
+                    <span class="n">nextletter</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">letters</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">])</span>
+                    <span class="n">message</span> <span class="o">+=</span> <span class="n">d2l</span><span class="p">(</span><span class="n">nextletter</span><span class="p">)</span><span class="o">.</span><span class="n">upper</span><span class="p">()</span>
+                    <span class="n">i</span> <span class="o">+=</span> <span class="mi">2</span>
+                <span class="k">elif</span> <span class="n">letter</span> <span class="o">==</span> <span class="n">numbersign</span><span class="p">:</span>
+                    <span class="n">nextletter</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">letters</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">])</span>
+                    <span class="n">message</span> <span class="o">+=</span> <span class="n">d2i</span><span class="p">(</span><span class="n">nextletter</span><span class="p">)</span>
+                    <span class="n">i</span> <span class="o">+=</span> <span class="mi">2</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="n">message</span> <span class="o">+=</span> <span class="n">d2l</span><span class="p">(</span><span class="n">letter</span><span class="p">)</span>
+                    <span class="n">i</span> <span class="o">+=</span> <span class="mi">1</span>
+            <span class="k">return</span> <span class="n">message</span>
+
+<span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="s">"__main__"</span><span class="p">:</span>
+
+    <span class="n">cipher</span> <span class="o">=</span> \
+<span class="s">""".. .o o. o. .o .. oo o. .. oo o. o. .. .o o. oo .o ..
+.. oo oo .. oo .. .o .o .. .o .o .. .. oo .. .o oo o.
+.o .o .. .. o. .. .. o. .. oo o. oo .. .o .. o. o. oo"""</span>
+
+    <span class="k">print</span><span class="p">(</span><span class="n">solve</span><span class="p">(</span><span class="n">cipher</span><span class="p">))</span>
+</code></pre>
+</div>

