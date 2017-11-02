@@ -1,0 +1,12 @@
+---
+layout: post
+title: "C3T Tryouts"
+date: 2017-06-28 03:14:16
+excerpt_separator: <!--more-->
+disqus: true
+---
+
+**Wanna be a Wizard?**
+
+Use your magic time traveling eye and find the flag on this site
+
