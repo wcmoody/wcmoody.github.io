@@ -155,7 +155,7 @@ If they view this file, they will see the first flag: `IT350{stage_1_vms_are_coo
 
 The second stage is where I want the cadets to begin applying what they learned in the course: specifically configuring router interfaces, creating access control lists, and securing vty lines. They should now want to connect to the router in order to recovery more flags.
 
-Since the description of the gigabitethernet 0/0 interface is where the first flag was, they should its IP address. If they try to ping this address, they will see the router is on the network and operational. Now they should try to access it. If the skip down to the configuration for `line vty 0 4` they will show see that only the telnet protocol is allowed asin the inbound transport protocol. If they try to connect from their VM (or any workstation in the classroom) to this routers they will be denied.
+Since the description of the GigabitEthernet 0/0 interface is where the first flag was, they should know its IP address. If they try to ping this address, they will see the router is on the network and operational. Now they should try to access it. If they skip down to the configuration for `line vty 0 4` they will see that only the telnet protocol is allowed as the inbound transport protocol. If they try to connect from their VM (or any workstation in the classroom) to this router they will be denied.
 
 ```sh
 [cadet@it350b1 ~]$ telnet 10.64.0.50
@@ -163,9 +163,9 @@ Trying 10.64.0.50...
 telnet: connect to address 10.64.0.50: Connection refused
 ```
 
-They thing should begin to ask themselves why that is? Going back to the configuration, they should see that standard access list 10 is applied in the inbound direction on those vty lines. Finding this ACL in the config, shows it permits only the single IP address of `10.52.0.51`. Since this is the 64 classroom VM, they should realize the other classrooms VM can connect to their classroom's router and vice versa. This is my attempt to show them they need to pivot. They have two choices, they can now ssh into the other classrooms VM and connect to their classrooms router via telnet, or they can try assume they can connect to the 52 classroom's router and go from there. Either way is sufficent to recover the this stage's flag.
+They then should begin to ask themselves why is that? Going back to the configuration, they should see that standard access list 10 is applied in the inbound direction on those vty lines. Finding this ACL in the config, shows it permits only the single IP address of `10.52.0.51`. Since this is the 64 classroom VM, they should realize the other classrooms VM can connect to their classroom's router and vice versa. This is my attempt to show them the need to pivot. They have two choices, they can now ssh into the other classrooms VM and connect to their classrooms router via telnet, or they can assume they can connect to the 52 classroom's router and go from there. Either way is sufficent to recover this stage's flag.
 
-When they do either these they get the following message (this is a connection to the 52 classroom's router from the 64 classroom VM)
+When they do either of these they get the following message (this is a connection to the 52 classroom's router from the 64 classroom VM)
 
 ```
 [cadet@it350b1 ~]$ telnet 10.52.0.50
