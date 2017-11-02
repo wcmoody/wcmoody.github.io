@@ -6,7 +6,7 @@ excerpt_separator: <!--more-->
 disqus: true
 ---
 
-#### Wanna be a Wizard?
+**Wanna be a Wizard?**
 
 Use your magic time traveling eye and find the flag on this site
 
