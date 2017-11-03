@@ -95,6 +95,7 @@ permalink: /cv/
 
 #### Awards and Recognition:
 
+*   Winning team, Symantec Higher Education Cyber Security Challenge [media](http://edscoop.com/west-point-shows-off-cyber-chops-in-higher-ed-challenge)
 *   Top Field Grade Officer, 2016 All-Army Cyberstakes Online, Capture the Flag Competition September 2016
 *   Outstanding Computer Science PhD Student - Clemson Univesity, 2014-2015
 *   Finalist, Intelligence National Security Alliance Sidney D. Drell Academic Award, November 2013 [INSA](http://www.insaonline.org/i/e/aa/2013/recipients.aspx)
