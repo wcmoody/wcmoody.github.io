@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>W. Clay Moody | RC3CTF 2017 - Math Class Writeup</title>
+  <meta name="description" content="I participated with BitsForEveryone in RC3CTF. There were five coaches from the C3T team competing and we finished in 12 place with a total of 1850 points. P...">
+
+  <link rel="stylesheet" href="/assets/main.css">
+  <link rel="canonical" href="http://localhost:4000/blog/2017/11/rc3ctf-2017-math-class">
+  <link rel="alternate" type="application/rss+xml" title="W. Clay Moody" href="/feed.xml">
+  
+  
+</head>
+
+
+  <body>
+
+    <header class="site-header" role="banner">
+
+  <div class="wrapper">
+    
+    
+    <a class="site-title" href="/">W. Clay Moody</a>
+  
+    
+      <nav class="site-nav">
+        <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+        <label for="nav-trigger">
+          <span class="menu-icon">
+            <svg viewBox="0 0 18 15" width="18px" height="15px">
+              <path fill="#424242" d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.031C17.335,0,18,0.665,18,1.484L18,1.484z"/>
+              <path fill="#424242" d="M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0c0-0.82,0.665-1.484,1.484-1.484 h15.031C17.335,6.031,18,6.696,18,7.516L18,7.516z"/>
+              <path fill="#424242" d="M18,13.516C18,14.335,17.335,15,16.516,15H1.484C0.665,15,0,14.335,0,13.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.031C17.335,12.031,18,12.696,18,13.516L18,13.516z"/>
+            </svg>
+          </span>
+        </label>
+
+        <div class="trigger">
+		<ul class="menu">
+
+    
+     <li><a href="/about/" class="page-link">About</a>
+    
+    </li>
+    
+    
+     <li><a href="/blog/" class="page-link">Blog</a>
+    
+    </li>
+    
+    
+     <li><a href="/cv/" class="page-link">CV</a>
+    
+    </li>
+    
+    
+     <li><a href="/research/" class="page-link">Research</a>
+    
+    </li>
+    
+    
+    <li><a href="/teaching/" class="page-link">Teaching</a>
+    <ul class="sub-menu">
+    
+    <li><a href="/teaching/cs-481-operating-systems">CS 481 - Operating Systems</a></li>
+    
+    <li><a href="/teaching/cy-350-networking-engineering-and-design">CY 350 (IT 350) - Networking Engineering and Design</a></li>
+    
+    <li><a href="/teaching/xe-401-402-capstone-projects">XE 401/402 - Capstone Projects</a></li>
+    
+    <li><a href="/teaching/it-105-introduction-to-computing-and-information-technology">IT 105 – Introduction to Computing and Information Technology</a></li>
+    
+    </ul>
+    
+    </li>
+    
+    </ul>
+
+        </div>
+      </nav>
+    
+  </div>
+</header>
+
+
+    <main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+
+  <header class="post-header">
+    <h1 class="post-title" itemprop="name headline">RC3CTF 2017 - Math Class Writeup</h1>
+    <p class="post-meta">
+      <time datetime="2017-11-21T08:37:42-05:00" itemprop="datePublished">
+        
+        Nov 21, 2017
+      </time>
+      </p>
+  </header>
+
+  <div class="post-content" itemprop="articleBody">
+    <p>I participated with BitsForEveryone in RC3CTF. There were five coaches from the C3T team competing and we finished in 12 place with a total of 1850 points. Pretty good showing. Lots of interesting problems.</p>
+
+<p>Though we did not get the 400 points for this problem since I finally solved it 20 minutes after the end of the competition, I want to post a writeup since it was very cool.</p>
+
+<p>This problem was worth 400 points and was the 4th in a series of classroom or school themed problems in the crypto category. English class, Science Class, History Class, Math Class and finally Report Card were the series of five challenges, worth 100,200,300,400 and 500 points. We did successfully solve Science and History for those 500 points.</p>
+
+<p>We are presented with a PDF file containing a series of two digit addition problems as shown below.</p>
+
+<p><img src="/assets/images/rc3ctf2017/math_class.png" alt="math_problems" /></p>
+
+<!--more-->
+
+<h2 id="the-realization">The realization</h2>
+
+<p>So when I first looked at this I noticed that the second math problem was incorrect. But I did not think much of it. Around mid day on Saturday of the CTF, the admin’s posted some hints to many of the problems. The hint to this problems said <em>you must be BLIND not to see the pattern</em>. When I saw they hint, I went back to the problem and told my teammate “It’s Braille!, I got this!” (see my previous post on Stevie and Ray)</p>
+
+<p>Each summation problem is two digits wide and three digits tall. Just like a Braille character. The only question was which numbers were raised dots and which were flat dots. The numbers can be partioned many different ways, and my first instinct was even and odds. The text at the top of the PDF confirmed this. <em>you can’t see the errors even though they are right in front of you.</em> My first hypothesis was even was a raised dot. Time to repurpose my braille library for this challenge.</p>
+
+<p>Since my Braille Library uses lowercase <code class="highlighter-rouge">o</code> for raised and <code class="highlighter-rouge">.</code> for flat, I needed to convert the math expressions to this. Luckily the PDF was highlightable and I just copy and pasted the numbers into a text file and cleaned it up by removing the <code class="highlighter-rouge">+</code> and spacing them evenly. Below is those digits.</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>42 54 66 24 29 32 21
+29 21 15 53 13 46 24
+71 57 84 69 51 85 37
+
+22 36 24 64 29 41 05
+52 27 29 27 36 02 17
+53 77 71 77 43 25 37
+
+29 10 45 22 02 34 42
+43 21 38 27 50 25 41
+59 27 61 57 57 73 99
+
+42 45 41 38 49 62 25
+29 27 33 27 34 18 32
+89 81 62 61 69 63 53
+
+22 65 27 22 41 26 52
+23 16 44 14 18 48 43
+59 85 63 23 79 97 81
+</code></pre>
+</div>
+
+<h2 id="the-implementation">The implementation</h2>
+
+<p>Saving those numbers above as <code class="highlighter-rouge">numbers.txt</code>, I was able to use the following python snippet to build my Braille representation of the math problems.</p>
+
+<div class="language-python highlighter-rouge"><pre class="highlight"><code><span class="c"># coding: utf-8</span>
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s">'numbers.txt'</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+    <span class="n">data</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+
+<span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="s">"02468"</span><span class="p">:</span>
+    <span class="n">data</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="n">c</span><span class="p">,</span> <span class="s">"o"</span><span class="p">)</span>
+
+<span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="s">"13579"</span><span class="p">:</span>
+    <span class="n">data</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="n">c</span><span class="p">,</span> <span class="s">"."</span><span class="p">)</span>
+</code></pre>
+</div>
+<p>Which gave me the following:</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>
+oo .o oo oo o. .o o.
+o. o. .. .. .. oo oo
+.. .. oo o. .. o. ..
+
+oo .o oo oo o. o. o.
+.o o. o. o. .o oo ..
+.. .. .. .. o. o. ..
+
+o. .o o. oo oo .o oo
+o. o. .o o. .o o. o.
+.. o. o. .. .. .. ..
+
+oo o. o. .o o. oo o.
+o. o. .. o. .o .o .o
+o. o. oo o. o. o. ..
+
+oo o. o. oo o. oo .o
+o. .o oo .o .o oo o.
+.. o. o. o. .. .. o.
+</code></pre>
+</div>
+<p>Now to see what is the Braille message. Using the <code class="highlighter-rouge">solve()</code> function from my Stevie N Ray code (below), I got what I thought was a flag in: <code class="highlighter-rouge">fixmathdifforabsofdifplusonefornegs</code>. Little did I know, that this was only the first of three messages I would need to solve to get the final answer.</p>
+
+<div class="language-python highlighter-rouge"><pre class="highlight"><code>
+<span class="kn">from</span> <span class="nn">string</span> <span class="kn">import</span> <span class="n">lowercase</span>
+
+<span class="n">letterdots</span> <span class="o">=</span> <span class="p">[[</span><span class="mi">1</span><span class="p">,],[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">4</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">5</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">4</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">5</span><span class="p">],</span>
+        <span class="p">[</span><span class="mi">2</span><span class="p">,</span><span class="mi">4</span><span class="p">],</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">3</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">5</span><span class="p">],[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">],</span>
+        <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">5</span><span class="p">],</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">],</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">6</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">6</span><span class="p">],</span>
+        <span class="p">[</span><span class="mi">2</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">6</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">6</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">6</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">6</span><span class="p">]]</span>
+
+<span class="k">def</span> <span class="nf">d2l</span><span class="p">(</span><span class="n">dotlist</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">dotlist</span> <span class="ow">in</span> <span class="n">letterdots</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">lowercase</span><span class="p">[</span><span class="n">letterdots</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="n">dotlist</span><span class="p">)]</span>
+    <span class="k">else</span><span class="p">:</span> <span class="k">return</span> <span class="s">"&amp;"</span>
+
+<span class="k">def</span> <span class="nf">d2i</span><span class="p">(</span><span class="n">dotlist</span><span class="p">):</span>
+    <span class="n">ind</span> <span class="o">=</span> <span class="p">(</span><span class="n">lowercase</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="n">d2l</span><span class="p">(</span><span class="n">dotlist</span><span class="p">))</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="o">%</span> <span class="mi">10</span>
+    <span class="k">return</span> <span class="n">digits</span><span class="p">[</span><span class="n">ind</span><span class="p">]</span>
+
+<span class="k">def</span> <span class="nf">solve</span><span class="p">(</span><span class="n">data</span><span class="p">):</span>
+    <span class="k">for</span> <span class="n">linecount</span><span class="p">,</span> <span class="n">line</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s">'</span><span class="se">\n</span><span class="s">'</span><span class="p">)):</span>
+        <span class="k">print</span> <span class="n">linecount</span><span class="p">,</span> <span class="n">line</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">line</span><span class="p">)</span><span class="o">==</span><span class="mi">0</span><span class="p">:</span> <span class="k">continue</span>
+        <span class="n">line</span> <span class="o">=</span> <span class="n">line</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+        <span class="k">if</span> <span class="n">linecount</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">letters</span> <span class="o">=</span> <span class="p">[]</span>
+            <span class="k">for</span> <span class="n">pairs</span> <span class="ow">in</span> <span class="n">line</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s">' '</span><span class="p">):</span>
+                <span class="n">letters</span><span class="o">.</span><span class="n">append</span><span class="p">([])</span>
+
+        <span class="n">lettercount</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">letters</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">pairs</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">line</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s">' '</span><span class="p">)):</span>
+            <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">pairs</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span> <span class="k">continue</span>
+            <span class="k">for</span> <span class="n">j</span><span class="p">,</span> <span class="n">column</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">pairs</span><span class="p">):</span>
+                <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">column</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span> <span class="k">continue</span>
+                <span class="k">if</span> <span class="n">j</span><span class="o">==</span><span class="mi">0</span> <span class="ow">and</span> <span class="n">column</span> <span class="o">==</span> <span class="s">'o'</span><span class="p">:</span>
+                    <span class="n">letters</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">linecount</span><span class="o">+</span><span class="mi">1</span> <span class="p">)</span>
+                <span class="k">if</span> <span class="n">j</span><span class="o">==</span><span class="mi">1</span> <span class="ow">and</span> <span class="n">column</span> <span class="o">==</span> <span class="s">'o'</span><span class="p">:</span>
+                    <span class="n">letters</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">linecount</span> <span class="o">+</span> <span class="mi">4</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">linecount</span> <span class="o">==</span> <span class="mi">2</span><span class="p">:</span>
+            <span class="n">message</span> <span class="o">=</span> <span class="s">''</span>
+            <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span>
+            <span class="k">while</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="nb">len</span><span class="p">(</span><span class="n">letters</span><span class="p">):</span>
+                <span class="n">letter</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">letters</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+                <span class="k">if</span> <span class="n">letter</span> <span class="o">==</span> <span class="n">shift</span><span class="p">:</span>
+                    <span class="n">nextletter</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">letters</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">])</span>
+                    <span class="n">message</span> <span class="o">+=</span> <span class="n">d2l</span><span class="p">(</span><span class="n">nextletter</span><span class="p">)</span><span class="o">.</span><span class="n">upper</span><span class="p">()</span>
+                    <span class="n">i</span> <span class="o">+=</span> <span class="mi">2</span>
+                <span class="k">elif</span> <span class="n">letter</span> <span class="o">==</span> <span class="n">numbersign</span><span class="p">:</span>
+                    <span class="n">nextletter</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">letters</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">])</span>
+                    <span class="n">message</span> <span class="o">+=</span> <span class="n">d2i</span><span class="p">(</span><span class="n">nextletter</span><span class="p">)</span>
+                    <span class="n">i</span> <span class="o">+=</span> <span class="mi">2</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="n">message</span> <span class="o">+=</span> <span class="n">d2l</span><span class="p">(</span><span class="n">letter</span><span class="p">)</span>
+                    <span class="n">i</span> <span class="o">+=</span> <span class="mi">1</span>
+            <span class="k">return</span> <span class="n">message</span>
+</code></pre>
+</div>
+<p>Like I said, I intially thought this was the flag. I tried submitting it as is, with spaces, with underscores, and finally with dashes. After confirming with a mod on IRC, I knew the phrase was a hint to going forward. Breaking down the message into individual words and thinking about the flow, I had this.</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>Fix math. Diff or abs of dif plus one for negs
+</code></pre>
+</div>
+<h2 id="the-correction">The correction</h2>
+
+<p>So most of the math problems looked to be incorrect. So this instruction was telling me to fix the math. Then to look the difference between the given answer and the correct result. If the difference was negative, take the absolute value of the difference and add one. This seems easy, but what to do with the result. My first guess was more Braille, replace the answer with the difference or absolute value plus one. This seemed like a stretch that such a message could have been created from only changing the last line. I was stuck on this for a while, adjusting my code to redo the Braille. But finally, I just stopped and looked at these new values. I had two difference sets of values depending if I subtracted the correction from the given values or the other way around. Here is the code I used to compute this two different sets of numbers.</p>
+
+<div class="language-python highlighter-rouge"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">string</span> <span class="kn">import</span> <span class="n">lowercase</span>
+<span class="kn">import</span> <span class="nn">re</span>
+
+<span class="n">patt_str</span> <span class="o">=</span> <span class="p">((</span><span class="s">"(</span><span class="err">\</span><span class="s">d{2}).?"</span> <span class="o">*</span> <span class="mi">7</span><span class="p">)</span> <span class="o">+</span> <span class="s">"</span><span class="se">\n</span><span class="s">"</span><span class="p">)</span> <span class="o">*</span> <span class="mi">3</span>
+
+<span class="k">print</span> <span class="n">patt_str</span>
+
+<span class="n">patt</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="nb">compile</span><span class="p">(</span><span class="n">patt_str</span><span class="p">)</span>
+
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s">'numbers.txt'</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+    <span class="n">data</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+
+<span class="n">match</span> <span class="o">=</span> <span class="n">patt</span><span class="o">.</span><span class="n">findall</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+
+<span class="n">option1</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="n">option2</span> <span class="o">=</span> <span class="p">[]</span>
+
+<span class="k">for</span> <span class="n">m</span> <span class="ow">in</span> <span class="n">match</span><span class="p">:</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">7</span><span class="p">):</span>
+        <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">c</span> <span class="o">=</span> <span class="p">[</span><span class="nb">int</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="p">(</span><span class="n">m</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">m</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">7</span><span class="p">],</span> <span class="n">m</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">14</span><span class="p">])]</span>
+        <span class="n">d</span> <span class="o">=</span> <span class="n">c</span> <span class="o">-</span> <span class="p">(</span><span class="n">a</span><span class="o">+</span><span class="n">b</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">d</span> <span class="o">&lt;=</span> <span class="mi">0</span><span class="p">:</span> <span class="n">d</span> <span class="o">=</span> <span class="nb">abs</span><span class="p">(</span><span class="n">d</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span>
+        <span class="n">option1</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">d</span><span class="p">)</span>
+        <span class="n">e</span> <span class="o">=</span> <span class="p">(</span><span class="n">a</span><span class="o">+</span><span class="n">b</span><span class="p">)</span> <span class="o">-</span> <span class="n">c</span>
+        <span class="k">if</span> <span class="n">e</span> <span class="o">&lt;=</span> <span class="mi">0</span><span class="p">:</span> <span class="n">e</span> <span class="o">=</span> <span class="nb">abs</span><span class="p">(</span><span class="n">e</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span>
+        <span class="n">option2</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
+</code></pre>
+</div>
+
+<p>Those sets of numbers all are from the range of 1 to 26.</p>
+<div class="highlighter-rouge"><pre class="highlight"><code>[1, 19, 3, 9, 9, 7, 9, 22, 14, 18, 15, 23, 19, 15, 14, 5, 23, 8, 5, 14, 
+	16, 18, 9, 13, 5, 15, 18, 5, 14, 4, 9, 14, 20, 23, 15]
+
+[1, 18, 4, 8, 10, 8, 8, 21, 15, 19, 14, 22, 18, 16, 13, 4, 22, 9, 6, 15, 
+	17, 19, 10, 12, 4, 14, 17, 4, 15, 5, 8, 13, 21, 24, 14]
+</code></pre>
+</div>
+
+<p>I was stuck on this for a while cause like a computer scientist I was stuck on zero-indexed
+arrays. Realizing that the value 0 was not possibly (thep problem says 0 is negative), I moved on.
+Finally, using them as an index in to the alphabet with this code:</p>
+
+<div class="language-python highlighter-rouge"><pre class="highlight"><code><span class="k">print</span> <span class="s">""</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">lowercase</span><span class="p">[</span><span class="n">o</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="k">for</span> <span class="n">o</span> <span class="ow">in</span> <span class="n">option1</span><span class="p">)</span>
+<span class="k">print</span> <span class="s">""</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">lowercase</span><span class="p">[</span><span class="n">o</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="k">for</span> <span class="n">o</span> <span class="ow">in</span> <span class="n">option2</span><span class="p">)</span>
+</code></pre>
+</div>
+
+<p>results in the following two messages:</p>
+
+<p><code class="highlighter-rouge">asciigivnrowsonewhenprimeorendintwo</code></p>
+
+<p><code class="highlighter-rouge">ardhjhhuosnvrpmdvifoqsjldnqdoehmuxn</code></p>
+
+<h2 id="one-last-step">One last step</h2>
+
+<p>The first message is obviously the next step. It tells us to create ASCII characters from the given rows. Using a 1 when the number is prime or ends in 2. Going back to the original data with the following code we can recover the flag.</p>
+
+<div class="language-python highlighter-rouge"><pre class="highlight"><code><span class="n">primes</span> <span class="o">=</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">11</span><span class="p">,</span> <span class="mi">13</span><span class="p">,</span> <span class="mi">17</span><span class="p">,</span> <span class="mi">19</span><span class="p">,</span> <span class="mi">23</span><span class="p">,</span> <span class="mi">29</span><span class="p">,</span> <span class="mi">31</span><span class="p">,</span>
+            <span class="mi">37</span><span class="p">,</span> <span class="mi">41</span><span class="p">,</span> <span class="mi">43</span><span class="p">,</span> <span class="mi">47</span><span class="p">,</span> <span class="mi">53</span><span class="p">,</span> <span class="mi">59</span><span class="p">,</span> <span class="mi">61</span><span class="p">,</span> <span class="mi">67</span><span class="p">,</span>
+            <span class="mi">71</span><span class="p">,</span> <span class="mi">73</span><span class="p">,</span> <span class="mi">79</span><span class="p">,</span> <span class="mi">83</span><span class="p">,</span> <span class="mi">89</span><span class="p">,</span> <span class="mi">97</span><span class="p">]</span>
+
+<span class="k">def</span> <span class="nf">bitstream</span><span class="p">(</span><span class="n">letter</span><span class="p">):</span>
+    <span class="n">bs</span> <span class="o">=</span> <span class="s">""</span>
+    <span class="k">for</span> <span class="n">b</span> <span class="ow">in</span> <span class="n">letter</span><span class="p">:</span>
+        <span class="n">bs</span> <span class="o">+=</span> <span class="s">"1"</span> <span class="k">if</span> <span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">b</span><span class="p">)</span> <span class="ow">in</span> <span class="n">primes</span> <span class="ow">or</span> <span class="nb">int</span><span class="p">(</span><span class="n">b</span><span class="p">)</span><span class="o">%</span><span class="mi">10</span><span class="o">==</span><span class="mi">2</span><span class="p">)</span> <span class="k">else</span> <span class="s">"0"</span>
+    <span class="k">return</span> <span class="n">bs</span>
+
+<span class="n">flag</span> <span class="o">=</span> <span class="s">""</span>
+
+<span class="k">for</span> <span class="n">m</span> <span class="ow">in</span> <span class="n">match</span><span class="p">:</span>
+    <span class="n">letters</span> <span class="o">=</span> <span class="p">[</span><span class="n">m</span><span class="p">[</span><span class="n">i</span><span class="p">:</span><span class="n">i</span><span class="o">+</span><span class="mi">7</span><span class="p">]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">m</span><span class="p">),</span> <span class="mi">7</span><span class="p">)]</span>
+    <span class="k">for</span> <span class="n">letter</span> <span class="ow">in</span> <span class="n">letters</span><span class="p">:</span>
+        <span class="n">flag</span> <span class="o">+=</span> <span class="nb">chr</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="s">""</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">bitstream</span><span class="p">(</span><span class="n">letter</span><span class="p">)),</span><span class="mi">2</span><span class="p">))</span>
+<span class="k">print</span> <span class="n">flag</span>
+</code></pre>
+</div>
+
+<p>That gives the message of:
+<code class="highlighter-rouge">FLAGSUMARRAYMAN</code></p>
+
+<p>I never got to submit the flag, so don’t know the exact flag, but that is definately the end.</p>
+
+<h2 id="full-solve">Full solve</h2>
+
+<p>The full code can be found here:</p>
+
+<p><a href="/assets/ctffiles/rc3ctf2017/math_class_400_solve.py.txt">Math Class(400)</a></p>
+
+<h4 id="thanks-to-rc3-for-a-great-challenge-and-fun-ctf-also-thanks-to-my-teammates-tr0gd0r-archang3l-phlint-and-goshawk">Thanks to RC3 for a great challenge and fun CTF. Also, thanks to my teammates tr0gd0r, archang3l, phlint and goshawk</h4>
+
+<p><em>Constant Vigilance</em></p>
+
+
+  </div>
+
+  
+</article>
+
+      </div>
+    </main>
+
+    <footer class="site-footer">
+
+  <div class="wrapper">
+
+    <h2 class="footer-heading">W. Clay Moody</h2>
+
+    <div class="footer-col-wrapper">
+      <div class="footer-col footer-col-1">
+        <ul class="contact-list">
+          <li>
+            
+              W. Clay Moody
+            
+            </li>
+            
+            <li><a href="mailto:william.moody@usma.edu">william.moody@usma.edu</a></li>
+            
+        </ul>
+      </div>
+
+      <div class="footer-col footer-col-2">
+        <ul class="social-media-list">
+          
+          <li>
+            <a href="https://github.com/wcmoody"><span class="icon icon--github"><svg viewBox="0 0 16 16" width="16px" height="16px"><path fill="#828282" d="M7.999,0.431c-4.285,0-7.76,3.474-7.76,7.761 c0,3.428,2.223,6.337,5.307,7.363c0.388,0.071,0.53-0.168,0.53-0.374c0-0.184-0.007-0.672-0.01-1.32 c-2.159,0.469-2.614-1.04-2.614-1.04c-0.353-0.896-0.862-1.135-0.862-1.135c-0.705-0.481,0.053-0.472,0.053-0.472 c0.779,0.055,1.189,0.8,1.189,0.8c0.692,1.186,1.816,0.843,2.258,0.645c0.071-0.502,0.271-0.843,0.493-1.037 C4.86,11.425,3.049,10.76,3.049,7.786c0-0.847,0.302-1.54,0.799-2.082C3.768,5.507,3.501,4.718,3.924,3.65 c0,0,0.652-0.209,2.134,0.796C6.677,4.273,7.34,4.187,8,4.184c0.659,0.003,1.323,0.089,1.943,0.261 c1.482-1.004,2.132-0.796,2.132-0.796c0.423,1.068,0.157,1.857,0.077,2.054c0.497,0.542,0.798,1.235,0.798,2.082 c0,2.981-1.814,3.637-3.543,3.829c0.279,0.24,0.527,0.713,0.527,1.437c0,1.037-0.01,1.874-0.01,2.129 c0,0.208,0.14,0.449,0.534,0.373c3.081-1.028,5.302-3.935,5.302-7.362C15.76,3.906,12.285,0.431,7.999,0.431z"/></svg>
+</span><span class="username">wcmoody</span></a>
+
+          </li>
+          
+
+          
+          <li>
+            <a href="https://twitter.com/wclaymoody"><span class="icon icon--twitter"><svg viewBox="0 0 16 16" width="16px" height="16px"><path fill="#828282" d="M15.969,3.058c-0.586,0.26-1.217,0.436-1.878,0.515c0.675-0.405,1.194-1.045,1.438-1.809c-0.632,0.375-1.332,0.647-2.076,0.793c-0.596-0.636-1.446-1.033-2.387-1.033c-1.806,0-3.27,1.464-3.27,3.27 c0,0.256,0.029,0.506,0.085,0.745C5.163,5.404,2.753,4.102,1.14,2.124C0.859,2.607,0.698,3.168,0.698,3.767 c0,1.134,0.577,2.135,1.455,2.722C1.616,6.472,1.112,6.325,0.671,6.08c0,0.014,0,0.027,0,0.041c0,1.584,1.127,2.906,2.623,3.206 C3.02,9.402,2.731,9.442,2.433,9.442c-0.211,0-0.416-0.021-0.615-0.059c0.416,1.299,1.624,2.245,3.055,2.271 c-1.119,0.877-2.529,1.4-4.061,1.4c-0.264,0-0.524-0.015-0.78-0.046c1.447,0.928,3.166,1.469,5.013,1.469 c6.015,0,9.304-4.983,9.304-9.304c0-0.142-0.003-0.283-0.009-0.423C14.976,4.29,15.531,3.714,15.969,3.058z"/></svg>
+</span><span class="username">wclaymoody</span></a>
+
+          </li>
+          
+        </ul>
+      </div>
+
+      <div class="footer-col footer-col-3">
+        <p>Alastor Moody. Ex-Auror, Ministry malcontent, and your new Defense Against the Dark Arts teacher. I am here because Dumbledore asked me. End of story, goodbye, the end! Any questions? When it comes to the Dark Arts I believe in a practical approach
+</p>
+      </div>
+    </div>
+
+  </div>
+
+</footer>
+
+
+  </body>
+
+</html>
