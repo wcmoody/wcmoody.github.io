@@ -97,4 +97,4 @@ EKO{M41NFR4M3}
 
 Entire solve script can be found [here](/assets/ctffiles/ekoctf2016/solve.py)
 
-_Note_: This write up can also be found [here](https://github.com/bitsforeveryone/write-ups/tree/master/EKOPartyCTF_2016/misc250)
+_Note_: This write up can also be found [here](https://www.bitsforeveryone.com/writeup/ekoparty_2017/old_but_gold/)
