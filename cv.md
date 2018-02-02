@@ -21,7 +21,7 @@ permalink: /cv/
 
 #### Journal Articles:
 
-* <u>W.C. Moody</u>; A. Apon, 'Maneuverable Applications: Advancing Distributed Computing', _Cyber Defense Review_ Volume 2, Number 3, Fall 2017 [PDF](http://cyberdefensereview.army.mil/Portals/6/Documents/CDR-FALL2017.pdf)
+* <u>W.C. Moody</u>; A. Apon, 'Maneuverable Applications: Advancing Distributed Computing', _Cyber Defense Review_ Volume 2, Number 3, Fall 2017 [![](/assets/pics/iconPdf.png)PDF](http://cyberdefensereview.army.mil/Portals/6/Documents/CDR-FALL2017.pdf)
 
 #### Conference Papers:
 *   J. Chamberlin, J. Hussey, B. Klimkowski, <u>W.C. Moody</u>, C. Morrell; 'The Impact of Virtualized Technology on Undergraduate Computer Networking Education', _SIGITE'17, 18th Annual Conference on Information Technology Education_, 4-7 Oct. 2017. [![](/assets/pics/iconPdf.png)PDF](/assets/pdf/sigite17_virtualization_final.pdf)[![](/assets/pics/acm.png){:height="5%" width="5%"}ACM](https://dl.acm.org/citation.cfm?id=3125693)
