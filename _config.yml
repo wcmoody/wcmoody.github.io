@@ -31,6 +31,8 @@ highlighter: rouge
 theme: minima
 gems:
   - jekyll-feed
+  - jekyll-twitter-plugin
+#plugins: ['jekyll-twitter-plugin']
 exclude:
   - Gemfile
   - Gemfile.lock

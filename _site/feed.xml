@@ -1,5 +1,94 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.4.3">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2017-11-22T21:51:16-05:00</updated><id>http://localhost:4000/</id><title type="html">W. Clay Moody</title><subtitle>Alastor Moody. Ex-Auror, Ministry malcontent, and your new Defense Against the Dark Arts teacher. I am here because Dumbledore asked me. End of story, goodbye, the end! Any questions? When it comes to the Dark Arts I believe in a practical approach
-</subtitle><entry><title type="html">RC3CTF 2017 - Math Class Writeup</title><link href="http://localhost:4000/blog/2017/11/rc3ctf-2017-math-class" rel="alternate" type="text/html" title="RC3CTF 2017 - Math Class Writeup" /><published>2017-11-21T08:37:42-05:00</published><updated>2017-11-21T08:37:42-05:00</updated><id>http://localhost:4000/blog/2017/11/rc3ctf-2017-math-class</id><content type="html" xml:base="http://localhost:4000/blog/2017/11/rc3ctf-2017-math-class">&lt;p&gt;I participated with BitsForEveryone in RC3CTF. There were five coaches from the C3T team competing and we finished in 12 place with a total of 1850 points. Pretty good showing. Lots of interesting problems.&lt;/p&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.4.3">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2018-01-01T06:32:00-05:00</updated><id>http://localhost:4000/</id><title type="html">W. Clay Moody</title><subtitle>Alastor Moody. Ex-Auror, Ministry malcontent, and your new Defense Against the Dark Arts teacher. I am here because Dumbledore asked me. End of story, goodbye, the end! Any questions? When it comes to the Dark Arts I believe in a practical approach
+</subtitle><entry><title type="html">2017 SANS Holiday Hack Challenge Writeup</title><link href="http://localhost:4000/blog/2017/12/holiday-hack-challenge-writeup" rel="alternate" type="text/html" title="2017 SANS Holiday Hack Challenge Writeup" /><published>2017-12-30T08:13:37-05:00</published><updated>2017-12-30T08:13:37-05:00</updated><id>http://localhost:4000/blog/2017/12/holiday-hack-challenge-writeup</id><content type="html" xml:base="http://localhost:4000/blog/2017/12/holiday-hack-challenge-writeup">&lt;p&gt;Its that’s time of year again. The SANS Holiday Hack Challenge presented by Counter Hack Challenges and Friends. This year my write up will be a little different that last years.
+But more on that a little bit laters.&lt;/p&gt;
+
+&lt;p&gt;This year’s challenged is called &lt;em&gt;Wintered: The Untold Story of the Elves of the North Pole&lt;/em&gt; and can be found at &lt;a href=&quot;https://holidayhackchallenge.com/2017/&quot;&gt;https://holidayhackchallenge.com/2017/&lt;/a&gt;.
+&lt;img src=&quot;/assets/images/holidayhack2017/HHC_banner.png&quot; alt=&quot;logo&quot; /&gt;&lt;/p&gt;
+
+&lt;!--more--&gt;
+
+&lt;p&gt;My write up this year will be done in multiple parts. This overview one you are reading and then additional entries for each question of the narrative and an entry for the terminal challenges. But before we dive into this years challenge, let me give you some perspective on my history with the Holiday Hack Challenge.&lt;/p&gt;
+
+&lt;h2 id=&quot;christmas-past&quot;&gt;Christmas Past&lt;/h2&gt;
+
+&lt;h3 id=&quot;2015&quot;&gt;2015&lt;/h3&gt;
+&lt;p&gt;I first started doing CTF’s in the Fall of 2015 when I began teaching at Hogwartz. I was offered the chance to work with Bits For Everyone (BFE for short) and the Cadet Competitive Cyber Team (C3T). I had tons of computer experience having three degrees in some computer field, a career as an Army communicatior, and as a webmaster and multi-language programmer. But I had never done a CTF. Once I started hackign in CTFs, I was hooked.&lt;/p&gt;
+
+&lt;p&gt;I did my first HHC in 2015 with the amazing &lt;a href=&quot;https://holidayhackchallenge.com/2015/&quot;&gt;Gnome in your Home&lt;/a&gt;. I was not able to make it very far, as I only found one images needed to solve the mystery. I did complete all the challenges of the game portion but not all the hacking. It was an eye opening experience of doing a CTF in an emersive story driven environment and video game environment. I remember having to get my youngest to help find that darn &lt;em&gt;cookie&lt;/em&gt; in the Secret-Secret Room. I was delighted to actually tweet something during that CTF and have Ed Skoudis actually reply to it.  When the write up were posted, I read many of them to help learn better. My favorite (and the overall winner) was &lt;a href=&quot;https://twitter.com/ctfhacker&quot;&gt;Cory Duplantis&lt;/a&gt; and can be found on his excellent &lt;a href=&quot;http://ctfhacker.com/ctf/pcap/pwn/web/2016/01/06/counterhack-holiday.html&quot;&gt;blog&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;In March of 2016, I took &lt;a href=&quot;&quot;&gt;SANS SEC 560&lt;/a&gt; with Ed in Orlando. We loves to talk about HHC and I asked him all kinds of questions about that years challenge. Many people in the class were unfamiliar with the event, but I was fascinated so we spoke about it in detail. Ed and I had many mutual friends as he’s always been a friend of the Army and Hogwartz on the Hudson specifically.&lt;/p&gt;
+
+&lt;h3 id=&quot;2016&quot;&gt;2016&lt;/h3&gt;
+&lt;p&gt;When it came time for HHC 2016, I counted down the days and was ready. I spent most of the month of December after exams solving the entire challenge. I was able to accomplish all the in-game achievements and recover all the audio files to reveal the ultimate villian. While working on the puzzle, I even traded twitter DM’s with Ed Skoudis and the last year’s winner, Cory Duplantis. I published a full write up and submitted it on this &lt;a href=&quot;http://wclaymoody.com/blog/2016/12/holiday-hack-challenge-writeup&quot;&gt;blog&lt;/a&gt;. When I got an email after my write up review from Tad Bennett, the Army TWI intern at the time, I invited Tadd to come visit school and speak to the students and my team. To my surprise, I got an email back from Ed himself. Ed thought the visit was a good idea and wanted to come visit also. We arranged a visit for him during early January.&lt;/p&gt;
+
+&lt;p&gt;During his visit, we talked about many things catching up from my time in Orlando the previous March. One of the main topics we discussed was Holiday Hack and its on going success along with Counter Hack’s continued participation in the Training with Industry interns from the Army’s Cyber and Signal Warrant Officer population. At the end of the visit, I asked Ed if he would be interested in having an Hogwartz Facutly member work with his team during the summer for a few weeks. He was interested and we promised to talk about it some more.&lt;/p&gt;
+
+&lt;p&gt;After some coordination between my department, the Army Cyber Institute, and Counter Hack Challenges, I was agreed that I would work with Counter Hack for about 5 weeks during the summer of 2017. As this coordination was on-going, the awards ceremony for HHC 2016 occurred. In a completely unrelated and coincidential occurance, I was selected as a &lt;em&gt;random&lt;/em&gt; prize winner of a super soft SANS Netwars T-shirt.You can see the results on the &lt;a href=&quot;https://holidayhackchallenge.com/2016/winners_answers.html&quot;&gt;winners page&lt;/a&gt; and the video below, jump to 11 minutes and 23 seconds left to hear my name.&lt;/p&gt;
+
+&lt;iframe width=&quot;560&quot; height=&quot;315&quot; src=&quot;https://www.youtube.com/embed/&amp;amp;start=&quot; frameborder=&quot;0&quot; allowfullscreen=&quot;&quot;&gt;&lt;/iframe&gt;
+
+&lt;h2 id=&quot;christmas-present&quot;&gt;Christmas Present&lt;/h2&gt;
+
+&lt;p&gt;So long story short (&lt;em&gt;too late&lt;/em&gt;), I got to work with Counter Hack this past summer. My primary role was working on NetWars 5. I did beta testing, auto-solve scripting, hint authoring, and my most famous contribution, naming most of the problems. I have been called the NetWars punmaster for all the puns I put in the names. If you don’t know what NetWars 5 is about, lets just say it takes place in a galaxy far, far away. I know a little about that universe also and it fit right in my wheel house. See this tweet from Derek Root to Jeff McJunkin discussing some of those questions.&lt;/p&gt;
+
+&lt;div class=&quot;jekyll-twitter-plugin&quot;&gt;&lt;blockquote class=&quot;twitter-tweet&quot;&gt;&lt;p lang=&quot;en&quot; dir=&quot;ltr&quot;&gt;Netwars Question Name: Wookieleaks&lt;a href=&quot;https://twitter.com/jeffmcjunkin?ref_src=twsrc%5Etfw&quot;&gt;@jeffmcjunkin&lt;/a&gt; I &amp;lt;3 you and whoever came up with that.&lt;/p&gt;&amp;mdash; Derek Rook (@_r00k_) &lt;a href=&quot;https://twitter.com/_r00k_/status/930608702381584384?ref_src=twsrc%5Etfw&quot;&gt;November 15, 2017&lt;/a&gt;&lt;/blockquote&gt;
+&lt;script async=&quot;&quot; src=&quot;https://platform.twitter.com/widgets.js&quot; charset=&quot;utf-8&quot;&gt;&lt;/script&gt;
+&lt;/div&gt;
+
+&lt;p&gt;Maybe one day, I will blog about my work with NetWars 5 in the future. But for now, lets talk HHC.&lt;/p&gt;
+
+&lt;p&gt;Ed thinks about HHC all year long, in fact I think he has already said he knows what is going to happen in HHC 2018. Over the summer, Ed gave me the full run down on HHC 17. The story, the theme, the visuals, the technology of the game and even some of the challenges. I knew it was going to be great, I had some homework to do and had to watch a few movies to get caught up. The first thing I thought when reviewing Rankin and Bass &lt;em&gt;Rudolph the Red-Nosed Reindeer&lt;/em&gt; TV special was how Sam the Snowman looked like Heisenberg from &lt;em&gt;Breaking Bad&lt;/em&gt; whom many people tell Ed he looks like also. I am glad this little nugget made it into the opening narrative.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/images/holidayhack2017/sam_the_snowman.png&quot; alt=&quot;Sam Heisenberg Skoudis&quot; height=&quot;300px&quot; width=&quot;300px&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;As November rolled around, I had been following what the team was doing on HHC but not envolved beyond some puns and ideas kicked around with the team over the summer. Then, Josh Wright asked me to do some front-end webdesign for one of the challenge websites. Ron Bowes had already done the heavy lifting on the &lt;a href=&quot;http://nppdn rthpolechristmastows.com&quot;&gt;North Pole Police Department&lt;/a&gt;. So I did the styling on the this website using the great lightweigth CSS framework &lt;a href=&quot;https://purecss.io/&quot;&gt;PureCSS&lt;/a&gt; and more specifically the &lt;a href=&quot;https://purecss.io/layouts/marketing/&quot;&gt;Landing Page&lt;/a&gt; layout. The main image on the website of the snowmobile police car was acquired from &lt;a href=&quot;https://www.shutterstock.com/image-vector/snowmobile-car-parked-near-igloo-arctic-68095978&quot;&gt;Shutterstock&lt;/a&gt;. I went all out on this website from a Holiday Hack references, other Christmas themed events, and even some good old Southern 80s nostalga. More on that below.&lt;/p&gt;
+
+&lt;p&gt;When I finished up work on the NPPD site, I was asked to give the main game website a shot. This was a huge task and was much more difficult and essential part of the challenge. The frameworks for the site were already in place, and so I had to learn some new skills. Specifically, using the Bootstrap CSS framework in Less and the Ember Node.js platform. Evan Booth and Ron Bowse did amazing work on this site building the bones of the game, the stocking, the chat, the music integration. I just adding the color and style. I was not able to work fully on the site until completion and those guys fixed some of my errors and brought it home magically. I will talk about some of my favorite parts of the site below also.&lt;/p&gt;
+
+&lt;h3 id=&quot;north-pole-police-department&quot;&gt;North Pole Police Department&lt;/h3&gt;
+
+&lt;p&gt;On the main page, I added a few shout outs in the Items of Interest Area.&lt;/p&gt;
+
+&lt;p&gt;&lt;em&gt;Nomination for Junior Deputy of the Year&lt;/em&gt;&lt;/p&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;Josh and Jess Dosis have been recognized as the Junior Deputies of the Year for the past two years (2015 and 2016). If you want to nominate other deserving children or elves for this presigious award, completed packets are due by 11:59 PM on December 31, 2017.
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;This was a shotout to the heros of the past two Holiday Hack Challenges. Ed intentionally made the decision to not continue with the Dosis kids, but I thought they needed to get at least a mention. So here they are.&lt;/p&gt;
+
+&lt;p&gt;&lt;em&gt;Volunteers need for the Community Concert&lt;/em&gt;&lt;/p&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;The NPPD is seeking volunteer elves or snowmen to volunteer during the annual post-Christmas concert. This year, we expect a record turnout as the NPPD Crime Scene Investigation Unit sponsors their favorite theme song band, The Who. 
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;The past two years the villian has been Cindy Lou Who and Dr. Who. People have joked over the last year thinking the villian might be the band “The Who”. Since all the &lt;em&gt;CSI&lt;/em&gt; tv shows have featured a song from “The Who” as its theme, it would make sense they would be the favorite band of the NPPD Criminal Scene Investigators.&lt;/p&gt;
+
+&lt;table&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th&gt;Show&lt;/th&gt;
+      &lt;th&gt;Song&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td&gt;CSI: Crime Scene Investigation&lt;/td&gt;
+      &lt;td&gt;“Who Are You”&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;CSI: Miami&lt;/td&gt;
+      &lt;td&gt;“Won’t Get Fooled Again”&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;CSI: NY&lt;/td&gt;
+      &lt;td&gt;“Baba O’Riley”&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;CSI: Cyber&lt;/td&gt;
+      &lt;td&gt;“I Can See for Miles”&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;</content><author><name></name></author><summary type="html">Its that’s time of year again. The SANS Holiday Hack Challenge presented by Counter Hack Challenges and Friends. This year my write up will be a little different that last years. But more on that a little bit laters. This year’s challenged is called Wintered: The Untold Story of the Elves of the North Pole and can be found at https://holidayhackchallenge.com/2017/.</summary></entry><entry><title type="html">RC3CTF 2017 - Math Class Writeup</title><link href="http://localhost:4000/blog/2017/11/rc3ctf-2017-math-class" rel="alternate" type="text/html" title="RC3CTF 2017 - Math Class Writeup" /><published>2017-11-21T08:37:42-05:00</published><updated>2017-11-21T08:37:42-05:00</updated><id>http://localhost:4000/blog/2017/11/rc3ctf-2017-math-class</id><content type="html" xml:base="http://localhost:4000/blog/2017/11/rc3ctf-2017-math-class">&lt;p&gt;I participated with BitsForEveryone in RC3CTF. There were five coaches from the C3T team competing and we finished in 12 place with a total of 1850 points. Pretty good showing. Lots of interesting problems.&lt;/p&gt;
 
 &lt;p&gt;Though we did not get the 400 points for this problem since I finally solved it 20 minutes after the end of the competition, I want to post a writeup since it was very cool.&lt;/p&gt;
 
