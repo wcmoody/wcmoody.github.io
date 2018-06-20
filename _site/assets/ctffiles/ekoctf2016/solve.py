@@ -1,5 +1,4 @@
-
-m PIL import Image
+from PIL import Image
 from string import digits, uppercase
 alphabet = digits + uppercase
 

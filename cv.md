@@ -21,7 +21,7 @@ permalink: /cv/
 
 #### Journal Articles:
 
-* <u>W.C. Moody</u>; A. Apon, 'Maneuverable Applications: Advancing Distributed Computing', _Cyber Defense Review_ (to appear)
+* <u>W.C. Moody</u>; A. Apon, 'Maneuverable Applications: Advancing Distributed Computing', _Cyber Defense Review_ Volume 2, Number 3, Fall 2017 [![](/assets/pics/iconPdf.png)PDF](http://cyberdefensereview.army.mil/Portals/6/Documents/CDR-FALL2017.pdf)
 
 #### Conference Papers:
 *   J. Chamberlin, J. Hussey, B. Klimkowski, <u>W.C. Moody</u>, C. Morrell; 'The Impact of Virtualized Technology on Undergraduate Computer Networking Education', _SIGITE'17, 18th Annual Conference on Information Technology Education_, 4-7 Oct. 2017. [![](/assets/pics/iconPdf.png)PDF](/assets/pdf/sigite17_virtualization_final.pdf)[![](/assets/pics/acm.png){:height="5%" width="5%"}ACM](https://dl.acm.org/citation.cfm?id=3125693)
@@ -61,12 +61,13 @@ permalink: /cv/
 
 #### Teaching:  
 
-*  _CS 481 Operating Systems,_ United States Military Academy, NY - Course Director, Instructor 2016-2017
-*  _IT 350 Network Engineering and Design,_ United States Military Academy, NY - Course Director, Instructor 2015-2017
-*  _IT 105 Introduction to Computing and Information Technology,_ United States Military Academy, Instructor 2015-2016
-*  _CPSC 3620 Distributed Programming and Cluster Computing,_ Clemson University, SC - Reoccuring Guest Lecturer, 2013-2014
-*  _Introduction to Programming_, Anderson Homeschool Association Encore Program, AY 2013-2014
-*  _Joint Advanced Cyber Warface Course_ Fort Meade, MD - Reoccurring Guest Lecturer, 2011-2012
+* _CS 489 NSA Cyber Exercise Prep,_ United States Military Academy, NY - Course Director, Instructor 2018 
+* _CS 481 Operating Systems,_ United States Military Academy, NY - Course Director, Instructor 2016-2017
+* _CY/IT 350 Network Engineering and Design,_ United States Military Academy, NY - Course Director, Instructor 2015-2018
+* _IT 105 Introduction to Computing and Information Technology,_ United States Military Academy, Instructor 2015-2016
+* _CPSC 3620 Distributed Programming and Cluster Computing,_ Clemson University, SC - Reoccuring Guest Lecturer, 2013-2014
+* _Introduction to Programming_, Anderson Homeschool Association Encore Program, AY 2013-2014
+* _Joint Advanced Cyber Warface Course_ Fort Meade, MD - Reoccurring Guest Lecturer, 2011-2012
 
 #### Service: 
 *   Paper Referee, 2017 International Conflict on Cyber Conflict U.S. (CyCon U.S.)
@@ -97,7 +98,7 @@ permalink: /cv/
 
 *   Winning team, Symantec Higher Education Cyber Security Challenge [media](http://edscoop.com/west-point-shows-off-cyber-chops-in-higher-ed-challenge)
 *   Top Field Grade Officer, 2016 All-Army Cyberstakes Online, Capture the Flag Competition September 2016
-*   Outstanding Computer Science PhD Student - Clemson Univesity, 2014-2015
+*   Outstanding Computer Science PhD Student - Clemson Univesity, 2014-2015 [media](http://www.clemson.edu/cecas/departments/computing/news-events/articles/2015awards.html)
 *   Finalist, Intelligence National Security Alliance Sidney D. Drell Academic Award, November 2013 [INSA](http://www.insaonline.org/i/e/aa/2013/recipients.aspx)
 
 ![US Army Seal](/assets/pics/usarmy.png)
