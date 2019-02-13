@@ -35,8 +35,17 @@ permalink: /cv/
 *   J. Dressler, <u>W.C. Moody</u>, J. M. Koepke, C. L. Bowen III; 'Operational Data Classes for Establishing Situational Awareness in Cyberspace', _The 6th International Conference on Cyber Conflict_ , 3-6 Jun. 2014  
     [![](/assets/pics/iconPdf.png)PDF](/assets/pdf/Odcesac-Final.pdf) [![](/assets/pics/ccdcoe.jpg)CCDCOE](http://www.ccdcoe.org/cycon/2014/proceedings/d2r1s7_dresslermoody.pdf) [ ![](/assets/pics/ieee-favicon.ico)IEEE](http://ieeexplore.ieee.org/document/6916402/)
 
-*   <u>W.C. Moody</u>; L.B. Ngo; E. Duffy; A. Apon, 'JUMMP: Job Uninterrupted Maneuverable MapReduce Platform', _Cluster Computing (CLUSTER), 2013 IEEE International Conference on_ , pp. 1-8, 23-27 Sept. 2013  
+*   <u>W.C. Moody</u>, L.B. Ngo; E. Duffy; A. Apon, 'JUMMP: Job Uninterrupted Maneuverable MapReduce Platform', _Cluster Computing (CLUSTER), 2013 IEEE International Conference on_ , pp. 1-8, 23-27 Sept. 2013  
     [![](/assets/pics/iconPdf.png)PDF](/assets/pdf/Jummp-Final.pdf) [![](/assets/pics/sf-favicon.ico)Source](https://sourceforge.net/projects/jummp/) [![](/assets/pics/ieee-favicon.ico)IEEE](http://ieeexplore.ieee.org/document/6702650/)
+
+### Other Publications
+
+* Technical Writer, 'Artificial Intelligence and Machine Learning Applied to Cybersecurity', IEEE, The result of an intensive three-day IEEE Confluence 6-8 Oct. 2017. [![](/assets/pics/iconPdf.png)PDF](/assets/pdf/ieee_confluence_report.pdf)[![](/assets/pics/ieee-favicon.ico)IEEE](https://www.ieee.org/about/industry/confluence/feedback.html) [media](https://medium.com/@parulnith/ai-machine-learning-the-future-of-cybersecurity-81832d9c08d9)
+
+* <u>W.C. Moody</u>, Joshua Bundt; (2018 April 5) 'Cadets participate in inaugural NSA Cyber Exercise' _Pointer View_. p. 3, Retrived from [online](http://www.pointerview.com/2018/04/05/cadets-participate-in-inaugural-nsa-cyber-exercise/) [![](/assets/pics/iconPdf.png)PDF](/assets/pdf/pointer_view_040518)
+
+* <u>W.C. Moody</u>, Joshua Bundt; (2016 December 1) 'Cadet Competitive Cyber Team finishes in Top 10 at competition' _Pointer View_. p. 8 Retrived from [online](http://www.pointerview.com/2016/12/01/cadet-competitive-cyber-team-finishes-in-top-10-at-competition/) [![](/assets/pics/iconPdf.png)PDF](/assets/pdf/pointer_view_120116)
+
 
 
 #### Invited Talks:
@@ -61,10 +70,20 @@ permalink: /cv/
 
 #### Teaching:  
 
-* _CS 489 NSA Cyber Exercise Prep,_ United States Military Academy, NY - Course Director, Instructor 2018 
-* _CS 481 Operating Systems,_ United States Military Academy, NY - Course Director, Instructor 2016-2017
-* _CY/IT 350 Network Engineering and Design,_ United States Military Academy, NY - Course Director, Instructor 2015-2018
-* _IT 105 Introduction to Computing and Information Technology,_ United States Military Academy, Instructor 2015-2016
+* _CS 489 Independent Study,_ United States Military Academy, NY
+    * NSA Cyber Exercise Prep, Course Director & Instructor - Spring 2018
+    * Automobile Hacking, Course Director & Instructor - Fall 2016
+* _CS 481 Operating Systems,_ United States Military Academy, NY
+    * Course Director & Instructor - Fall 2018, Fall 2017
+    * Instructor - Fall 2016     
+* _CY/IT 350 Network Engineering and Design,_ United States Military Academy, NY
+    * Course Director & Instructor - Spring 2016, Fall 2016, Spring 2017, Fall 2017, 
+    * Instructor - Fall 2015, Spring 2017
+* _IT 105 Introduction to Computing and Information Technology,_ United States Military Academy
+    * Instructor - Fall 2015, Spring 2016
+* _Cadet Competitive Cyber Team_, United States Military Academy, NY
+    * Head Coach / Officer-in-charge - Academic Year 2016-2017, 2017-2018
+    * Coach / Assistant Officer-in-charge - Academy Year 2015-2016, 2018-2019
 * _CPSC 3620 Distributed Programming and Cluster Computing,_ Clemson University, SC - Reoccuring Guest Lecturer, 2013-2014
 * _Introduction to Programming_, Anderson Homeschool Association Encore Program, AY 2013-2014
 * _Joint Advanced Cyber Warface Course_ Fort Meade, MD - Reoccurring Guest Lecturer, 2011-2012
@@ -97,8 +116,8 @@ permalink: /cv/
 #### Awards and Recognition:
 
 *   Winning team, Symantec Higher Education Cyber Security Challenge [media](http://edscoop.com/west-point-shows-off-cyber-chops-in-higher-ed-challenge)
-*   Top Field Grade Officer, 2016 All-Army Cyberstakes Online, Capture the Flag Competition September 2016
-*   Outstanding Computer Science PhD Student - Clemson Univesity, 2014-2015 [media](http://www.clemson.edu/cecas/departments/computing/news-events/articles/2015awards.html)
+*   Top Field Grade Officer (6th Overall), 2016 All-Army Cyberstakes Online, Capture the Flag Competition - September 2016
+*   Outstanding Computer Science PhD Student - Clemson University, 2014-2015 [media](http://www.clemson.edu/cecas/departments/computing/news-events/articles/2015awards.html)
 *   Finalist, Intelligence National Security Alliance Sidney D. Drell Academic Award, November 2013 [INSA](http://www.insaonline.org/i/e/aa/2013/recipients.aspx)
 
 ![US Army Seal](/assets/pics/usarmy.png)
