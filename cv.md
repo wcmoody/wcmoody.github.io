@@ -37,12 +37,12 @@ permalink: /cv/
     [![](/assets/pics/iconPdf.png)PDF](/assets/pdf/Odcesac-Final.pdf) [![](/assets/pics/ccdcoe.jpg)CCDCOE](http://www.ccdcoe.org/cycon/2014/proceedings/d2r1s7_dresslermoody.pdf) [ ![](/assets/pics/ieee-favicon.ico)IEEE](http://ieeexplore.ieee.org/document/6916402/)
 
 *   <u>W.C. Moody</u>, L.B. Ngo; E. Duffy; A. Apon, 'JUMMP: Job Uninterrupted Maneuverable MapReduce Platform', _Cluster Computing (CLUSTER), 2013 IEEE International Conference on_ , pp. 1-8, 23-27 Sept. 2013  
-    [![](/assets/pics/iconPdf.png)PDF](/assets/pdf/Jummp-Final.pdf) [![](/assets/pics/sf-favicon.ico)Source](https://sourceforge.net/projects/jummp/) [![](/assets/pics/ieee-favicon.ico)IEEE](http://ieeexplore.ieee.org/document/6702650/)
+    [![](/assets/pics/iconPdf.png)PDF](/assets/pdf/Jummp-Final.pdf) [![](/assets/pics/sf-favicon.ico) Source](https://sourceforge.net/projects/jummp/) [![](/assets/pics/ieee-favicon.ico)IEEE](http://ieeexplore.ieee.org/document/6702650/)
 
-### Other Publications
+#### Other Publications
 
 * Technical Writer, 'Artificial Intelligence and Machine Learning Applied to Cybersecurity', IEEE, The result of an intensive three-day IEEE Confluence 6-8 Oct. 2017. 
-     [![](/assets/pics/iconPdf.png)PDF](/assets/pdf/ieee_confluence_report.pdf)[![](/assets/pics/ieee-favicon.ico)IEEE](https://www.ieee.org/about/industry/confluence/feedback.html) [media](https://medium.com/@parulnith/ai-machine-learning-the-future-of-cybersecurity-81832d9c08d9)
+     [![](/assets/pics/iconPdf.png)PDF](/assets/pdf/ieee_confluence_report.pdf) [![](/assets/pics/ieee-favicon.ico)IEEE](https://www.ieee.org/about/industry/confluence/feedback.html) [media](https://medium.com/@parulnith/ai-machine-learning-the-future-of-cybersecurity-81832d9c08d9)
 
 * <u>W.C. Moody</u>, Joshua Bundt; (2018 April 5) 'Cadets participate in inaugural NSA Cyber Exercise' _Pointer View_. p. 3, Retrived from [online](http://www.pointerview.com/2018/04/05/cadets-participate-in-inaugural-nsa-cyber-exercise/) 
      [![](/assets/pics/iconPdf.png)PDF](/assets/pdf/pointer_view_040518)
@@ -150,6 +150,7 @@ Source of Commissioned Service: ROTC (Distinguished Military Graduate)
 *   Cyber Capabilities Engineer, J-3 (Operations), United States Cyber Command, Fort George G. Meade, MD
 *   Student, Clemson University, Clemson, SC
 *   Assistant Professor, United States Military Academy, West Point, NY
+*   Research Scientist, Army Cyber Institute, West Point, NY
 
 #### Summary of Joint Assignments:  
 
@@ -166,6 +167,7 @@ Source of Commissioned Service: ROTC (Distinguished Military Graduate)
 
 *   Bronze Star Medal
 *   Defense Meritorious Service Medal
+*   Meritorious Service Medal
 *   Army Commendation Medal (with 2 Oak Leaf Cluster)
 *   Army Achievement Medal (with 5 Oak Leaf Clusters)
 *   Combat Action Badge
