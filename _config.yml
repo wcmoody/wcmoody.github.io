@@ -14,7 +14,7 @@
 # You can create any custom variable you would like, and they will be accessible
 # in the templates via {{ site.myvariable }}.
 title: W. Clay Moody
-email: william.moody@usma.edu 
+email: william.moody@westpoint.edu 
 description: > # this means to ignore newlines until "baseurl:"
         Alastor Moody. Ex-Auror, Ministry malcontent, and your new Defense Against the
         Dark Arts teacher. I am here because Dumbledore asked me. End of story,
