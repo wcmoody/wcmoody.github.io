@@ -13,11 +13,13 @@ _The operating system controls the computer itself and provides a useful interfa
 **Course Director:** 
 
 * Fall 2017 (25 students)
+* Fall 2018 (38 students)
 
 **Semesters Taught:** 
 
 *  Fall 2016 - 18 Students
 *  Fall 2017 - 25 Students (2 sections)
+*  Fall 2018 - 11 Students
 
 **Textbook:**
 
