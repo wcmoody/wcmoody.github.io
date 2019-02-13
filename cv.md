@@ -45,10 +45,10 @@ permalink: /cv/
      [![](/assets/pics/iconPdf.png)PDF](/assets/pdf/ieee_confluence_report.pdf) [![](/assets/pics/ieee-favicon.ico)IEEE](https://www.ieee.org/about/industry/confluence/feedback.html) [media](https://medium.com/@parulnith/ai-machine-learning-the-future-of-cybersecurity-81832d9c08d9)
 
 * <u>W.C. Moody</u>, Joshua Bundt; (2018 April 5) 'Cadets participate in inaugural NSA Cyber Exercise' _Pointer View_. p. 3, Retrived from [online](http://www.pointerview.com/2018/04/05/cadets-participate-in-inaugural-nsa-cyber-exercise/) 
-     [![](/assets/pics/iconPdf.png)PDF](/assets/pdf/pointer_view_040518)
+     [![](/assets/pics/iconPdf.png)PDF](/assets/pdf/pointer_view_040518.pdf)
 
 * <u>W.C. Moody</u>, Joshua Bundt; (2016 December 1) 'Cadet Competitive Cyber Team finishes in Top 10 at competition' _Pointer View_. p. 8 Retrived from [online](http://www.pointerview.com/2016/12/01/cadet-competitive-cyber-team-finishes-in-top-10-at-competition/) 
-     [![](/assets/pics/iconPdf.png)PDF](/assets/pdf/pointer_view_120116)
+     [![](/assets/pics/iconPdf.png)PDF](/assets/pdf/pointer_view_120116.pdf)
 
 
 
