@@ -1,6 +1,6 @@
 ---
 layout: page
-title: Cirriculum Vitae
+title: Curriculum Vitae
 permalink: /cv/
 ---
 
@@ -24,7 +24,8 @@ permalink: /cv/
 * <u>W.C. Moody</u>; A. Apon, 'Maneuverable Applications: Advancing Distributed Computing', _Cyber Defense Review_ Volume 2, Number 3, Fall 2017 [![](/assets/pics/iconPdf.png)PDF](http://cyberdefensereview.army.mil/Portals/6/Documents/CDR-FALL2017.pdf)
 
 #### Conference Papers:
-*   J. Chamberlin, J. Hussey, B. Klimkowski, <u>W.C. Moody</u>, C. Morrell; 'The Impact of Virtualized Technology on Undergraduate Computer Networking Education', _SIGITE'17, 18th Annual Conference on Information Technology Education_, 4-7 Oct. 2017. [![](/assets/pics/iconPdf.png)PDF](/assets/pdf/sigite17_virtualization_final.pdf)[![](/assets/pics/acm.png){:height="5%" width="5%"}ACM](https://dl.acm.org/citation.cfm?id=3125693)
+*   J. Chamberlin, J. Hussey, B. Klimkowski, <u>W.C. Moody</u>, C. Morrell; 'The Impact of Virtualized Technology on Undergraduate Computer Networking Education', _SIGITE'17, 18th Annual Conference on Information Technology Education_, 4-7 Oct. 2017. 
+    [![](/assets/pics/iconPdf.png)PDF](/assets/pdf/sigite17_virtualization_final.pdf)[![](/assets/pics/acm.png){:height="5%" width="5%"}ACM](https://dl.acm.org/citation.cfm?id=3125693)
 
 *   <u>W.C. Moody</u>, H. Hu, A. Apon; 'Defensive Maneuver Cyber Platform Modeling with Stochastic Petri Nets', _In Collaborative Computing: Networking, Applications and Worksharing (Collaboratecom), 2014 10th International Conference on_ , 22 Oct. 2014  
     [![](/assets/pics/iconPdf.png)PDF](/assets/pdf/moodytrustcol14.pdf) [![](/assets/pics/ieee-favicon.ico)IEEE](http://ieeexplore.ieee.org/document/7014609/)
@@ -40,11 +41,14 @@ permalink: /cv/
 
 ### Other Publications
 
-* Technical Writer, 'Artificial Intelligence and Machine Learning Applied to Cybersecurity', IEEE, The result of an intensive three-day IEEE Confluence 6-8 Oct. 2017. [![](/assets/pics/iconPdf.png)PDF](/assets/pdf/ieee_confluence_report.pdf)[![](/assets/pics/ieee-favicon.ico)IEEE](https://www.ieee.org/about/industry/confluence/feedback.html) [media](https://medium.com/@parulnith/ai-machine-learning-the-future-of-cybersecurity-81832d9c08d9)
+* Technical Writer, 'Artificial Intelligence and Machine Learning Applied to Cybersecurity', IEEE, The result of an intensive three-day IEEE Confluence 6-8 Oct. 2017. 
+     [![](/assets/pics/iconPdf.png)PDF](/assets/pdf/ieee_confluence_report.pdf)[![](/assets/pics/ieee-favicon.ico)IEEE](https://www.ieee.org/about/industry/confluence/feedback.html) [media](https://medium.com/@parulnith/ai-machine-learning-the-future-of-cybersecurity-81832d9c08d9)
 
-* <u>W.C. Moody</u>, Joshua Bundt; (2018 April 5) 'Cadets participate in inaugural NSA Cyber Exercise' _Pointer View_. p. 3, Retrived from [online](http://www.pointerview.com/2018/04/05/cadets-participate-in-inaugural-nsa-cyber-exercise/) [![](/assets/pics/iconPdf.png)PDF](/assets/pdf/pointer_view_040518)
+* <u>W.C. Moody</u>, Joshua Bundt; (2018 April 5) 'Cadets participate in inaugural NSA Cyber Exercise' _Pointer View_. p. 3, Retrived from [online](http://www.pointerview.com/2018/04/05/cadets-participate-in-inaugural-nsa-cyber-exercise/) 
+     [![](/assets/pics/iconPdf.png)PDF](/assets/pdf/pointer_view_040518)
 
-* <u>W.C. Moody</u>, Joshua Bundt; (2016 December 1) 'Cadet Competitive Cyber Team finishes in Top 10 at competition' _Pointer View_. p. 8 Retrived from [online](http://www.pointerview.com/2016/12/01/cadet-competitive-cyber-team-finishes-in-top-10-at-competition/) [![](/assets/pics/iconPdf.png)PDF](/assets/pdf/pointer_view_120116)
+* <u>W.C. Moody</u>, Joshua Bundt; (2016 December 1) 'Cadet Competitive Cyber Team finishes in Top 10 at competition' _Pointer View_. p. 8 Retrived from [online](http://www.pointerview.com/2016/12/01/cadet-competitive-cyber-team-finishes-in-top-10-at-competition/) 
+     [![](/assets/pics/iconPdf.png)PDF](/assets/pdf/pointer_view_120116)
 
 
 
@@ -119,6 +123,7 @@ permalink: /cv/
 *   Top Field Grade Officer (6th Overall), 2016 All-Army Cyberstakes Online, Capture the Flag Competition - September 2016
 *   Outstanding Computer Science PhD Student - Clemson University, 2014-2015 [media](http://www.clemson.edu/cecas/departments/computing/news-events/articles/2015awards.html)
 *   Finalist, Intelligence National Security Alliance Sidney D. Drell Academic Award, November 2013 [INSA](http://www.insaonline.org/i/e/aa/2013/recipients.aspx)
+*   Distinguished Military Graduate, Clemson University ROTC, December 1998
 
 ![US Army Seal](/assets/pics/usarmy.png)
 
