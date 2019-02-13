@@ -40,7 +40,8 @@ After some coordination between my department, the Army Cyber Institute, and Cou
 
 So long story short (_too late_), I got to work with Counter Hack this past summer. My primary role was working on NetWars 5. I did beta testing, auto-solve scripting, hint authoring, and my most famous contribution, naming most of the problems. I have been called the NetWars punmaster for all the puns I put in the names. If you don't know what NetWars 5 is about, lets just say it takes place in a galaxy far, far away. I know a little about that universe also and it fit right in my wheel house. See this tweet from Derek Root to Jeff McJunkin discussing some of those questions.
 
-{% twitter https://twitter.com/_r00k_/status/930608702381584384 %}
+<!-- {% twitter https://twitter.com/_r00k_/status/930608702381584384 %}
+-->
 
 Maybe one day, I will blog about my work with NetWars 5 in the future. But for now, lets talk HHC.
 
