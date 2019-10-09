@@ -24,6 +24,9 @@ permalink: /cv/
 * <u>W.C. Moody</u>; A. Apon, 'Maneuverable Applications: Advancing Distributed Computing', _Cyber Defense Review_ Volume 2, Number 3, Fall 2017 [![](/assets/pics/iconPdf.png)PDF](http://cyberdefensereview.army.mil/Portals/6/Documents/CDR-FALL2017.pdf)
 
 #### Conference Papers:
+*  O.G. Baciu-Ureche, C. Sleeman, <u>W.C. Moody</u>, and S. Matthews. 'The Adventures of ScriptKitty: Using the Raspberry Pi to Teach Adolescents about Internet Safety.' _SIGITE'19 20th Annual Conference on Information Technology Education_, 3-5 Oct. 2019.
+	[![](/assets/pics/iconPdf.png)PDF](/assets/pdf/sigite19_script_kitty.pdf)[![](/assets/pics/acm.png){:height="5%" width="5%"}ACM](https://dl.acm.org/citation.cfm?id=3351399)
+
 *   J. Chamberlin, J. Hussey, B. Klimkowski, <u>W.C. Moody</u>, C. Morrell; 'The Impact of Virtualized Technology on Undergraduate Computer Networking Education', _SIGITE'17, 18th Annual Conference on Information Technology Education_, 4-7 Oct. 2017. 
     [![](/assets/pics/iconPdf.png)PDF](/assets/pdf/sigite17_virtualization_final.pdf)[![](/assets/pics/acm.png){:height="5%" width="5%"}ACM](https://dl.acm.org/citation.cfm?id=3125693)
 
@@ -53,6 +56,7 @@ permalink: /cv/
 
 
 #### Invited Talks:
+*   <u>W.C. Moody</u>, C. Sleeman, 'The Adventures of ScriptKitty: Using the Raspberry Pi to Teach Adolescents about Internet Safety.', _SIGITE'19 20th Annual Conference on Information Technology Education_, 5 Oct. 2019. Tacoma, WA. [![](/assets/pics/iconPdf.png)PDF](/assets/pdf/sigite-2019-moody-sleeman-presentation.pdf)
 *   <u>W.C. Moody</u>, 'Reconfigurable Network Testbed for Evaluation of Datacenter Topologies', _The 6th International Workshop on Data-intensive Distributed Computing (DIDC'14)_ , 24 June. 2014, Vancouver, Canada [![](/assets/pics/iconPdf.png)PDF](/assets/pdf/didc-2014-moody-presentation.pdf)
 *   J. Dressler, <u>W.C. Moody</u> 'Operational Data Classes for Establishing Situational Awareness in Cyberspace', _The 6th International Conference on Cyber Conflict,_ 5 Jun 2014, Tallinn, Estonia [![](/assets/pics/iconPdf.png)PDF](/assets/pdf/dressler-moody-cycon14.pdf)
 *   <u>W.C. Moody</u>, 'HOFESAC: Holistic Operational Framework for Establishing Situational Awareness in Cyberspace' _2013 Symposium for Visualization of Cyberspace Security (VizSec13)_, October 14, 2013, Atlanta, GA [![](/assets/pics/iconPdf.png)PDF](/assets/pdf/hofesac-vizsec.pdf)
