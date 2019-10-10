@@ -70,8 +70,6 @@
     
     <li><a href="/teaching/cy-350-networking-engineering-and-design">CY 350 (IT 350) - Networking Engineering and Design</a></li>
     
-    <li><a href="/teaching/xe-401-402-capstone-projects">XE 401/402 - Capstone Projects</a></li>
-    
     <li><a href="/teaching/it-105-introduction-to-computing-and-information-technology">IT 105 – Introduction to Computing and Information Technology</a></li>
     
     </ul>
@@ -108,9 +106,8 @@
 
 <!--more-->
 
-<div class="highlighter-rouge"><pre class="highlight"><code>A cadet learns much about ********** in IT350. A snippet of a router running configuration file can be found on the host 10.R.0.51. (R is the last 2 of your classroom number [52|64]). There are three stages of flags hidden in these systems, see if you can recover the flags. Stage 1 and 2 are worth 3 points each, stage 3 is 4 points. Flags start with IT350. This is also worth endless internet cool points so, no inter-group collaboration!
-</code></pre>
-</div>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>A cadet learns much about ********** in IT350. A snippet of a router running configuration file can be found on the host 10.R.0.51. (R is the last 2 of your classroom number [52|64]). There are three stages of flags hidden in these systems, see if you can recover the flags. Stage 1 and 2 are worth 3 points each, stage 3 is 4 points. Flags start with IT350. This is also worth endless internet cool points so, no inter-group collaboration!
+</code></pre></div></div>
 
 <p>My course was taught in two different class rooms and each classroom has its own subnet within our academic research network. The room number determines the subnet to which the each classroom is directly connected. The setup for these problems involved a simple CentOS VM from our ESXi cluster with the address of <code class="highlighter-rouge">10.R.0.51</code> and a Cisco router in the classroom connected as <code class="highlighter-rouge">10.R.0.50</code>. This was setup in both the 52 and 64 classrooms.</p>
 
@@ -120,43 +117,39 @@
 
 <p>This account is very locked down in this environment. They have the ability to create files in their local directory but most of the existing file are locked down so that they are not the owners, can can only read and execute those files. A detailed directory listing is below:</p>
 
-<div class="language-sh highlighter-rouge"><pre class="highlight"><code><span class="o">[</span>cadet@it350b1 ~]<span class="nv">$ </span>ls -la
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">[</span>cadet@it350b1 ~]<span class="nv">$ </span><span class="nb">ls</span> <span class="nt">-la</span>
 total 16
-drwx------. 3 cadet  cadet  4096 May 12 07:45 .
-drwxrwxr-x. 2 madeye madeye   19 Apr 26 17:54 .
+drwx------. 3 cadet  cadet  4096 May 12 07:45 <span class="nb">.</span>
+drwxrwxr-x. 2 madeye madeye   19 Apr 26 17:54 <span class="nb">.</span>
 drwxr-xr-x. 4 root   root     31 Apr 27 10:15 ..
--rw-r--r--. 1 madeye cadet    44 Apr 27 10:43 .bash_history
--rw-r-x---. 1 madeye cadet    40 Apr 27 10:41 .bash_login
--rw-r-x---. 1 madeye cadet     0 Apr 27 10:39 .bash_logout
--rw-r--r--. 1 madeye cadet  1170 Apr 26 17:49 running_config.txt
-</code></pre>
-</div>
+<span class="nt">-rw-r--r--</span><span class="nb">.</span> 1 madeye cadet    44 Apr 27 10:43 .bash_history
+<span class="nt">-rw-r-x---</span><span class="nb">.</span> 1 madeye cadet    40 Apr 27 10:41 .bash_login
+<span class="nt">-rw-r-x---</span><span class="nb">.</span> 1 madeye cadet     0 Apr 27 10:39 .bash_logout
+<span class="nt">-rw-r--r--</span><span class="nb">.</span> 1 madeye cadet  1170 Apr 26 17:49 running_config.txt
+</code></pre></div></div>
 
 <p>Before we jump into capturing the flags, let me describe some of the more fun things in their system. The <code class="highlighter-rouge">.bash_login</code> file sets the prompt and allows no history to be saved.</p>
 
-<div class="language-sh highlighter-rouge"><pre class="highlight"><code><span class="o">[</span>cadet@it350b1 ~]<span class="nv">$ </span>cat .bash_login
-<span class="nb">shopt</span> -u -o <span class="nb">history
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">[</span>cadet@it350b1 ~]<span class="nv">$ </span><span class="nb">cat</span> .bash_login
+<span class="nb">shopt</span> <span class="nt">-u</span> <span class="nt">-o</span> <span class="nb">history
 </span><span class="nv">PS1</span><span class="o">=</span><span class="s1">'[\u@\h \w]\$ '</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>But there is an entry saved in their history.</p>
 
-<div class="language-sh highlighter-rouge"><pre class="highlight"><code>cadet@it350b1 ~]<span class="nv">$ </span>cat .bash_history
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code>cadet@it350b1 ~]<span class="nv">$ </span><span class="nb">cat</span> .bash_history
 <span class="c">#what are you doing? trying to FIND a hint?</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 <p>This really frustrated the students since they could not use the arrow keys to navigate through their command history when working in the system. This nugget was actually a hint itself. Since most of the students are not from our department, many are not familiar with the intricacies of Linux. They probably do not default to doing a long listing of the directory with hidden files and miss the fact there is what appears to be two current directories (<code class="highlighter-rouge">.</code>). Actually the one owned by the user madeye, is a period and a space. In this directory is a file called <code class="highlighter-rouge">.hints</code>, which could be found with the <code class="highlighter-rouge">find</code> program in the following way.</p>
 
-<div class="language-sh highlighter-rouge"><pre class="highlight"><code>cadet@it350b1 ~]<span class="nv">$ </span>find . -name <span class="s2">"*hint*"</span>
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code>cadet@it350b1 ~]<span class="nv">$ </span>find <span class="nb">.</span> <span class="nt">-name</span> <span class="s2">"*hint*"</span>
 ./. /.hints
-</code></pre>
-</div>
+</code></pre></div></div>
 <p>I will talk about what is in this file at the end.</p>
 
 <p>Now to the flag, so from the problem statement the students know a partial router config is located on this host. A simple directory listing will show only one file called <code class="highlighter-rouge">running_config.txt</code>. The contents of this file (for the 64 classroom)is below:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>!
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>!
 hostname &lt;redacted&gt;
 !
 boot-start-marker
@@ -243,8 +236,7 @@ line vty 0 4
 scheduler allocate 20000 1000
 !
 end
-</code></pre>
-</div>
+</code></pre></div></div>
 <p>If they view this file, they will see the first flag: <code class="highlighter-rouge">IT350{stage_1_vms_are_cool}</code></p>
 
 <h3 id="stage-two">Stage Two:</h3>
@@ -253,17 +245,16 @@ end
 
 <p>Since the description of the GigabitEthernet 0/0 interface is where the first flag was, they should know its IP address. If they try to ping this address, they will see the router is on the network and operational. Now they should try to access it. If they skip down to the configuration for <code class="highlighter-rouge">line vty 0 4</code> they will see that only the telnet protocol is allowed as the inbound transport protocol. If they try to connect from their VM (or any workstation in the classroom) to this router they will be denied.</p>
 
-<div class="language-sh highlighter-rouge"><pre class="highlight"><code><span class="o">[</span>cadet@it350b1 ~]<span class="nv">$ </span>telnet 10.64.0.50
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">[</span>cadet@it350b1 ~]<span class="nv">$ </span>telnet 10.64.0.50
 Trying 10.64.0.50...
 telnet: connect to address 10.64.0.50: Connection refused
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>They then should begin to ask themselves why is that? Going back to the configuration, they should see that standard access list 10 is applied in the inbound direction on those vty lines. Finding this ACL in the config, shows it permits only the single IP address of <code class="highlighter-rouge">10.52.0.51</code>. Since this is the 64 classroom VM, they should realize the other classrooms VM can connect to their classroom’s router and vice versa. This is my attempt to show them the need to pivot. They have two choices, they can now ssh into the other classrooms VM and connect to their classrooms router via telnet, or they can assume they can connect to the 52 classroom’s router and go from there. Either way is sufficent to recover this stage’s flag.</p>
 
 <p>When they do either of these they get the following message (this is a connection to the 52 classroom’s router from the 64 classroom VM)</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>[cadet@it350b1 ~]$ telnet 10.52.0.50
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[cadet@it350b1 ~]$ telnet 10.52.0.50
 Trying 10.52.0.50...
 Connected to 10.52.0.50.
 Escape character is '^]'.
@@ -288,8 +279,7 @@ Constant Vigilance!
 User Access Verification
 
 Password:
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>And there is the second stage flag.</p>
 
@@ -305,12 +295,11 @@ Password:
 
 <p>Using that password as the login reveals the third and final flag in the hostname of the device:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>User Access Verification
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>User Access Verification
 
 Password:
 IT350_stage_3_cisco_encryption_ftl&gt;
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>Interestingly, curly braces are not valid characters in Cisco host names.</p>
 
@@ -318,7 +307,7 @@ IT350_stage_3_cisco_encryption_ftl&gt;
 
 <p>So if they had found the hint file and viewed its contents, they would have seen the following:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>[cadet@it350b1 ~]$ find -name "*hint*" -exec cat {} \;
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[cadet@it350b1 ~]$ find -name "*hint*" -exec cat {} \;
 can you read a config file?
 
 do you understand ACLs?
@@ -326,8 +315,7 @@ do you understand ACLs?
 are the passwords secure?
 
 IT350{...what...are...you...doing...in...my...files?}
-</code></pre>
-</div>
+</code></pre></div></div>
 <p>They would not have gotten points for the last line, but the rest of the file would guide them on the path to success.</p>
 
 <h3 id="conclusion">Conclusion</h3>
@@ -357,7 +345,7 @@ IT350{...what...are...you...doing...in...my...files?}
             
             </li>
             
-            <li><a href="mailto:william.moody@usma.edu">william.moody@usma.edu</a></li>
+            <li><a href="mailto:contact@wclaymoody.com">contact@wclaymoody.com</a></li>
             
         </ul>
       </div>
@@ -383,7 +371,7 @@ IT350{...what...are...you...doing...in...my...files?}
       </div>
 
       <div class="footer-col footer-col-3">
-        <p>Alastor Moody. Ex-Auror, Ministry malcontent, and your new Defense Against the Dark Arts teacher. I am here because Dumbledore asked me. End of story, goodbye, the end! Any questions? When it comes to the Dark Arts I believe in a practical approach
+        <p>We adopted that name for our outpost because it is a beacon of talent—a counterculture to what many think of technology at the Defense, Our mission is to figure out how to work better inside of the world’s largest bureaucracy while fixing the problems of hardware and software —  quickly — to support the mission. Everyone sees themselves as a nerd, and we’re trying to empower the nerds inside of an organization that  maybe doesn’t value or handle technical talent correctly.
 </p>
       </div>
     </div>

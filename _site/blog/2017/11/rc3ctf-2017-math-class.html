@@ -70,8 +70,6 @@
     
     <li><a href="/teaching/cy-350-networking-engineering-and-design">CY 350 (IT 350) - Networking Engineering and Design</a></li>
     
-    <li><a href="/teaching/xe-401-402-capstone-projects">XE 401/402 - Capstone Projects</a></li>
-    
     <li><a href="/teaching/it-105-introduction-to-computing-and-information-technology">IT 105 – Introduction to Computing and Information Technology</a></li>
     
     </ul>
@@ -122,7 +120,7 @@
 
 <p>Since my Braille Library uses lowercase <code class="highlighter-rouge">o</code> for raised and <code class="highlighter-rouge">.</code> for flat, I needed to convert the math expressions to this. Luckily the PDF was highlightable and I just copy and pasted the numbers into a text file and cleaned it up by removing the <code class="highlighter-rouge">+</code> and spacing them evenly. Below is those digits.</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>42 54 66 24 29 32 21
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>42 54 66 24 29 32 21
 29 21 15 53 13 46 24
 71 57 84 69 51 85 37
 
@@ -141,15 +139,14 @@
 22 65 27 22 41 26 52
 23 16 44 14 18 48 43
 59 85 63 23 79 97 81
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <h2 id="the-implementation">The implementation</h2>
 
 <p>Saving those numbers above as <code class="highlighter-rouge">numbers.txt</code>, I was able to use the following python snippet to build my Braille representation of the math problems.</p>
 
-<div class="language-python highlighter-rouge"><pre class="highlight"><code><span class="c"># coding: utf-8</span>
-<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s">'numbers.txt'</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># coding: utf-8
+</span><span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s">'numbers.txt'</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
     <span class="n">data</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
 
 <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="s">"02468"</span><span class="p">:</span>
@@ -157,11 +154,10 @@
 
 <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="s">"13579"</span><span class="p">:</span>
     <span class="n">data</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="n">c</span><span class="p">,</span> <span class="s">"."</span><span class="p">)</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 <p>Which gave me the following:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
 oo .o oo oo o. .o o.
 o. o. .. .. .. oo oo
 .. .. oo o. .. o. ..
@@ -181,11 +177,10 @@ o. o. oo o. o. o. ..
 oo o. o. oo o. oo .o
 o. .o oo .o .o oo o.
 .. o. o. o. .. .. o.
-</code></pre>
-</div>
+</code></pre></div></div>
 <p>Now to see what is the Braille message. Using the <code class="highlighter-rouge">solve()</code> function from my Stevie N Ray code (below), I got what I thought was a flag in: <code class="highlighter-rouge">fixmathdifforabsofdifplusonefornegs</code>. Little did I know, that this was only the first of three messages I would need to solve to get the final answer.</p>
 
-<div class="language-python highlighter-rouge"><pre class="highlight"><code>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
 <span class="kn">from</span> <span class="nn">string</span> <span class="kn">import</span> <span class="n">lowercase</span>
 
 <span class="n">letterdots</span> <span class="o">=</span> <span class="p">[[</span><span class="mi">1</span><span class="p">,],[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">4</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">5</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">4</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">5</span><span class="p">],</span>
@@ -239,18 +234,16 @@ o. .o oo .o .o oo o.
                     <span class="n">message</span> <span class="o">+=</span> <span class="n">d2l</span><span class="p">(</span><span class="n">letter</span><span class="p">)</span>
                     <span class="n">i</span> <span class="o">+=</span> <span class="mi">1</span>
             <span class="k">return</span> <span class="n">message</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 <p>Like I said, I intially thought this was the flag. I tried submitting it as is, with spaces, with underscores, and finally with dashes. After confirming with a mod on IRC, I knew the phrase was a hint to going forward. Breaking down the message into individual words and thinking about the flow, I had this.</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>Fix math. Diff or abs of dif plus one for negs
-</code></pre>
-</div>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Fix math. Diff or abs of dif plus one for negs
+</code></pre></div></div>
 <h2 id="the-correction">The correction</h2>
 
 <p>So most of the math problems looked to be incorrect. So this instruction was telling me to fix the math. Then to look the difference between the given answer and the correct result. If the difference was negative, take the absolute value of the difference and add one. This seems easy, but what to do with the result. My first guess was more Braille, replace the answer with the difference or absolute value plus one. This seemed like a stretch that such a message could have been created from only changing the last line. I was stuck on this for a while, adjusting my code to redo the Braille. But finally, I just stopped and looked at these new values. I had two difference sets of values depending if I subtracted the correction from the given values or the other way around. Here is the code I used to compute this two different sets of numbers.</p>
 
-<div class="language-python highlighter-rouge"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">string</span> <span class="kn">import</span> <span class="n">lowercase</span>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">string</span> <span class="kn">import</span> <span class="n">lowercase</span>
 <span class="kn">import</span> <span class="nn">re</span>
 
 <span class="n">patt_str</span> <span class="o">=</span> <span class="p">((</span><span class="s">"(</span><span class="err">\</span><span class="s">d{2}).?"</span> <span class="o">*</span> <span class="mi">7</span><span class="p">)</span> <span class="o">+</span> <span class="s">"</span><span class="se">\n</span><span class="s">"</span><span class="p">)</span> <span class="o">*</span> <span class="mi">3</span>
@@ -276,26 +269,23 @@ o. .o oo .o .o oo o.
         <span class="n">e</span> <span class="o">=</span> <span class="p">(</span><span class="n">a</span><span class="o">+</span><span class="n">b</span><span class="p">)</span> <span class="o">-</span> <span class="n">c</span>
         <span class="k">if</span> <span class="n">e</span> <span class="o">&lt;=</span> <span class="mi">0</span><span class="p">:</span> <span class="n">e</span> <span class="o">=</span> <span class="nb">abs</span><span class="p">(</span><span class="n">e</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span>
         <span class="n">option2</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>Those sets of numbers all are from the range of 1 to 26.</p>
-<div class="highlighter-rouge"><pre class="highlight"><code>[1, 19, 3, 9, 9, 7, 9, 22, 14, 18, 15, 23, 19, 15, 14, 5, 23, 8, 5, 14, 
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[1, 19, 3, 9, 9, 7, 9, 22, 14, 18, 15, 23, 19, 15, 14, 5, 23, 8, 5, 14, 
 	16, 18, 9, 13, 5, 15, 18, 5, 14, 4, 9, 14, 20, 23, 15]
 
 [1, 18, 4, 8, 10, 8, 8, 21, 15, 19, 14, 22, 18, 16, 13, 4, 22, 9, 6, 15, 
 	17, 19, 10, 12, 4, 14, 17, 4, 15, 5, 8, 13, 21, 24, 14]
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>I was stuck on this for a while cause like a computer scientist I was stuck on zero-indexed
 arrays. Realizing that the value 0 was not possibly (thep problem says 0 is negative), I moved on.
 Finally, using them as an index in to the alphabet with this code:</p>
 
-<div class="language-python highlighter-rouge"><pre class="highlight"><code><span class="k">print</span> <span class="s">""</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">lowercase</span><span class="p">[</span><span class="n">o</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="k">for</span> <span class="n">o</span> <span class="ow">in</span> <span class="n">option1</span><span class="p">)</span>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">print</span> <span class="s">""</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">lowercase</span><span class="p">[</span><span class="n">o</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="k">for</span> <span class="n">o</span> <span class="ow">in</span> <span class="n">option1</span><span class="p">)</span>
 <span class="k">print</span> <span class="s">""</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">lowercase</span><span class="p">[</span><span class="n">o</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="k">for</span> <span class="n">o</span> <span class="ow">in</span> <span class="n">option2</span><span class="p">)</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>results in the following two messages:</p>
 
@@ -307,7 +297,7 @@ Finally, using them as an index in to the alphabet with this code:</p>
 
 <p>The first message is obviously the next step. It tells us to create ASCII characters from the given rows. Using a 1 when the number is prime or ends in 2. Going back to the original data with the following code we can recover the flag.</p>
 
-<div class="language-python highlighter-rouge"><pre class="highlight"><code><span class="n">primes</span> <span class="o">=</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">11</span><span class="p">,</span> <span class="mi">13</span><span class="p">,</span> <span class="mi">17</span><span class="p">,</span> <span class="mi">19</span><span class="p">,</span> <span class="mi">23</span><span class="p">,</span> <span class="mi">29</span><span class="p">,</span> <span class="mi">31</span><span class="p">,</span>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">primes</span> <span class="o">=</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">11</span><span class="p">,</span> <span class="mi">13</span><span class="p">,</span> <span class="mi">17</span><span class="p">,</span> <span class="mi">19</span><span class="p">,</span> <span class="mi">23</span><span class="p">,</span> <span class="mi">29</span><span class="p">,</span> <span class="mi">31</span><span class="p">,</span>
             <span class="mi">37</span><span class="p">,</span> <span class="mi">41</span><span class="p">,</span> <span class="mi">43</span><span class="p">,</span> <span class="mi">47</span><span class="p">,</span> <span class="mi">53</span><span class="p">,</span> <span class="mi">59</span><span class="p">,</span> <span class="mi">61</span><span class="p">,</span> <span class="mi">67</span><span class="p">,</span>
             <span class="mi">71</span><span class="p">,</span> <span class="mi">73</span><span class="p">,</span> <span class="mi">79</span><span class="p">,</span> <span class="mi">83</span><span class="p">,</span> <span class="mi">89</span><span class="p">,</span> <span class="mi">97</span><span class="p">]</span>
 
@@ -324,8 +314,7 @@ Finally, using them as an index in to the alphabet with this code:</p>
     <span class="k">for</span> <span class="n">letter</span> <span class="ow">in</span> <span class="n">letters</span><span class="p">:</span>
         <span class="n">flag</span> <span class="o">+=</span> <span class="nb">chr</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="s">""</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">bitstream</span><span class="p">(</span><span class="n">letter</span><span class="p">)),</span><span class="mi">2</span><span class="p">))</span>
 <span class="k">print</span> <span class="n">flag</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>That gives the message of:
 <code class="highlighter-rouge">FLAGSUMARRAYMAN</code></p>
@@ -366,7 +355,7 @@ Finally, using them as an index in to the alphabet with this code:</p>
             
             </li>
             
-            <li><a href="mailto:william.moody@usma.edu">william.moody@usma.edu</a></li>
+            <li><a href="mailto:contact@wclaymoody.com">contact@wclaymoody.com</a></li>
             
         </ul>
       </div>
@@ -392,7 +381,7 @@ Finally, using them as an index in to the alphabet with this code:</p>
       </div>
 
       <div class="footer-col footer-col-3">
-        <p>Alastor Moody. Ex-Auror, Ministry malcontent, and your new Defense Against the Dark Arts teacher. I am here because Dumbledore asked me. End of story, goodbye, the end! Any questions? When it comes to the Dark Arts I believe in a practical approach
+        <p>We adopted that name for our outpost because it is a beacon of talent—a counterculture to what many think of technology at the Defense, Our mission is to figure out how to work better inside of the world’s largest bureaucracy while fixing the problems of hardware and software —  quickly — to support the mission. Everyone sees themselves as a nerd, and we’re trying to empower the nerds inside of an organization that  maybe doesn’t value or handle technical talent correctly.
 </p>
       </div>
     </div>
