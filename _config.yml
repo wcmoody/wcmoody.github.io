@@ -14,16 +14,19 @@
 # You can create any custom variable you would like, and they will be accessible
 # in the templates via {{ site.myvariable }}.
 title: W. Clay Moody
-email: william.moody@westpoint.edu 
+email: contact@wclaymoody.com
 description: > # this means to ignore newlines until "baseurl:"
-        Alastor Moody. Ex-Auror, Ministry malcontent, and your new Defense Against the
-        Dark Arts teacher. I am here because Dumbledore asked me. End of story,
-        goodbye, the end! Any questions? When it comes to the Dark Arts I believe in a
-        practical approach
+    \"We adopted that name for our outpost because it is a beacon of talent—a counterculture to what many think of technology at the Defense,\" he says. 
+    \"Our mission is to figure out how to work better inside of the world’s largest bureaucracy while fixing the problems of hardware and software — 
+    quickly — to support the mission. Everyone sees themselves as a nerd, and we’re trying to empower the nerds inside of an organization that 
+    maybe doesn’t value or handle technical talent correctly.\"
+
 baseurl: "" # the subpath of your site, e.g. /blog
 url: "http://wclaymoody.com" # the base hostname & protocol for your site, e.g. http://example.com
 twitter_username: wclaymoody 
 github_username:  wcmoody 
+gscholar_username: wcm
+gscholar_id: e6gT-0oAAAAJ
 
 # Build settings
 markdown: kramdown
