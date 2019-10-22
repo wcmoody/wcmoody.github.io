@@ -146,8 +146,8 @@ code {
   @include relative-font-size(0.9375);
   border: 1px solid $grey-color-light;
   border-radius: 3px;
-  background-color: #073642; /*#eef;*/
-  color: $grey-color-light;
+  background-color: #fdf6e3; /*#000; #073642; #eef;*/
+  color: #586e75; /*#fff; $grey-color-light;*/
   white-space: pre-wrap;       /* Since CSS 2.1 */
   white-space: -moz-pre-wrap;  /* Mozilla, since 1999 */
   white-space: -pre-wrap;      /* Opera 4-6 */
@@ -157,7 +157,7 @@ code {
 
 code {
   padding: 1px 5px;
-  background-color: #073642; /*#eef;*/
+  background-color: #fdf6e3; /*#000; #073642; #eef;*/
 }
 
 pre {
