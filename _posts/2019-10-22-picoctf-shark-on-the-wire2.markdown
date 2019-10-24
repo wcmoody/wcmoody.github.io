@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Mama Shark"
+title: "picoCTF 2019 - Shark on the Wire 2 aka 'Mama Shark'"
 date: 2019-10-22 13:37:11
 excerpt_separator: <!--more-->
 disqus: true
@@ -9,7 +9,7 @@ disqus: true
 {: .center}
 ![](/assets/pics/mama_shark.jpg)
 
-Back to another picoCTF challenge, this time to a challenge that is more in my wheel house. Network traffic forensics... specifically "shark on the wire 2" for 300 points.
+Back to another picoCTF challenge, this time to a challenge that is more in my wheel house. Network traffic forensics... specifically "shark on the wire 2" for 300 points. There is a first challenge in this series, which would be _Baby Shark_ so this one is _Mama Shark_
 
 <!--more-->
 
@@ -57,7 +57,7 @@ The next statistic I like to look at to get a feel for the packet capture is the
 
 ![](/assets/ctffiles/pico2019/shark2/shark-2-proto-hier.png)
 
-Here we see that 56% of the traffic is `IP`, 42% is `ARP`. Furthermore, 45% is `IP/UDP` and 40% is `IP/UPD-Data`. So ARP and UDP-Data are the most interesting.
+Here we see that 56% of the traffic is `IP`, 42% is `ARP`. Furthermore, 45% is `IP/UDP` and 40% is `IP/UDP-Data`. So ARP and UDP-Data are the most interesting.
 
 We can quickly rule out the lone TCP flow by seeing there is not an entire flow there. Additionally the ARP traffic appears to be only `10.0.0.5` looking for a bunch of MAC addresses for other hosts in its network. So UDP-Data packets are where we will focus.
 
@@ -77,7 +77,7 @@ Scrolling through these packets, nothing looks obvious. A few common themes do a
 
 ![](/assets/ctffiles/pico2019/shark2/shark-2-dstport-22.png)
 
-Now we are getting hotter. Nothing changes from packet to packet except the source upd port. In fact the port - 5000 (our start and end message port), looks like values in the ASCII range.
+Now we are getting hotter. Nothing changes from packet to packet except the source udp port. In fact the port minus 5000 (our start and end message port), looks like values in the ASCII range.
 
 ![](/assets/ctffiles/pico2019/shark2/shark-2-srcport-5000.png)
 
@@ -93,7 +93,7 @@ Firing up `ipython`, we will start by importing importing scapy into our workspa
 In [1]: from scapy.all import *
 ```
 
-Next we want to open the pcap file we have so we can use parse it for the data we want. We also will initial our `flag` as an empty list.
+Next we want to open the pcap file we have so we can parse it for the data we want. We also will initial our `flag` as an empty list.
 
 ```python
 In [2]: packets = rdpcap('capture.pcap')
@@ -101,7 +101,7 @@ In [2]: packets = rdpcap('capture.pcap')
 In [3]: flag = []
 ```
 
-We will now loop through each packet, and check if it a UDP packet and if so check its destination port is 22. We cannot check the udp ports until we know for sure its upd.
+We will now loop through each packet, and check if it a UDP packet and if so check its destination port is 22. We cannot check the udp ports until we know for sure it's udp.
 
 ```python
 In [4]: for p in packets:
