@@ -77,7 +77,7 @@ total 16
 -rw-rw-r-- 1 hacksports hacksports    742 Sep 28 21:51 vuln.c
 ```
 
-We have the two files that are linked from the problem description (`vuln` and `vuln.c`) and a `flag.txt` file. Only the owner (hacksports) can read the flag file. Our ctf-participant user can read the source code and read and execute the binary. A special note of the binary is that the `getuid` bit is enable. This means that when any user executes the binary, the program operates with the permissions of the owning group (`overflow-1`). So even though we cannot read the flag file, when we run the `vuln` binary, it can read the flag file for us. This will be important as we investigate the binary.
+We have the two files that are linked from the problem description (`vuln` and `vuln.c`) and a `flag.txt` file. Only the owner (hacksports) can read the flag file. Our ctf-participant user can read the source code and read and execute the binary. A special note of the binary is that the `setgid` bit is enable. This means that when any user executes the binary, the program operates with the permissions of the owning group (`overflow-1`). So even though we cannot read the flag file, when we run the `vuln` binary, it can read the flag file for us. This will be important as we investigate the binary.
 
 Checking out the binary with the `file` command we see the following:
 
