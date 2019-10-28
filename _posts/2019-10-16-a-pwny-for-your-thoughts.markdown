@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "A PWNy For Your Thoughts"
+title: "picoCTF 2019 - Overflow 1 - 'A PWNy For Your Thoughts'"
 date: 2019-10-15 13:37:11
 excerpt_separator: <!--more-->
 disqus: true
@@ -325,7 +325,7 @@ p.recvuntil('!\n')
 print p.recvall()
 ```
 
-Here we don't even have to calculate the offset, as we can make the program crash, read _eip_ from the core dump, and use the fit function to build our payload. Also, by using the `ELF` object, we have access to the symbols, such as the function `flag()`. No need to calculate the function's address either.
+Here we don't even have to calculate the offset, as we can make the program crash, read _eip_ from the core dump, and use the fit function to build our payload. I will dive into those techniques in a future post. Also, by using the `ELF` object, we have access to the symbols, such as the function `flag()`. No need to calculate the function's address either.
 
 ```
 $ ./exploit_blog.py
@@ -361,7 +361,7 @@ void vuln(){
 }
 ```
 
-You will notice, I cleaned up the `printf()` statement since we don't have a copy of `asm.h` so you we cannot use the `get_return_address()` function call. Additionally you need to comments out the include statement for the asm header file.
+You will notice, I cleaned up the `printf()` statement since we don't have a copy of `asm.h` so you we cannot use the `get_return_address()` function call. Additionally you need to comment out the include statement for the asm header file.
 
 Compiling and attempting to exploit this patched `vuln.c` shows it is not vulnerable to a buffer overflow.
 
