@@ -68,6 +68,8 @@ permalink: /cv/
 
 #### Posters:
 
+* Ovidiu-Gabriel Baciu-Ureche, Carlie Sleeman, <u>WC Moody</u>, and Suzanne J. Matthews. 'The Adventures of ScriptKitty: Using the Raspberry Pi to Teach Adolescents about Internet Safety'. _In Proceedings of the 20th Annual SIG Conference on Information Technology Education (SIGITE ’19)_. Feb 27 - Mar 2, 2019. Minneapolis, MN [![](/assets/pics/iconPdf.png)PDF](/assets/pdf/sigcse19_poster.pdf)
+
 *   <u>W.C. Moody</u>; A. Apon, 'Towards a Framework for Building Maneuverable Applications' _PhD Forum of the 28th IEEE International Parallel & Distributed Processing Symposium,_ May 19-23, 2014, Phoenix, AZ [![](/assets/pics/iconPdf.png)PDF](/assets/pdf/ipdps_poster.pdf)
 *   <u>W.C. Moody</u>; A. Apon, 'Towards a Framework for Building Maneuverable Applications' _Clemson Graduate Research and Discovery Symposium_ April 4, 2014, Clemson, SC
 *   J. Anderson; <u>W.C. Moody</u>; D. Wagenseller; K.-C. Wang; A. Apon, 'Using SDN to Visualize the Network Behavior of MapReduce', _Conference of Research Experiences for Undergraduate Students Scholarship,_ Oct 28, 2013, Washington D.C. [![](/assets/pics/iconPdf.png)PDF](/assets/pdf/REUPoster.pdf)
