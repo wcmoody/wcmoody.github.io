@@ -8,7 +8,7 @@ disqus: true
 ---
 
 Its that's time of year again. The SANS Holiday Hack Challenge presented by Counter Hack Challenges and Friends. This year my write up will be a little different that last years.
-But more on that a little bit laters.
+But more on that a little bit later.
 
 This year's challenged is called *Wintered: The Untold Story of the Elves of the North Pole* and can be found at [https://holidayhackchallenge.com/2017/](https://holidayhackchallenge.com/2017/).
 ![logo](/assets/images/holidayhack2017/HHC_banner.png)
@@ -21,24 +21,24 @@ My write up this year will be done in multiple parts. This overview one you are 
 ## Christmas Past 
 
 ### 2015
-I first started doing CTF's in the Fall of 2015 when I began teaching at Hogwartz. I was offered the chance to work with Bits For Everyone (BFE for short) and the Cadet Competitive Cyber Team (C3T). I had tons of computer experience having three degrees in some computer field, a career as an Army communicatior, and as a webmaster and multi-language programmer. But I had never done a CTF. Once I started hackign in CTFs, I was hooked.
+I first started doing CTF's in the Fall of 2015 when I began teaching at Hogwartz. I was offered the chance to work with Bits For Everyone (BFE for short) and the Cadet Competitive Cyber Team (C3T). I had tons of computer experience having three degrees in some computer field, a career as an Army communicatior, and as a webmaster and multi-language programmer. But I had never done a CTF. Once I started hacking in CTFs, I was hooked.
 
-I did my first HHC in 2015 with the amazing [Gnome in your Home](https://holidayhackchallenge.com/2015/). I was not able to make it very far, as I only found one images needed to solve the mystery. I did complete all the challenges of the game portion but not all the hacking. It was an eye opening experience of doing a CTF in an emersive story driven environment and video game environment. I remember having to get my youngest to help find that darn _cookie_ in the Secret-Secret Room. I was delighted to actually tweet something during that CTF and have Ed Skoudis actually reply to it.  When the write up were posted, I read many of them to help learn better. My favorite (and the overall winner) was [Cory Duplantis](https://twitter.com/ctfhacker) and can be found on his excellent [blog](http://ctfhacker.com/ctf/pcap/pwn/web/2016/01/06/counterhack-holiday.html).
+I did my first HHC in 2015 with the amazing [Gnome in your Home](https://holidayhackchallenge.com/2015/). I was not able to make it very far, as I only found one images needed to solve the mystery. I did complete all the challenges of the game portion but not all the hacking. It was an eye opening experience of doing a CTF in an emersive story driven and video game environment. I remember having to get my youngest to help find that darn _cookie_ in the Secret-Secret Room. I was delighted to actually tweet something during that CTF and have Ed Skoudis actually reply to it.  When the write up were posted, I read many of them to help learn better. My favorite (and the overall winner) was [Cory Duplantis](https://twitter.com/ctfhacker) and can be found on his excellent [blog](http://ctfhacker.com/ctf/pcap/pwn/web/2016/01/06/counterhack-holiday.html).
 
 In March of 2016, I took [SANS SEC 560]() with Ed in Orlando. We loves to talk about HHC and I asked him all kinds of questions about that years challenge. Many people in the class were unfamiliar with the event, but I was fascinated so we spoke about it in detail. Ed and I had many mutual friends as he's always been a friend of the Army and Hogwartz on the Hudson specifically.
 
 ### 2016
-When it came time for HHC 2016, I counted down the days and was ready. I spent most of the month of December after exams solving the entire challenge. I was able to accomplish all the in-game achievements and recover all the audio files to reveal the ultimate villian. While working on the puzzle, I even traded twitter DM's with Ed Skoudis and the last year's winner, Cory Duplantis. I published a full write up and submitted it on this [blog](http://wclaymoody.com/blog/2016/12/holiday-hack-challenge-writeup). When I got an email after my write up review from Tad Bennett, the Army TWI intern at the time, I invited Tadd to come visit school and speak to the students and my team. To my surprise, I got an email back from Ed himself. Ed thought the visit was a good idea and wanted to come visit also. We arranged a visit for him during early January.
+When it came time for HHC 2016, I counted down the days and was ready. I spent most of the month of December after exams solving the entire challenge. I was able to accomplish all the in-game achievements and recover all the audio files to reveal the ultimate villain. While working on the puzzle, I even traded twitter DM's with Ed Skoudis and the last year's winner, Cory Duplantis. I published a full write up and submitted it on this [blog](http://wclaymoody.com/blog/2016/12/holiday-hack-challenge-writeup). When I got an email after my write up review from Tad Bennett, the Army Training with Industry intern at the time, I invited Tadd to come visit school and speak to the students and my team. To my surprise, I got an email back from Ed himself. Ed thought the visit was a good idea and wanted to come visit also. We arranged a visit for him during early January.
 
-During his visit, we talked about many things catching up from my time in Orlando the previous March. One of the main topics we discussed was Holiday Hack and its on going success along with Counter Hack's continued participation in the Training with Industry interns from the Army's Cyber and Signal Warrant Officer population. At the end of the visit, I asked Ed if he would be interested in having an Hogwartz Facutly member work with his team during the summer for a few weeks. He was interested and we promised to talk about it some more.
+During his visit, we talked about many things catching up from my time in Orlando the previous March. One of the main topics we discussed was Holiday Hack and its ongoing success along with Counter Hack's continued participation in the Training with Industry program and the interns from the Army's Cyber and Signal Warrant Officer population. At the end of the visit, I asked Ed if he would be interested in having an Hogwartz Facutly member work with his team during the summer for a few weeks. He was interested and we promised to talk about it some more.
 
-After some coordination between my department, the Army Cyber Institute, and Counter Hack Challenges, it was agreed that I would work with Counter Hack for about 5 weeks during the summer of 2017. As this coordination was on-going, the awards ceremony for HHC 2016 occurred. In a completely unrelated and coincidential occurance, I was selected as a _random_ prize winner of a super soft SANS Netwars T-shirt.You can see the results on the [winners page](https://holidayhackchallenge.com/2016/winners_answers.html) and the video below, jump to 11 minutes and 23 seconds left to hear my name.
+After some coordination between my academic department, the Army Cyber Institute, and Counter Hack Challenges, it was agreed that I would work with Counter Hack for about 5 weeks during the summer of 2017. As this coordination was on-going, the awards ceremony for HHC 2016 occurred. In a completely unrelated and coincidential occurance, I was selected as a _random_ prize winner of a super soft SANS Netwars T-shirt. You can see the results on the [winners page](https://holidayhackchallenge.com/2016/winners_answers.html) and the video below, jump to 11 minutes and 23 seconds left to hear my name.
 
 <!-- {% include youtubePlayer.html id=page.youtubeIdi %} -->
 
 ## Christmas Present
 
-So long story short (_too late_), I got to work with Counter Hack this past summer. My primary role was working on NetWars 5. I did beta testing, auto-solve scripting, hint authoring, and my most famous contribution, naming most of the problems. I have been called the NetWars punmaster for all the puns I put in the names. If you don't know what NetWars 5 is about, lets just say it takes place in a galaxy far, far away. I know a little about that universe also and it fit right in my wheel house. See this tweet from Derek Root to Jeff McJunkin discussing some of those questions.
+So long story short (_too late_), I got to work with Counter Hack this past summer. My primary role was working on NetWars 5. I did beta testing, auto-solve scripting, hint authoring, and my most famous contribution, naming most of the problems. I have been called the NetWars punmaster for all the puns I put in the names. If you don't know what NetWars 5 is about, lets just say it takes place in a galaxy far, far away. I know a little about that universe also and it fit right in my wheel house. See this tweet from Derek Rook to Jeff McJunkin discussing some of those questions.
 
 <!-- percent twitter https://twitter.com/_r00k_/status/930608702381584384 %}
 -->
@@ -64,7 +64,7 @@ On the main page, I added a few shout outs in the Items of Interest Area.
 Josh and Jess Dosis have been recognized as the Junior Deputies of the Year for the past two years (2015 and 2016). If you want to nominate other deserving children or elves for this presigious award, completed packets are due by 11:59 PM on December 31, 2017.
 ```
 
-This was a shotout to the heros of the past two Holiday Hack Challenges. Ed intentionally made the decision to not continue with the Dosis kids, but I thought they needed to get at least a mention. So here they are.
+This was a shoot-out to the heros of the past two Holiday Hack Challenges. Ed intentionally made the decision to not continue with the Dosis kids, but I thought they needed to get at least a mention. So here they are.
 
 *Volunteers need for the Community Concert*
 
@@ -92,7 +92,7 @@ The past two years the villian has been Cindy Lou Who and Dr. Who. People have j
 
 #### Meet the Sheriff
 
-The [About](https://nppd.northpolechristmastown.com/about) page of the site was pretty much just one big pun. The Sheriff's name is R. Purvis Coaltrain. This is a spoof of the Sheriff on the Duke's of Hazzard. There is even mention of those darn Duke boys. There is a throwback to 2016 and SantaGram. Mention of the three wise men from the Fire Department (they came from a far). A finally an elf quote. Also, there is an Unix epoch time joke in there also. Like I said, its just one big pun.
+The [About](https://nppd.northpolechristmastown.com/about) page of the site was pretty much just one big pun. The Sheriff's name is R. Purvis Coaltrain. This is a spoof of the Sheriff on the Duke's of Hazzard. There is even mention of those darn Duke boys. There is a throwback to 2016 and SantaGram. Mention of the three wise men from the Fire Department (they came from a far). And finally an elf quote. Also, there is an Unix epoch time joke in there also. Like I said, its just one big pun.
 
 The bottom of this page has a nice little hint about one of my most proud aspects of the site. It mentions the humans and robots that went into making the site functional. Its the only page with this footer, so it must mean something.
 
