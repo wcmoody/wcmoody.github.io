@@ -8,6 +8,8 @@ layout: home
 
 ### Greetings!
 
-This is the professional site of W. Clay Moody, Ph.D. I have few different titles including: Research Scientist at Army Cyber Institute, Director of the Advanced Education Program for Cyber Engineers at the Army Cyber School, Talent Bounty Hunter at Defense Digital Service Rebel Outpost Tatooine. Lieutenant Colonel - Cyberware Branch. Husband, Father, Hacker
+This is the professional site of W. Clay Moody, Ph.D. I have few different titles including: Senior Technology Engineer with [Counter Hack](https://www.counterhack.com) and Hacker In Residence at the [Georgia Cyber Center](https://www.gacybercenter.org). I also am an Adjunct Professor at [USC Aiken](https://www.usca.edu). I am a veteran, as I am a retired Army officer.
+
+I formerly was a Senior Research Scientist at the [Army Cyber Institute](https://cyber.army.mil), Director of the Advanced Education Program for Cyber Engineers at the Army Cyber School, Talent Bounty Hunter at [Defense Digital Service](https://www.dds.mil) Rebel Outpost Tatooine. 
 
 {: .center}
