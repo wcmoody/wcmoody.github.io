@@ -177,6 +177,7 @@ Source of Commissioned Service: ROTC (Distinguished Military Graduate)
 #### Awards and Decorations:
 
 *   Bronze Star Medal
+*   Legion of Merit
 *   Defense Meritorious Service Medal
 *   Meritorious Service Medal
 *   Army Commendation Medal (with 2 Oak Leaf Cluster)
