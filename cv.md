@@ -76,12 +76,14 @@ permalink: /cv/
 
 #### Other Presentations: 
 
-*	<u>W.C. Moody</u>, Panel Moderator, 'Educating the Cyber Force of 2050', US Army Training and Doctrine Command (TRADOC) and Army Cyber Institute Mad Scientist Conference, Sep 13, 2016, West Point, NY
+*   <u>W.C. Moody</u>, Panel Moderator, 'Educating the Cyber Force of 2050', US Army Training and Doctrine Command (TRADOC) and Army Cyber Institute Mad Scientist Conference, Sep 13, 2016, West Point, NY
 *   <u>W.C. Moody</u>, Panel Member, 'Operational and Legal Aspects of Active Cyber Defence', 6th International Conference on Cyber Conflict, June 5, 2014, Talin, Estonia
 *   <u>W.C. Moody</u>, 'Cyberspace Situational Awareness for the United States Cyber Command J3 Operations Directorate', _Testimony before the U.S. Air Force Scientific Advisory Board,_ May 22-24, 2012, Washington, DC
 
 #### Teaching:  
 
+* CSCI 285 - Introduction to Cryptography, University of South Carolina - Aiken
+    * Course Director & Instructor - Spring 2021
 * _CS 489 Independent Study,_ United States Military Academy, NY
     * NSA Cyber Exercise Prep, Course Director & Instructor - Spring 2018
     * Automobile Hacking, Course Director & Instructor - Fall 2016
@@ -127,6 +129,7 @@ permalink: /cv/
 
 #### Awards and Recognition:
 
+*   Finalist, 4th Place - Team. President's Cup Cyber Security Competition - February 2021.
 *   Winning team, Symantec Higher Education Cyber Security Challenge [media](http://edscoop.com/west-point-shows-off-cyber-chops-in-higher-ed-challenge)
 *   Top Field Grade Officer (6th Overall), 2016 All-Army Cyberstakes Online, Capture the Flag Competition - September 2016
 *   Outstanding Computer Science PhD Student - Clemson University, 2014-2015 [media](http://www.clemson.edu/cecas/departments/computing/news-events/articles/2015awards.html)
@@ -135,7 +138,7 @@ permalink: /cv/
 
 ![US Army Seal](/assets/pics/usarmy.png)
 
-### MilitaryService
+### MilitaryService - Retired June 2021
 
 Source of Commissioned Service: ROTC (Distinguished Military Graduate)  
 
