@@ -12,7 +12,7 @@ You can read more about these classes here:
 * [Operating Systems](/teaching/cs-481-operating-systems)
 * [Networking Engineering and Design](/teaching/cy-350-networking-engineering-and-design)
 * [Introduction to Computing and Information Tecnology](/teaching/it-105-introduction-to-computing-and-information-technology)
-* [Introduction to Cryptography](/teaching/cs-285-introduction-to-cryptopraphy)
+* [Introduction to Cryptography](/teaching/cs-285-introduction-to-cryptography)
 
 {: .center}
 ![](/assets/pics/clones_learning.jpg)

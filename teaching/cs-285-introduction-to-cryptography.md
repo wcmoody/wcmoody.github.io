@@ -8,7 +8,14 @@ permalink: /teaching/cs-285-introduction-to-cryptography
 
 **Description** (from catalog): 
 
-The purpose of this course is to prepare students for future professional practice in multimedia design involving processes of instructional design that includes illustrating media learning principles and learning theories while working with media and technology. Each student is expected to actively contribute as individuals and in-group projects using online resources that will include communications, documentation of development, time management, and project management decisions
+The purpose of this course is to prepare students for future professional practice in Computer
+Science by introducing the topic of cryptography. Securing modern digital communications
+requires the use of strong ciphers to guarantee confidentiality, integrity, and availability.
+Understanding the history of cryptography, the foundational mathematical principles, and current
+implementation of cryptography will allow students to advance in the topic of computer science
+and cybersecurity. Each student is expected to keep up with the assigned reading, view recorded
+lectures, and complete homework assignments. Additional students are expected to seek out help
+from the instructor when encountering roadblocks in learning.
 
 **Course Director:** 
 
