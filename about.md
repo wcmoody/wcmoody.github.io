@@ -5,7 +5,7 @@ permalink: /about/
 ---
 
 {: .center}
-![](/assets/pics/me.jpg){:height="50%" width="50%"}
+![](/assets/pics/funko-pop.jpg){:height="50%" width="50%"}
 
 I currently split my time as a Senior Technology Engineer with [Counter Hack](https://www.counterhack.com) and as the 'Hacker In Residence' at the [Georgia Cyber Center](https://www.gacybercenter.org). I also enjoy volunteering as a technical mentor to a local Cyber Patriot Team in Augusta, GA.
 
