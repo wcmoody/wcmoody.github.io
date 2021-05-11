@@ -138,7 +138,7 @@ permalink: /cv/
 
 ![US Army Seal](/assets/pics/usarmy.png)
 
-### MilitaryService - Retired June 2021
+### Military Service - Retired June 2021
 
 Source of Commissioned Service: ROTC (Distinguished Military Graduate)  
 
