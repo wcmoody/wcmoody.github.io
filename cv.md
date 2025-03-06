@@ -7,7 +7,7 @@ permalink: /cv/
 
 [![](/assets/pics/iconPdf.png)CV PDF](/assets/pdf/moody-cv.pdf)  |
 [LinkedIn](https://www.linkedin.com/in/wclaymoody) | 
-[Google Scholar](https://scholar.google.com/citations?user=e6gT-0oAAAAJ)
+[Google Scholar](https://scholar.google.com/citations?user=TCxYk6oAAAAJ&hl=en)
 
 #### Education
 
