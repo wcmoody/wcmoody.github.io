@@ -3,17 +3,17 @@ layout: page
 title: Research
 permalink: /research/
 ---
-One of my current focuses of research is _cybersecurity education_. We are focusing on how gamification can be used to increase understanding of cyber security concepts. Specifically, how can we use **capture-the-flag exercises** to expose middle school, high school, and undergraduate students to basic concept of computer science, networking, and computer security.
+When I wrapped up my time in academia, my research was focused on _cybersecurity education_. We focused on how gamification could be used to increase understanding of cyber security concepts. Specifically, we explored how **capture-the-flag exercises** could expose middle school, high school, and undergraduate students to basic concepts of computer science, networking, and computer security.
 
 {: .center}
 ![](/assets/pics/ctf_scoreboard.png){:height="75%" width="75%"}
 
-Additionally, I am involved in a study of using _virtualization platforms_ combined with physical lab environments to learn **network engineering and design**. We conducted a semester long study of students taking a intermediate-level networking course in an undergraduate institution. We are studying learning proficiency, timing, and general excitement and interest through these environments.
+Additionally, I was involved in a study of using _virtualization platforms_ combined with physical lab environments to learn **network engineering and design**. We conducted a semester-long study of students taking an intermediate-level networking course at an undergraduate institution. We studied learning proficiency, timing, and general excitement and interest in these environments.
 
 {: .center}
 ![](/assets/pics/packetracer.png){:height="75%" width="75%"}
 
-Lastly, I am leading two senior capstone projects to build _cyber ranges and cyber weapons platforms_ for use in education and cyber security competitions.
+Lastly, I led two senior capstone projects to build _cyber ranges and cyber weapons platforms_ for use in education and cyber security competitions.
 
 {: .center}
 ![](/assets/pics/attackdefend.jpg){:height="75%" width="75%"}
